@@ -9,7 +9,7 @@ require_once(__DIR__ . "/lib/error_reporting.php"); // enables error reporting l
 /**
  * Enable the ErrorHandler class for using the error and exception handlers.
  */
-require_once(__DIR__ . '/utils/ErrorHandler.php');
+require_once(__DIR__ . '/services/ErrorHandler.php');
 ErrorHandler::register();
 
 /**
