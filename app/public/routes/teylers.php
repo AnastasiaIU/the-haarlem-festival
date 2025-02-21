@@ -1,5 +1,7 @@
 <?php
+require_once __DIR__ . '/../controllers/MagicTeylersEventController.php';
 
 Route::add('/teylers', function () {
-    require_once(__DIR__ . "/../views/pages/teylers.php");
-});
+    $controller = new MagicTeylersEventController();
+    $controller->showIndex();
+}, 'GET');

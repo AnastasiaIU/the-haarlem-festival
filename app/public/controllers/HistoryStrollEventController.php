@@ -1,5 +1,4 @@
 <?php
-// Controller for "History Stroll" events
 
 class HistoryStrollEventController extends EventController {
     public function showIndex() {

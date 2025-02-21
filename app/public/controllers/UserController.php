@@ -2,9 +2,7 @@
 
 require_once(__DIR__ . "/../models/UserModel.php");
 
-/**
- * Controller class for handling user-related operations.
- */
+
 class UserController
 {
     private $userModel;

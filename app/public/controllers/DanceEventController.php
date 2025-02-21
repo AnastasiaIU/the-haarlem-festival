@@ -1,6 +1,4 @@
 <?php
-// Controller for "Dance" events
-// Handles data and views specific to the Dance event
 
 class DanceEventController extends EventController {
     public function showIndex() {

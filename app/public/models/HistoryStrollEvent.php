@@ -1,6 +1,9 @@
 <?php
-class HistoryStrollEvent extends BaseEvent {
-    public function getEventDetails() {
-        return "Details for HistoryStrollEvent...";
+    // Model for the "HistoryStrollEvent" event
+    
+    class HistoryStrollEvent extends BaseEvent {
+        public function getEventDetails(): array {
+            return ["details" => "Details for DanceEvent..."];
+        }
     }
-}
+    
