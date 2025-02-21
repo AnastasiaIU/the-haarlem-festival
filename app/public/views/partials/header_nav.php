@@ -11,8 +11,7 @@
         <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
             <ul class="navbar-nav mb-2 mb-lg-0 ms-3 gap-3">
                 <li class="nav-item">
-                    <a class="nav-link active" id="nav-item-home" aria-current="page"
-                       href="/">Home</a>
+                    <a class="nav-link" id="nav-item-home" href="/">Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" id="nav-item-dance" href="/dance">DANCE!</a>
