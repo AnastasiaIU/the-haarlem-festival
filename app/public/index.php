@@ -26,6 +26,14 @@ require_once(__DIR__ . "/lib/Route.php");
  * Require routes. Defines the routes that the application will need.
  */
 require_once(__DIR__ . "/routes/index.php");
+require_once(__DIR__ . "/routes/cart.php");
+require_once(__DIR__ . "/routes/dance.php");
+require_once(__DIR__ . "/routes/login.php");
+require_once(__DIR__ . "/routes/profile.php");
+require_once(__DIR__ . "/routes/register.php");
+require_once(__DIR__ . "/routes/strolls.php");
+require_once(__DIR__ . "/routes/teylers.php");
+require_once(__DIR__ . "/routes/yummy.php");
 
 // Start the router, enabling handling requests
 Route::run();
