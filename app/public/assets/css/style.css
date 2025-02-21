@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /*
  * GENERAL STYLES
  */
@@ -79,5 +80,98 @@ footer {
 
 .footer-link:hover {
     color: var(--slate-blue);
-    opacity: 80%;
+    opacity: 80%;}
+=======
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    font-family: 'Cabin', sans-serif;
 }
+.banner-image {
+    display: block;  
+    width: 100%;    
+    height: auto;
+    z-index: -1;
+}
+
+.oval {
+    position: relative;
+    width: 100vw; 
+    min-height: 60vh; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow: visible;
+    margin-top: -20vh;
+}
+
+.oval-image {
+    position: absolute;
+    width: 200vw; 
+    height: auto;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1; 
+    object-fit: cover;
+}
+
+.oval p{
+    position: relative; 
+    width: 65vw;
+    max-width: 80vw;
+    text-align: center;
+    color: #4A2E2A;
+    font-size: clamp(1rem, 2vw, 1.8rem);
+    line-height: 1.5; 
+    z-index: 2;
+    margin-bottom: 5vh;
+}
+
+.oval h1{
+    position: relative;
+    color: #A82B11;
+    font-size: clamp(2rem, 5vw, 4rem);
+    font-weight: bold;
+    margin-bottom: 5vh;
+    z-index: 2;
+}
+
+.museum-section {
+    position: relative;
+    width: 100vw;
+    height: auto;
+    padding: 10vh 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    overflow: visible;
+    margin-top: 30vh;
+}
+
+.museum-image,
+.green-shape {
+    display: block;
+    width: 100%;
+    height: auto;
+    position: absolute;
+}
+.museum-image{
+    width: 101vw;
+    height: auto;
+    position: absolute;
+    z-index: -1;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.green-shape {
+    width: 60vw;
+    left: 0;
+    margin-top: 6vh;}
+>>>>>>> 35e5325 (Add images and update CSS and homepage content)
