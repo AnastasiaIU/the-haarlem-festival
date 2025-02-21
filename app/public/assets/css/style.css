@@ -7,10 +7,12 @@ body {
 
 * {
     font-family: 'Open Sans', serif;
+    font-size: 1em;
 }
 
 :is(h1, h2, h3, h4, h5, h6) {
     font-family: 'Cabin', serif;
+    font-weight: bold;
 }
 
 .icon {
@@ -51,4 +53,31 @@ body {
     color: var(--champagne);
     font-size: 1rem;
     font-weight: normal;
+}
+
+/*
+ * FOOTER STYLES
+ */
+footer {
+    color: white;
+}
+
+.footer-top {
+    background-color: var(--terracotta);
+}
+
+.footer-bottom {
+    background-color: var(--punch);
+}
+
+.footer-link {
+    display: block;
+    text-decoration: none;
+    color: white;
+    padding-bottom: 8px;
+}
+
+.footer-link:hover {
+    color: var(--slate-blue);
+    opacity: 80%;
 }

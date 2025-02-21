@@ -1,6 +1,6 @@
 <nav class="navbar nav-underline navbar-expand-lg" data-bs-theme="dark">
     <div class="container-fluid">
-        <a class="navbar-brand text-white ms-3" href="/">
+        <a class="navbar-brand ms-3" href="/">
             <img src="/assets/images/logo.svg" class="img-fluid logo"
                  alt="Logo The Haarlem Festival with a windmill">
         </a>
