@@ -20,3 +20,6 @@
 </head>
 
 <body class="d-flex flex-column min-vh-100">
+<header>
+    <!-- Header placeholder -->
+</header>
