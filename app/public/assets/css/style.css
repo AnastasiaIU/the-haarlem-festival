@@ -1,3 +1,13 @@
 .nav-bar {
     background-color: var(--rufous);
 }
+
+.blue-button {
+    background-color: var(--cerulean-blue);
+    color: white;
+    font-weight: 600;
+    height: 38px;
+    min-width: 60px;
+    border: none;
+    border-radius: 10px;
+}
