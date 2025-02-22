@@ -17,11 +17,9 @@
             <p class="download-prompt">Download the app now</p>
             <div class="store-badges">
                 <a href="https://play.google.com" class="store-badge">
-                    <img src="/assets/images/google-play-icon.png" alt="">
                     Download for Android
                 </a>
                 <a href="https://apps.apple.com" class="store-badge">
-                    <img src="/assets/images/apple-icon.png" alt="">
                     Download for iOS
                 </a>
             </div>
