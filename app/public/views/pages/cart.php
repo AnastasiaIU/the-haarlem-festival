@@ -1,6 +1,3 @@
 <?php
-
-require(__DIR__ . '/../partials/header.php');
-require(__DIR__ . '/../partials/header_nav.php');
-require(__DIR__ . '/../partials/cart.php');
-require(__DIR__ . '/../partials/footer.php');
+$mainContent = __DIR__ . '/../partials/cart.php';
+include __DIR__ . '/../templates/non-event-page.php';
