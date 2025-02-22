@@ -1,4 +1,47 @@
-.nav-bar {
+/*
+ * GENERAL STYLES
+ */
+body {
+    background-color: var(--champagne);
+}
+
+* {
+    font-family: 'Open Sans', serif;
+    font-size: 1em;
+}
+
+:is(h1, h2, h3, h4, h5, h6) {
+    font-family: 'Cabin', serif;
+    font-weight: bold;
+}
+
+.icon {
+    height: 24px;
+}
+
+/*
+ * BUTTON STYLES
+ */
+.btn {
+    border-radius: 12px;
+    border-width: 0;
+    padding: 8px 16px;
+}
+
+.btn:hover {
+    background-color: var(--champagne);
+    color: var(--rich-espresso);
+}
+
+.btn-primary {
+    background-color: var(--cerulean-blue);
+    color: white;
+}
+
+/*
+ * NAVBAR STYLES
+ */
+.navbar {
     background-color: var(--rufous);
 }
 
@@ -10,4 +53,41 @@
     min-width: 60px;
     border: none;
     border-radius: 10px;
+}
+
+.logo {
+    height: 50px;
+}
+
+.nav-link, .navbar-nav .nav-link.active {
+    color: var(--champagne);
+    font-size: 1rem;
+    font-weight: normal;
+}
+
+/*
+ * FOOTER STYLES
+ */
+footer {
+    color: white;
+}
+
+.footer-top {
+    background-color: var(--terracotta);
+}
+
+.footer-bottom {
+    background-color: var(--punch);
+}
+
+.footer-link {
+    display: block;
+    text-decoration: none;
+    color: white;
+    padding-bottom: 8px;
+}
+
+.footer-link:hover {
+    color: var(--slate-blue);
+    opacity: 80%;
 }
