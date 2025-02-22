@@ -1,5 +1,5 @@
 <?php
 
 Route::add('/teylers', function () {
-    require_once(__DIR__ . "/../views/pages/teylers.php");
+    require_once(__DIR__ . "/../views/pages/events/teylers.php");
 });
