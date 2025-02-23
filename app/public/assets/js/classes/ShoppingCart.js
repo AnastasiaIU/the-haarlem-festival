@@ -1,20 +1,16 @@
-// filepath: /d:/Coding/Inholland/Year 2/term 3/HaarlemFestival/the-haarlem-festival/resources/js/classes/ShoppingCart.js
+import { Ticket } from "./Ticket.js";
 
 export class ShoppingCart {
     constructor() {
-        this.items = [];
-        this.itemQuantities = new Map();
+        this.items = new Map();
         this.totalPrice = 0;
     }
 
     addItem(newItem) {
-        const existingItem = this.items.find(item => item.code === newItem.code);
-        if (existingItem) {
-            this.itemQuantities.set(newItem.code, (this.itemQuantities.get(newItem.code) || 1) + (newItem.quantity || 1));
+        if (this.items.has(newItem.code)) {
+            this.items.get(newItem.code).push(newItem);
         } else {
-            newItem.quantity = newItem.quantity || 1;
-            this.items.push(newItem);
-            this.itemQuantities.set(newItem.code, newItem.quantity);
+            this.items.set(newItem.code, [newItem]);
         }
         this.updateTotalPrice();
         this.updateTotalPriceInDOM();
@@ -22,29 +18,40 @@ export class ShoppingCart {
     }
 
     removeItem(itemCode) {
-        this.items = this.items.filter(item => item.code !== itemCode);
-        this.itemQuantities.delete(itemCode);
-        this.updateTotalPrice();
-        this.updateTotalPriceInDOM();
-        this.updateCartUI();
+        if (this.items.has(itemCode)) {
+            const tickets = this.items.get(itemCode);
+            tickets.pop();
+            if (tickets.length === 0) {
+                this.items.delete(itemCode);
+            }
+            this.updateTotalPrice();
+            this.updateTotalPriceInDOM();
+            this.updateCartUI();
+        }
     }
 
     updateQuantity(itemCode, quantity) {
-        if (this.itemQuantities.has(itemCode)) {
-            const newQuantity = (this.itemQuantities.get(itemCode) || 1) + quantity;
-            if (newQuantity < 1) {
-                this.removeItem(itemCode);
+        if (this.items.has(itemCode)) {
+            const tickets = this.items.get(itemCode);
+            if (quantity > 0) {
+                const existingItem = tickets[0];
+                const newItem = new Ticket(existingItem.id + 1, existingItem.code, existingItem.name, existingItem.date, existingItem.time, existingItem.price, existingItem.type, existingItem.path);
+                tickets.push(newItem);
             } else {
-                this.itemQuantities.set(itemCode, newQuantity);
-                this.updateTotalPrice();
-                this.updateTotalPriceInDOM();
-                this.updateCartUI();
+                tickets.pop();
+                if (tickets.length === 0) {
+                    this.items.delete(itemCode);
+                }
             }
+            this.updateTotalPrice();
+            this.updateTotalPriceInDOM();
+            this.updateCartUI();
+            console.log(this.items);
         }
     }
 
     updateTotalPrice() {
-        this.totalPrice = this.items.reduce((total, item) => total + item.price * (this.itemQuantities.get(item.code) || 1), 0);
+        this.totalPrice = Array.from(this.items.values()).flat().reduce((total, item) => total + item.price, 0);
     }
 
     getTotalPrice() {
@@ -52,13 +59,11 @@ export class ShoppingCart {
     }
 
     getItems() {
-        return this.items;
+        return Array.from(this.items.values()).flat();
     }
 
-    getQuantity(itemType) {
-        return this.items
-            .filter(item => item.type === itemType)
-            .reduce((total, item) => total + (this.itemQuantities.get(item.code) || 1), 0);
+    getQuantity(itemCode) {
+        return this.items.has(itemCode) ? this.items.get(itemCode).length : 0;
     }
 
     updateTotalPriceInDOM() {
@@ -72,26 +77,27 @@ export class ShoppingCart {
         const cartItemsContainer = document.getElementById('cart-items');
         cartItemsContainer.innerHTML = '';
 
-        this.items.forEach(item => {
-            const quantity = this.itemQuantities.get(item.code) || 1;
+        this.items.forEach((tickets, code) => {
+            const item = tickets[0];
+            const quantity = tickets.length;
             const cartItem = document.createElement('div');
             cartItem.classList.add('cart-item');
             cartItem.innerHTML = `
-                <img src="${item.path}" alt="${item.name}">
-                <div>
-                    <p class="event-type">${item.type}</p>
-                    <p class="event-name">${item.name}</p>
-                    <p class="event-date">${item.date}</p>
-                    <p class="event-date">${item.time}</p>
-                </div>
-                <div class="quantity-controls">
-                    <button class="decrease-quantity">-</button>
-                    <span class="quantity">${quantity}</span>
-                    <button class="increase-quantity">+</button>
-                </div>
-                <div>€${(item.price).toFixed(2)}</div>
-                <div>€${(item.price * quantity).toFixed(2)}</div>
-                <button class="remove-item">Remove</button>
+            <img src="${item.path}" alt="${item.name}">
+            <div>
+                <p class="event-type">${item.type}</p>
+                <p class="event-name">${item.name}</p>
+                <p class="event-date">${item.date}</p>
+                <p class="event-date">${item.time}</p>
+            </div>
+            <div class="quantity-controls">
+                <button class="decrease-quantity">-</button>
+                <span class="quantity">${quantity}</span>
+                <button class="increase-quantity">+</button>
+            </div>
+            <div>€${(item.price).toFixed(2)}</div>
+            <div>€${(item.price * quantity).toFixed(2)}</div>
+            <button class="remove-item">Remove</button>
             `;
             cartItemsContainer.appendChild(cartItem);
 
