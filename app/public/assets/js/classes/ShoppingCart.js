@@ -7,7 +7,7 @@ export class ShoppingCart {
     }
 
     addItem(newItem) {
-        const key = `${newItem.code}-${newItem.subType}-${newItem.price}`;
+        const key = `${newItem.id}`;
         if (this.items.has(key)) {
             this.items.get(key).push(newItem);
         } else {
@@ -26,8 +26,8 @@ export class ShoppingCart {
         this.updateCartUI();
     }
 
-    updateQuantity(itemCode, subType, price, change) {
-        const key = `${itemCode}-${subType}-${price}`;
+    updateQuantity(id, change) {
+        const key = `${id}`;
         if (this.items.has(key)) {
             const tickets = this.items.get(key);
             if (change > 0) {
@@ -97,11 +97,13 @@ export class ShoppingCart {
                 </div>
                 <div class="d-flex flex-column">
                     ${subTypeGroups.map(({ subType }) => {
-                        return `
-                            <div class="subtype-quantity">
-                                <p class="text-center m-0">${subType}</p>
-                            </div>
-                        `;
+                        if (subType !== 'null') {
+                            return `
+                                <div class="subtype-quantity">
+                                    <p class="text-center m-0">${subType}</p>
+                                </div>
+                            `;
+                        }
                     }).join('')}
                 </div>
                 <div class="d-flex flex-column">
