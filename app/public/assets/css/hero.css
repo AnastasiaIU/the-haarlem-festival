@@ -1,0 +1,133 @@
+/*------------------------------------*\
+  # HERO SECTION
+\*------------------------------------*/
+.hero-section {
+    position: relative;
+    min-height: 700px;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 0;
+    color: #fff;
+    background-size: cover !important;
+    background-position: center left !important;
+    max-width: 60%;
+    max-height: 100%;
+}
+
+.shape {
+    position: absolute;
+    top: -5%;
+    right: -66.67%;
+    height: 105%;
+    max-width: 55vw; 
+    object-fit: cover;
+    z-index: 1;
+}
+
+.hero-ellipse {
+    position: absolute;
+    bottom: -25%;
+    left: 0;
+    width: 100%;
+    z-index: 3;
+    pointer-events: none; /* Allows clicking through the ellipse */
+}
+  
+  /*------------------------------------*\
+    # HERO TEXT CONTAINER
+  \*------------------------------------*/
+  .hero-text-container {
+    position: relative;
+    right: -50%; 
+    z-index: 2;
+    margin-left: auto;
+    margin-right: 10%;
+    max-width: 600px;
+  }
+  
+  .hero-text-container h1 {
+    font-family: 'Bangers', cursive;
+    font-size: 3.5rem;
+    letter-spacing: 2px;
+    text-shadow: 3px 3px 0 rgba(0,0,0,0.2);
+    margin-bottom: 1rem;
+    color: #fff;
+  }
+  
+  .hero-text-container p {
+    font-family: 'Rubik', sans-serif;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    color: #fff;
+  }
+  
+  .hero-text-container .sub-heading {
+    font-family: 'Bangers', cursive;
+    font-size: 2rem;
+    color: #FFD700;
+    text-shadow: 2px 2px 0 rgba(0,0,0,0.3);
+    margin: 2rem 0 1rem 0;
+  }
+  
+  .hero-text-container .extra-text {
+    font-family: 'Rubik', sans-serif;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    color: #fff;
+  }
+  
+  /*------------------------------------*\
+    # BUTTON GROUP
+  \*------------------------------------*/
+  .button-group {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+  
+  .button-group .btn {
+    padding: 12px 24px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-family: 'Rubik', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    background: var(--light-color);
+    color: var(--primary-color);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .button-group .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  }
+
+
+  
+  /*------------------------------------*\
+    # MEDIA QUERIES
+  \*------------------------------------*/
+  @media (max-width: 768px) {
+    .hero-section {
+      padding: 2rem;
+    }
+    .hero-text-container {
+      margin: 0 auto;
+      width: 90%;
+    }
+    .hero-text-container h1 {
+      font-size: 2.5rem;
+    }
+    .button-group {
+      flex-direction: column;
+      align-items: center;
+    }
+    .hero-ellipse {
+        bottom: -15%;
+        width: 150%; /* Wider on mobile to ensure coverage */
+        left: -25%;
+    }
+  }

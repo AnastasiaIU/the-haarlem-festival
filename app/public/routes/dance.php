@@ -3,6 +3,7 @@ require_once(__DIR__ . '/../controllers/DanceEventController.php');
 
 Route::add('/dance', function () {
     $controller = new DanceEventController();
+    //when /dance it renders the page with its controller
     $controller->renderEventPage();
 }, 'GET');
 

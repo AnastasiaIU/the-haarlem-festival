@@ -1,26 +1,23 @@
 <?php
 
-require_once __DIR__ . '/BaseModel.php';
+require_once __DIR__ . '/BaseEvent.php';
 
-class MagicTeylersEvent extends BaseModel
+class MagicTeylersEvent extends BaseEvent
 {
+    protected string $eventSlug = 'teylers';
+   //for now it has the stuff for hero section only
+
     public function getEventDetails(): array
     {
-        try {
-            $sql = "SELECT * FROM events WHERE event_slug = :slug LIMIT 1";
-            $stmt = self::$pdo->prepare($sql);
-            $stmt->execute(['slug' => 'teylers']);
-
-            $result = $stmt->fetch();
-            
-            if (!$result) {
-                return [];
-            }
-
-            return $result;
-        } catch (PDOException $e) {
-            error_log("Database error: " . $e->getMessage());
-            throw $e;
+        $dto = $this->fetchEventData();
+        if (!$dto) {
+            return [];
         }
+        return [
+            'heroTitle'    => $dto->heroTitle,
+            'heroParagraph'=> $dto->heroParagraph,
+            'heroBgImage'  => $dto->heroBgImage
+        ];
     }
 }
+

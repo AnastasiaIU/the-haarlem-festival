@@ -1,6 +1,4 @@
 <?php
-// $eventDTO from HistoryStrollEventController
-
 $heroData = [
   'bg_image'  => $eventDTO->heroBgImage  ?? '/assets/images/default-hero.jpg',
   'title'     => $eventDTO->heroTitle    ?? 'History Strolls',

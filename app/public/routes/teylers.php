@@ -1,5 +1,4 @@
 <?php
-require_once __DIR__ . '/../controllers/MagicTeylersEventController.php';
 
 require_once __DIR__ . '/../controllers/TeylersEventController.php';
 
