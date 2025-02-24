@@ -1,14 +1,11 @@
 <?php
+require_once(__DIR__ . '/../controllers/DanceEventController.php');
 
 Route::add('/dance', function () {
-    // Set a page title just in case
-    $pageTitle = "DANCE!";
-
-    // Capture the unique content for the Dance event
-    ob_start();
-    require_once(__DIR__ . '/../views/pages/events/dance/index.php');
-    $content = ob_get_clean();
-
-    // Wrap it in the event layout
-    require_once(__DIR__ . '/../views/layouts/event-layout.php');
+    $controller = new DanceEventController();
+    $controller->renderEventPage();
 }, 'GET');
+
+Route::add('/dance/artist/([a-z-0-9-]*)', function ($artist) {
+    require_once(__DIR__ . "/../views/pages/events/dance-artist.php");
+});

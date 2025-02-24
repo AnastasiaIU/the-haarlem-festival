@@ -1,11 +1,8 @@
 <?php
 
-Route::add('/yummy', function () {
-    $pageTitle = "Yummy!";
+require_once(__DIR__ . '/../controllers/YummyEventController.php');
 
-    ob_start();
-    require_once(__DIR__ . '/../views/pages/events/yummy/index.php');
-    $content = ob_get_clean();
-
-    require_once(__DIR__ . '/../views/layouts/event-layout.php');
-}, 'GET');
+Route::add('/yummy', function() {
+    $controller = new YummyEventController();
+    $controller->renderEventPage();
+});

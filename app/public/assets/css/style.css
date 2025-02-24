@@ -43,6 +43,7 @@ body {
  */
 .navbar {
     background-color: var(--rufous);
+    z-index: 1000 !important;
 }
 
 .logo {

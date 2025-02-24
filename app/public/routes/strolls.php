@@ -1,11 +1,8 @@
 <?php
 
-Route::add('/strolls', function () {
-    $pageTitle = "History Strolls";
+require_once(__DIR__ . '/../controllers/HistoryStrollEventController.php');
 
-    ob_start();
-    require_once(__DIR__ . '/../views/pages/events/history-stroll/index.php');
-    $content = ob_get_clean();
-
-    require_once(__DIR__ . '/../views/layouts/event-layout.php');
-}, 'GET');
+Route::add('/strolls', function() {
+    $controller = new HistoryStrollEventController();
+    $controller->renderEventPage();
+});
