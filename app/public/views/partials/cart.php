@@ -11,6 +11,7 @@
         <div class="cart-item-headers">
             <strong>Event Details</strong>
             <strong></strong>
+            <strong></strong>
             <strong>Quantity</strong>
             <strong>Price</strong>
             <strong>Total</strong>
