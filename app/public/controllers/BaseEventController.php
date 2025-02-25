@@ -33,11 +33,11 @@ abstract class BaseEventController {
                 'button2_text'  => $eventDetails['button2Text'] ?? null
             ];
 
-// now we get mainContent once here instead of redundat on every event page view
+// now we get mainContent once here instead of redundant on every event page view
             $eventData = $eventDetails;
             $mainContent = $this->getMainContentPath();
 
- //uses the template once in here and $mainContent is be the path to the page with the partials for each event
+ //uses the template once in here and $mainContent is the path to the page with the partials for each event
             require __DIR__ . '/../views/templates/event-page.php';
 
 
