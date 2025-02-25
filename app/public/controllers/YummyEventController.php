@@ -9,7 +9,7 @@ class YummyEventController extends BaseEventController
     }
 
     protected function getMainContentPath() {
-        return __DIR__ . '/../views/partials/events/yummy/yummy.php';
+        return __DIR__ . '/../views/pages/events/yummy.php';
     }
 
     protected function getSvgPath() {

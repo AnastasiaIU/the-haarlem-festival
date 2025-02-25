@@ -1,14 +1,15 @@
 <?php
 /**
- * Hero partial (universal for any event)
- *
- * Required keys in $heroData:
+ * Hero partial (for any event)
+ * expected data in $heroData
+ * 
+ * Required keys:
  * - 'bg_image'    => string (background image URL)
  * - 'title'       => string (hero heading)
  * - 'paragraph'   => string (hero paragraph text)
  * - 'svg_path'    => string (path to the shape SVG)
  *
- * Optional keys for extra call-to-action:
+ * Optional keys (can add more if needed):
  * - 'extra_heading' => string (optional extra heading)
  * - 'extra_text'    => string (optional extra text)
  * - 'button1_link'  => string (URL for button 1)
@@ -47,14 +48,15 @@
         ? nl2br(htmlspecialchars($heroData['paragraph']))
         : "Default paragraph..." ?>
     </p>
-
+<!-- optional sections bools check if the event page has any of the optional variables set up  -->
     <?php 
-    // Check if we have ANY "extra" fields for heading/text or at least one button
     $hasExtraHeading = !empty($heroData['extra_heading']);
     $hasExtraText    = !empty($heroData['extra_text']);
     $hasButton1      = !empty($heroData['button1_link']) && !empty($heroData['button1_text']);
     $hasButton2      = !empty($heroData['button2_link']) && !empty($heroData['button2_text']);
 
+
+    // if any of the optional bools sections are set up, display them
     if ($hasExtraHeading || $hasExtraText || $hasButton1 || $hasButton2): ?>
       
       <!-- Optional Sub-Heading -->

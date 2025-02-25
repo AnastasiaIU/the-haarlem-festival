@@ -13,6 +13,8 @@
     background-position: center left !important;
     max-width: 60%;
     max-height: 100%;
+    margin-bottom: 100px; 
+    overflow: visible; 
 }
 
 .shape {
@@ -26,14 +28,15 @@
 }
 
 .hero-ellipse {
-    position: absolute;
-    bottom: -25%;
-    left: 0;
-    width: 100%;
-    z-index: 3;
-    pointer-events: none; /* Allows clicking through the ellipse */
+  position: absolute;
+  bottom: -150px;
+  width: 100vw;
+  height: 25%;
+  z-index: 5;
+  pointer-events: none;
+  display: block;
+  margin-bottom: 50px ;
 }
-  
   /*------------------------------------*\
     # HERO TEXT CONTAINER
   \*------------------------------------*/
@@ -126,8 +129,9 @@
       align-items: center;
     }
     .hero-ellipse {
-        bottom: -15%;
-        width: 150%; /* Wider on mobile to ensure coverage */
-        left: -25%;
+        bottom: -100px;
+        width: 150vw; /* Even wider on mobile */
+        left: 50%;
+        transform: translateX(-50%);
     }
   }

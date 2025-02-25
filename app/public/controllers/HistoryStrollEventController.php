@@ -10,7 +10,7 @@ class HistoryStrollEventController extends BaseEventController
     }
 
     protected function getMainContentPath() {
-        return __DIR__ . '/../views/partials/events/stroll/stroll.php';
+        return __DIR__ . '/../views/pages/events/stroll.php';
     }
 
     protected function getSvgPath() {

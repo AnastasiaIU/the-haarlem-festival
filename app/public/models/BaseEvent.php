@@ -40,8 +40,7 @@ abstract class BaseEvent extends BaseModel
         }
     }
 
-    // Abstrac method so we can have different event details for every event
-
+    // Abstract method so we can have different event details for every event type
     abstract public function getEventDetails(): array;
 
     // getters/setters

@@ -9,7 +9,7 @@ class DanceEventController extends BaseEventController
     }
 
     protected function getMainContentPath() {
-        return __DIR__ . '/../views/partials/events/dance/dance.php';
+        return __DIR__ . '/../views/pages/events/dance.php';
     }
 
     protected function getSvgPath() {

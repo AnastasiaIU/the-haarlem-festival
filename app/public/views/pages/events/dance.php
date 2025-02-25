@@ -1,18 +1,21 @@
 <?php
+// add here the partials see example in teylers.php
 
-$heroData = [
-  'bg_image'    => $eventDTO->heroBgImage  ?? '/assets/images/default-hero.jpg',
-  'title'       => $eventDTO->heroTitle    ?? 'DANCE FESTIVAL',
-  'paragraph'   => $eventDTO->heroParagraph?? 'Join the groove and dance the night away!',
-  'svg_path'    => '/assets/images/Rectangle4Dance.svg',
-  'show_ellipse' => true,  
 
-  // only one button
-  'extra_heading' => "BUY TICKETS NOW!",
-  'extra_text'    => "Secure your spot and enjoy exclusive performances.",
-  'button1_link'  => "https://ticketing.example.com/dance",
-  'button1_text'  => "Buy Tickets"
-];
+// instead of having this on every page (redundant now we set them up once in the base controller)
 
-$mainContent = __DIR__ . '/../../partials/events/dance/dance.php';
-include __DIR__ . '/../../templates/event-page.php';
+// $mainContent = __DIR__ . '/../../partials/events/dance/dance.php';
+// include __DIR__ . '/../../templates/event-page.php';
+
+
+
+//partials
+
+require_once __DIR__ . '/../../partials/events/dance/artist.php';
+//for artists will make a for each loop to display all artists
+//artist partial will have if counter % 2 == 0 then display artist left else display artist right
+//artist partial has Artist Name, SUBTITLE, PARAGRAPH, LEARN MORE BUTTON NEXT TO IMMAGE OF ARTIST
+
+
+require_once __DIR__ . '/../../partials/events/dance/specialOffers.php';
+require_once __DIR__ . '/../../partials/events/dance/location.php';
