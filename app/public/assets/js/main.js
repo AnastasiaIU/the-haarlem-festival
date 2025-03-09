@@ -1,3 +1,5 @@
+import { LoginForm } from "./classes/LoginForm.js";
+
 /**
  * Fetches data from the given API URL.
  *
@@ -30,6 +32,10 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     if (navItems.hasOwnProperty(path)) {
         setCurrentNavItem(navItems[path]);
+    }
+
+    if (path === '/login') {
+        new LoginForm();
     }
 
     enableBootstrapFormValidation();

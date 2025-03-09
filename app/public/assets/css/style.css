@@ -45,7 +45,7 @@ body {
     background-color: var(--rufous);
 }
 
-.logo {
+.navbar-logo {
     height: 50px;
 }
 
@@ -80,4 +80,8 @@ footer {
 .footer-link:hover {
     color: var(--slate-blue);
     opacity: 80%;
+}
+
+.form-logo {
+    height: 60px;
 }

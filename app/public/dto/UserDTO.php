@@ -1,6 +1,6 @@
 <?php
 
-require_once (__DIR__ . '/../enums/UserRole.php');
+require_once(__DIR__ . '/../enums/UserRole.php');
 
 /**
  * Data Transfer Object (DTO) for representing a user.
