@@ -2,7 +2,7 @@
 
 require_once(__DIR__ . "/../models/UserModel.php");
 require_once(__DIR__ . '/../dto/UserDTO.php');
-require_once (__DIR__ . '/../enums/UserRole.php');
+require_once(__DIR__ . '/../enums/UserRole.php');
 
 /**
  * Controller class for handling user-related operations.
@@ -58,7 +58,7 @@ class UserController
      * Attempts to log in a user with the provided email and password.
      *
      * This method retrieves the user by email, verifies the password, and if successful,
-     * sets the user ID in the session and redirects to the home page. If the user does not
+     * sets the user ID in the session and redirects to the last visited page. If the user does not
      * exist or the password is incorrect, it sets an error message and form data in the session.
      *
      * @param string $email The email of the user attempting to log in.
@@ -75,9 +75,12 @@ class UserController
             $this->setErrorMessageInSession($email, $password);
         } else {
             if ($user->verifyPassword($password)) {
-                // Set logged-in user in session and redirect to home page
+                // Set logged-in user in session
                 $_SESSION['user'] = $user->id;
-                header('Location: /');
+
+                // Redirect to the last visited page or default to profile page
+                $redirectUrl = $_SESSION['last_visited_url'] ?? '/profile';
+                header("Location: $redirectUrl");
                 return $user;
             } else {
                 $this->setErrorMessageInSession($email, $password);

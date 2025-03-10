@@ -1,6 +1,6 @@
 <?php
 
-require_once (__DIR__ . '/../enums/Michelin.php');
+require_once(__DIR__ . '/../enums/Michelin.php');
 
 /**
  * Data Transfer Object (DTO) for representing a restaurant.

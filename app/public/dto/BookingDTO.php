@@ -1,6 +1,6 @@
 <?php
 
-require_once (__DIR__ . '/../enums/TicketType.php');
+require_once(__DIR__ . '/../enums/TicketType.php');
 
 /**
  * Data Transfer Object (DTO) for representing a booking.

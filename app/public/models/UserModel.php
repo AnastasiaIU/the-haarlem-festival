@@ -1,8 +1,8 @@
 <?php
 
 require_once(__DIR__ . "/BaseModel.php");
-require_once (__DIR__ . '/../dto/UserDTO.php');
-require_once (__DIR__ . '/../enums/UserRole.php');
+require_once(__DIR__ . '/../dto/UserDTO.php');
+require_once(__DIR__ . '/../enums/UserRole.php');
 
 /**
  * UserModel class extends BaseModel to interact with the USER entity in the database.
