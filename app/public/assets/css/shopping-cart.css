@@ -1,0 +1,152 @@
+/* CART */
+
+.cart-view-container {
+    margin: 40px 80px;
+}
+
+.cart-item, .cart-item-headers {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    align-items: center;
+    max-width: 90%;
+    padding: 10px 0;
+}
+
+.cart-item-headers strong:nth-child(4) {
+    text-align: center;
+}
+
+.cart-item img {
+    width: 116px;
+    height: 116px;
+}
+
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0;
+}
+
+.quantity {
+    background: white;
+    width: 42px;
+    height: 38px;
+    border: 1.5px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.quantity-controls button {
+    background: transparent;
+    border: none;
+    margin: 0 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.decrease-quantity, .increase-quantity {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cart-total {
+    text-align: right;
+    margin-top: 20px;
+    font-size: 18px;
+}
+
+.event-type {
+    color: var(--rufous);
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.event-name {
+    color: var(--punch);
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.event-date {
+    color: var(--dark-charcoal);
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.event-type, .event-name, .event-date {
+    margin: 0;
+}
+
+.remove-item {
+    background: none;
+    color: var(--punch);
+    font-weight: 400;
+    border: none;
+    cursor: pointer;
+}
+
+.cart-item-headers {
+    font-weight: bold;
+}
+
+.cart-item-headers {
+    text-align: left;
+}
+
+.subtype-quantity {
+    margin: 20px 0;
+}
+
+/* CHECKOUT */
+
+.payment-container {
+    width: 55%;
+    margin-right: 80px;
+}
+
+.input-container {
+    width: 60%;
+    display: grid;
+    grid-template-columns: 0.5fr 1fr;
+    align-items: center;
+}
+
+.aside-container {
+    width: 45%;
+}
+
+.personal-plan-background {
+    width: 100%;
+    background: white;
+    border: #666666 1px solid;
+    border-radius: 10px;
+}
+
+.plan-container {
+    margin: 32px;
+}
+
+.input-field {
+    width: 100%;
+    max-width: 400px;
+    height: 40px;
+    border: #A6A6A6 1px solid;
+    border-radius: 4px;
+}
+
+.plan-headers, .cart-items {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    margin-top: 32px;
+}
+
+.plan-headers strong:nth-child(2), 
+.plan-headers strong:nth-child(3) {
+    text-align: center;
+}

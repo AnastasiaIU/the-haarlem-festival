@@ -1,4 +1,5 @@
-app/public/assets/js/argly/node_modules
+app/assets/js/argly/node_modules
+app/vendor/
 
 .DS_Store
 .idea

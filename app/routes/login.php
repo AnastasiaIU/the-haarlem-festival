@@ -1,6 +1,6 @@
 <?php
 
-require_once(__DIR__ . '/../controllers/UserController.php');
+require_once(__DIR__ . '/../src/controllers/UserController.php');
 
 Route::add('/login', function () {
     $loginError = $_SESSION['login_error'] ?? null;

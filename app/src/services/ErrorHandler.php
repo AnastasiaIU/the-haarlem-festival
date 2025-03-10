@@ -10,8 +10,8 @@ class ErrorHandler
      */
     private static function displayErrorPage(): void
     {
-        include(__DIR__ . '/../views/partials/header.php');
-        include(__DIR__ . '/../views/partials/error.php');
+        include(__DIR__ . '/../../views/partials/header.php');
+        include(__DIR__ . '/../../views/partials/error.php');
     }
 
     /**

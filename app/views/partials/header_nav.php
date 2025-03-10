@@ -1,7 +1,7 @@
 <nav class="navbar nav-underline navbar-expand-lg" data-bs-theme="dark">
     <div class="container-fluid">
         <a class="navbar-brand ms-3" href="/">
-            <img src="/assets/images/logo_header.svg" class="img-fluid navbar-logo"
+            <img src="../../assets/images/logo_header.svg" class="img-fluid navbar-logo"
                  alt="Logo The Haarlem Festival with a windmill">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -27,7 +27,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" id="nav-item-cart" href="/cart">
-                        <img src="/assets/images/shopping_cart.svg" alt="Shopping Cart" class="img-fluid icon">
+                        <img src="../../assets/images/shopping_cart.svg" alt="Shopping Cart" class="img-fluid icon">
                     </a>
                 </li>
                 <li class="nav-item">
@@ -37,7 +37,7 @@
                         <?php else: ?>
                             href="/login">
                         <?php endif; ?>
-                        <img src="/assets/images/profile.svg" alt="Profile Icon" class="img-fluid icon">
+                        <img src="../../assets/images/profile.svg" alt="Profile Icon" class="img-fluid icon">
                     </a>
                 </li>
             </ul>
