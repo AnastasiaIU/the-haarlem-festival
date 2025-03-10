@@ -1,6 +1,6 @@
 <?php
 
-require_once(__DIR__ . '/../../../../vendor/autoload.php');
+require_once(__DIR__ . '/../../vendor/autoload.php');
 
 \Stripe\Stripe::setApiKey('sk_test_51QwoutQK69u3tWgIlyxkZsAp8xygOLnRd1QKRhEdEMrAAqTwnryZixsMbICDeuC4gmR27t4nYCJxSPefLHR9COLs00zKZs6HV6');
 

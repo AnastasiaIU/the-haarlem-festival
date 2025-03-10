@@ -20,7 +20,7 @@
         <h3>Payment</h3>
         <hr class="my-4" style="border-color: black;">
         <p>Choose payment method.</p>
-        <form id="payment-form" action="/routes/api/stripe.php" method="post">
+        <form id="payment-form" action="../../routes/api/stripe.php" method="post">
             <div class="form-row">
                 <label for="payment-method">Payment Method:</label>
                 <select id="payment-method" name="payment_method" required>
@@ -81,4 +81,4 @@
 </div>
 
 <script src="https://js.stripe.com/v3/"></script>
-<script type="module" src="/assets/js/checkout.js"></script>
+<script type="module" src="../../assets/js/checkout.js"></script>

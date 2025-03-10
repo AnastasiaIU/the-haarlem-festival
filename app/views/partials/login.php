@@ -2,7 +2,7 @@
     <section class="card col-md-6 col-lg-5 col-xl-4 p-4 m-4">
         <form class="d-flex flex-column gap-2 needs-validation" id="loginForm" method="post" novalidate>
             <div class="d-flex flex-column justify-content-center align-items-center gap-3">
-                <img src="/assets/images/logo_form.svg" class="img-fluid image-height-40 form-logo"
+                <img src="../../assets/images/logo_form.svg" class="img-fluid image-height-40 form-logo"
                      alt="Logo">
                 <p class="h5 mb-3 medium-grey-text">Sign in to your account</p>
             </div>

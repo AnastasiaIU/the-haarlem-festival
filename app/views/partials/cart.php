@@ -32,4 +32,4 @@
     </div>
 </main>
 
-<script type="module" src="/assets/js/shopping-cart.js"></script>
+<script type="module" src="../../assets/js/shopping-cart.js"></script>

@@ -4,7 +4,7 @@
             <div class="row justify-content-between gap-3">
                 <div class="col-md-4">
                     <a href="/">
-                        <img src="/assets/images/logo_footer.svg" class="img-fluid logo"
+                        <img src="../../assets/images/logo_footer.svg" class="img-fluid logo"
                              alt="Logo The Haarlem Festival with a windmill">
                     </a>
                     <p class="pt-2 m-0">Haarlem: a cozy historic center, famous museums, stores, restaurants and the
@@ -35,13 +35,13 @@
                     <p class="pt-2 m-0">Subscribe to our social media!</p>
                     <div class="container-fluid d-flex gap-4 px-0 py-3">
                         <a class="footer-link" href="https://www.facebook.com/Haarlemmarketing">
-                            <img src="/assets/images/facebook.svg" alt="Facebook Icon" class="img-fluid icon">
+                            <img src="../../assets/images/facebook.svg" alt="Facebook Icon" class="img-fluid icon">
                         </a>
                         <a class="footer-link" href="https://www.instagram.com/visithaarlem">
-                            <img src="/assets/images/instagram.svg" alt="Instagram Icon" class="img-fluid icon">
+                            <img src="../../assets/images/instagram.svg" alt="Instagram Icon" class="img-fluid icon">
                         </a>
                         <a class="footer-link" href="https://www.youtube.com/visithaarlem">
-                            <img src="/assets/images/youtube.svg" alt="Youtube Icon" class="img-fluid icon">
+                            <img src="../../assets/images/youtube.svg" alt="Youtube Icon" class="img-fluid icon">
                         </a>
                     </div>
                 </div>

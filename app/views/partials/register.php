@@ -2,7 +2,7 @@
     <section class="card col-md-6 col-lg-5 col-xl-4 p-4 m-4">
         <form class="d-flex flex-column gap-2 needs-validation" id="registrationForm" method="post" novalidate>
             <div>
-                <img src="/assets/images/logo_header.svg" class="img-fluid image-height-40"
+                <img src="../../assets/images/logo_header.svg" class="img-fluid image-height-40"
                      alt="Logo">
                 <span class="h3 align-middle ms-2 dark-grey-text">Register</span>
             </div>
