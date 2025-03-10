@@ -1,0 +1,64 @@
+<?php
+
+/**
+ * Data Transfer Object (DTO) for representing a tour type.
+ */
+class TourTypeDTO {
+    private int $id;
+    private int $capacity;
+    private float $singlePrice;
+    private float $familyPrice;
+
+    public function __construct(int $id, int $capacity, float $singlePrice, float $familyPrice) {
+        $this->id = $id;
+        $this->capacity = $capacity;
+        $this->singlePrice = $singlePrice;
+        $this->familyPrice = $familyPrice;
+    }
+
+    // Getters
+    public function getId(): int {
+        return $this->id;
+    }
+
+    public function getCapacity(): int {
+        return $this->capacity;
+    }
+
+    public function getSinglePrice(): float {
+        return $this->singlePrice;
+    }
+
+    public function getFamilyPrice(): float {
+        return $this->familyPrice;
+    }
+
+    /**
+     * Converts the TourTypeDTO object to an associative array.
+     *
+     * @return array An associative array representing the TourTypeDTO object.
+     */
+    public function toArray(): array {
+        return [
+            'id' => $this->id,
+            'capacity' => $this->capacity,
+            'single_price' => $this->singlePrice,
+            'family_price' => $this->familyPrice
+        ];
+    }
+
+    /**
+     * Creates a TourTypeDTO instance from an associative array.
+     *
+     * @param array $data The associative array containing tour type data.
+     * @return self A new instance of TourTypeDTO populated with the provided data.
+     */
+    public static function fromArray(array $data): self {
+        return new self(
+            $data['id'],
+            $data['capacity'],
+            $data['single_price'],
+            $data['family_price']
+        );
+    }
+}

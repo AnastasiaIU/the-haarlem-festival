@@ -29,6 +29,7 @@ require_once(__DIR__ . "/routes/index.php");
 require_once(__DIR__ . "/routes/cart.php");
 require_once(__DIR__ . "/routes/dance.php");
 require_once(__DIR__ . "/routes/login.php");
+require_once(__DIR__ . "/routes/logout.php");
 require_once(__DIR__ . "/routes/profile.php");
 require_once(__DIR__ . "/routes/register.php");
 require_once(__DIR__ . "/routes/strolls.php");

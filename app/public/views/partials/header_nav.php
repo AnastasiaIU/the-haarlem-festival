@@ -1,7 +1,7 @@
 <nav class="navbar nav-underline navbar-expand-lg" data-bs-theme="dark">
     <div class="container-fluid">
         <a class="navbar-brand ms-3" href="/">
-            <img src="/assets/images/logo.svg" class="img-fluid logo"
+            <img src="/assets/images/logo_header.svg" class="img-fluid navbar-logo"
                  alt="Logo The Haarlem Festival with a windmill">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -35,7 +35,7 @@
                         <?php if (isset($_SESSION['user'])): ?>
                             href="/profile">
                         <?php else: ?>
-                            href="/register">
+                            href="/login">
                         <?php endif; ?>
                         <img src="/assets/images/profile.svg" alt="Profile Icon" class="img-fluid icon">
                     </a>
