@@ -26,32 +26,27 @@ class UserController
      *
      * @param string $email The email of the user to register.
      * @param string $password The password of the user to register.
-     * @param UserRole $userRole The role of the user to register.
      * @return UserDTO|null The newly created UserDTO object or null if the user already exists.
      */
-    public function registerUser(string $email, string $password, UserRole $userRole): ?UserDTO
+    public function registerUser(string $email, string $password): ?UserDTO
     {
         // Retrieve the user by email
         $user = $this->userModel->getUser($email);
 
         // Check if the user already exists
         if ($user !== null) {
-            // Set error message and form data in session
-            $_SESSION['error'] = 'User already exists. Please use another email.';
-            $_SESSION['form_data'] = ['email' => $email];
             http_response_code(400);
-        } else {
-            // Hash the password and save the user to the database
-            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-            $new_user = $this->userModel->createUser($email, $hashedPassword, $userRole);
-
-            $_SESSION['login_user_created'] = 'User created successfully. Please log in.';
-            header('Location: /login');
-
-            return $new_user;
+            echo json_encode(['error' => 'User already exists. Please use another email.']);
+            return null;
         }
 
-        return null;
+        // Hash the password and save the user to the database
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+        $new_user = $this->userModel->createUser($email, $hashedPassword, UserRole::CUSTOMER);
+
+        $_SESSION['login_user_created'] = 'User created successfully. Please log in.';
+
+        return $new_user;
     }
 
     /**
@@ -78,8 +73,10 @@ class UserController
         }
 
         $_SESSION['user'] = $user->id;
+
         $redirectUrl = $_SESSION['last_visited_url'] ?? '/profile';
         echo json_encode(['redirectUrl' => $redirectUrl]);
+
         return $user;
     }
 }
