@@ -71,35 +71,15 @@ class UserController
         $user = $this->userModel->getUser($email);
 
         // Check if the user exists
-        if ($user === null) {
-            $this->setErrorMessageInSession($email, $password);
-        } else {
-            if ($user->verifyPassword($password)) {
-                // Set logged-in user in session
-                $_SESSION['user'] = $user->id;
-
-                // Redirect to the last visited page or default to profile page
-                $redirectUrl = $_SESSION['last_visited_url'] ?? '/profile';
-                header("Location: $redirectUrl");
-                return $user;
-            } else {
-                $this->setErrorMessageInSession($email, $password);
-            }
+        if ($user === null || !$user->verifyPassword($password)) {
+            http_response_code(400);
+            echo json_encode(['error' => 'Wrong email or password. Please, try again.']);
+            return null;
         }
 
-        return null;
-    }
-
-    /**
-     * Sets an error message and form data in the session.
-     *
-     * @param string $email The email of the user.
-     * @param string $password The password of the user.
-     */
-    public function setErrorMessageInSession(string $email, string $password): void
-    {
-        $_SESSION['login_error'] = 'Wrong email or password. Please, try again.';
-        $_SESSION['login_form_data'] = ['email' => $email, 'password' => $password];
-        http_response_code(400);
+        $_SESSION['user'] = $user->id;
+        $redirectUrl = $_SESSION['last_visited_url'] ?? '/profile';
+        echo json_encode(['redirectUrl' => $redirectUrl]);
+        return $user;
     }
 }

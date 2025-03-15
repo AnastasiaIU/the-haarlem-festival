@@ -8,33 +8,19 @@
             </div>
             <div class="form-group">
                 <label for="loginEmail">Email address</label>
-                <input type="email" name="email" class="form-control" id="loginEmail"
-                       aria-describedby="emailHelp" placeholder="Enter email" autocomplete="email"
-                    <?php if (isset($loginFormData['email'])): ?>
-                       value="<?= htmlspecialchars($loginFormData['email']) ?>" required>
-                <div class="invalid-feedback" id="loginEmailPrompt"></div>
-                <?php else: ?>
-                    required>
-                    <div class="invalid-feedback" id="loginEmailPrompt">
-                        Email address cannot be empty.
-                    </div>
-                <?php endif; ?>
+                <input type="email" name="email" class="form-control" id="loginEmail" aria-describedby="emailHelp"
+                       placeholder="Enter email" autocomplete="email" required>
+                <div class="invalid-feedback" id="loginEmailPrompt">
+                    Email address cannot be empty.
+                </div>
             </div>
             <div class="form-group mb-2">
                 <label for="loginPassword">Password</label>
                 <input type="password" name="password" class="form-control" id="loginPassword" placeholder="Password"
-                       autocomplete="current-password"
-                    <?php if (isset($loginFormData['password'])): ?>
-                       value="<?= htmlspecialchars($loginFormData['password']) ?>" required>
+                       autocomplete="current-password" required>
                 <div class="invalid-feedback" id="loginPasswordPrompt">
-                    <?= htmlspecialchars($loginError) ?>
+                    Password cannot be empty.
                 </div>
-                <?php else: ?>
-                    required>
-                    <div class="invalid-feedback" id="loginPasswordPrompt">
-                        Password cannot be empty.
-                    </div>
-                <?php endif; ?>
             </div>
             <div class="d-flex align-items-center mb-4">
                 <input class="checkbox me-2" type="checkbox" value="" id="showPasswordCheck">

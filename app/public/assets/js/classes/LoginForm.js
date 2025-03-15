@@ -9,7 +9,7 @@ export class LoginForm {
 
         this.initializeValidation();
 
-        this.form.addEventListener('submit', () => this.handleFormSubmission());
+        this.form.addEventListener('submit', (event) => this.handleFormSubmission(event));
         this.showPasswordCheck.addEventListener('change', () => this.togglePasswordVisibility());
         this.email.addEventListener('change', () => this.resetCredentialsValidation());
         this.password.addEventListener('change', () => this.resetCredentialsValidation());
@@ -32,15 +32,34 @@ export class LoginForm {
     /**
      * Handles form submission by validating the inputs and updating the UI accordingly.
      */
-    handleFormSubmission() {
-        this.email.setCustomValidity('');
-        this.password.setCustomValidity('');
-        this.inputPasswordPrompt.innerHTML = 'Password address cannot be empty.';
+    async handleFormSubmission(event) {
+        event.preventDefault()
+
+        this.resetCredentialsValidation();
 
         if (this.email.value === '') {
             this.inputEmailPrompt.innerHTML = 'Email address cannot be empty.';
         } else {
             this.inputEmailPrompt.innerHTML = 'Invalid email.';
+        }
+
+        if (this.form.checkValidity()) {
+            const formData = new FormData(this.form);
+            const response = await fetch('/login', {
+                method: 'POST',
+                body: formData
+            });
+            const result = await response.json();
+            if (response.ok) {
+                window.location.href = result.redirectUrl;
+            } else {
+                this.email.setCustomValidity(result.error);
+                this.inputEmailPrompt.innerHTML = '';
+                this.password.setCustomValidity(result.error);
+                this.inputPasswordPrompt.innerHTML = result.error;
+            }
+        } else {
+            event.stopPropagation()
         }
 
         this.form.classList.add('was-validated');
