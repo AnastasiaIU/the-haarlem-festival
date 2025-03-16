@@ -1,13 +1,16 @@
 import { LoginForm } from "./classes/LoginForm.js";
 import { RegistrationForm } from "./classes/RegistrationForm.js";
+import {Navigation} from "./classes/Navigation.js";
 
 /**
  * Initializes event listeners and functions when the DOM content is fully loaded.
  */
 document.addEventListener("DOMContentLoaded", async () => {
+    new Navigation();
+
     const path = window.location.pathname;
     const navItems = {
-        '/': 'nav-item-home',
+        '/': 'nav-item-',
         '/cart': 'nav-item-cart',
         '/dance': 'nav-item-dance',
         '/login': '',

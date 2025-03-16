@@ -14,11 +14,12 @@ class UserModel extends BaseModel
      *
      * @param string $email The email of the user to retrieve.
      * @return UserDTO|null The data transfer object representing the user or null if the user is not found.
+     * @throws DateMalformedStringException
      */
     public function getUser(string $email): ?UserDTO
     {
         $query = self::$pdo->prepare(
-            'SELECT id, email, password, role
+            'SELECT id, email, password, role, created_at
                     FROM user
                     WHERE email = :email'
         );
@@ -46,7 +47,7 @@ class UserModel extends BaseModel
             self::$pdo->beginTransaction();
 
             $query = self::$pdo->prepare(
-                'INSERT INTO user (email, password, role) VALUES (:email, :password, :role)'
+                'INSERT INTO user (email, password, role, created_at) VALUES (:email, :password, :role, NOW())'
             );
 
             $success = $query->execute([

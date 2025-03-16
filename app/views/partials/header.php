@@ -20,7 +20,29 @@
             integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
             crossorigin="anonymous"></script>
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script src="https://cdn.tiny.cloud/1/clwrf6ykpssoswy8p2on10mut3yv9h65futcwnlgkg48h573/tinymce/7/tinymce.min.js"
+            referrerpolicy="origin"></script>
     <script type="module" src="../../assets/js/main.js"></script>
+    <?php
+    $isAdmin = isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'Administrator';
+    ?>
+    <?php if ($isAdmin): ?>
+        <script>
+            tinymce.init({
+                selector: '.tinymce', // Target elements with class 'tinymce'
+                inline: true, // Enable inline editing for non-textarea elements
+                toolbar: 'bold italic underline | alignleft aligncenter alignright | undo redo',
+                menubar: false, // Remove the menubar for a cleaner UI
+                plugins: 'autoresize', // Enable autoresize for better UX
+                forced_root_block: false, // Prevents TinyMCE from wrapping content in <p>
+            });
+        </script>
+        <style>
+            .tinymce-save {
+                display: inline-block !important;
+            }
+        </style>
+    <?php endif; ?>
 </head>
 
 <body class="d-flex flex-column min-vh-100">

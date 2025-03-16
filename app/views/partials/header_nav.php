@@ -10,21 +10,7 @@
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
             <ul class="navbar-nav mb-2 mb-lg-0 ms-3 gap-3">
-                <li class="nav-item">
-                    <a class="nav-link" id="nav-item-home" href="/">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="nav-item-dance" href="/dance">DANCE!</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="nav-item-yummy" href="/yummy">Yummy!</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="nav-item-strolls" href="/strolls">History Strolls</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="nav-item-teylers" href="/teylers">Magic@Teylers</a>
-                </li>
+                <ul class="navbar-nav gap-3" id="navbar"></ul>
                 <li class="nav-item">
                     <a class="nav-link" id="nav-item-cart" href="/cart">
                         <img src="../../assets/images/shopping_cart.svg" alt="Shopping Cart" class="img-fluid icon">
@@ -33,7 +19,7 @@
                 <li class="nav-item">
                     <a class="nav-link" id="nav-item-profile"
                         <?php if (isset($_SESSION['user'])): ?>
-                            href="/profile">
+                       href="/profile">
                         <?php else: ?>
                             href="/login">
                         <?php endif; ?>
@@ -44,11 +30,21 @@
             <div>
                 <a type="button" class="btn btn-primary ms-3 font-p-16 fw-bold" id="loginButton"
                     <?php if (isset($_SESSION['user'])): ?>
-                        href="/logout">Sign out</a>
-                    <?php else: ?>
-                        href="/login">Sign in</a>
-                    <?php endif; ?>
+                   href="/logout">Sign out</a>
+                <?php else: ?>
+                    href="/login">Sign in</a>
+                <?php endif; ?>
             </div>
         </div>
     </div>
 </nav>
+<?php
+require_once(__DIR__ . '/../../src/controllers/EventController.php');
+
+$eventController = new EventController();
+$events = $eventController->fetchAllEvents();
+?>
+<script>
+    // Pass the PHP variable to JavaScript
+    const events = JSON.parse('<?php echo addslashes(json_encode($events, JSON_UNESCAPED_UNICODE | JSON_HEX_APOS | JSON_HEX_QUOT)); ?>');
+</script>
