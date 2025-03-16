@@ -7,6 +7,7 @@ export class RegistrationForm {
         this.confirmPassword = document.getElementById("inputConfirmPassword");
         this.confirmPasswordPrompt = document.getElementById("confirmPasswordPrompt");
         this.showPasswordCheck = document.getElementById('showPasswordCheck');
+        this.captchaPrompt = document.getElementById('captchaPrompt');
 
         this.form.addEventListener('submit', (event) => this.handleFormSubmission(event));
         this.showPasswordCheck.addEventListener('change', () => this.togglePasswordVisibility());
@@ -47,11 +48,16 @@ export class RegistrationForm {
                 window.location.href = '/login';
             } else {
                 const result = await response.json();
-                this.email.setCustomValidity(result.error);
-                this.emailPrompt.innerHTML = '';
-                this.password.setCustomValidity(result.error);
-                this.confirmPassword.setCustomValidity(result.error);
-                this.confirmPasswordPrompt.innerHTML = result.error;
+                if (result.user_error) {
+                    this.email.setCustomValidity(result.user_error);
+                    this.emailPrompt.innerHTML = '';
+                    this.password.setCustomValidity(result.user_error);
+                    this.confirmPassword.setCustomValidity(result.user_error);
+                    this.confirmPasswordPrompt.innerHTML = result.user_error;
+                } else {
+                    this.captchaPrompt.style.display = 'block';
+                }
+                grecaptcha.reset();
             }
         } else {
             // Stop the form submission
@@ -77,5 +83,6 @@ export class RegistrationForm {
         this.email.setCustomValidity('');
         this.password.setCustomValidity('');
         this.confirmPassword.setCustomValidity('');
+        this.captchaPrompt.style.display = 'none';
     }
 }

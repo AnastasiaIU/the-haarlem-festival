@@ -1,6 +1,7 @@
 {
     "require": {
         "stripe/stripe-php": "^16.6",
-      "ext-pdo": "*"
+      "ext-pdo": "*",
+        "google/cloud-recaptcha-enterprise": "^2.0"
     }
 }

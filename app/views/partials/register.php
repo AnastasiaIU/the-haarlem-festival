@@ -29,11 +29,16 @@
                     </div>
                 </div>
             </div>
-            <div class="d-flex align-items-center mb-4">
+            <div class="d-flex align-items-center">
                 <input class="checkbox me-2" type="checkbox" value="" id="showPasswordCheck">
                 <label class="" for="showPasswordCheck">
                     Show passwords
                 </label>
+            </div>
+            <div class="mb-2">
+                <div class="g-recaptcha mt-2" data-sitekey="<?php echo $_ENV['RECAPTCHA_SITE_KEY']; ?>"
+                     data-action="<?php echo $_ENV['RECAPTCHA_ACTION']; ?>"></div>
+                <div class="form-prompt" id="captchaPrompt">Please complete the captcha.</div>
             </div>
             <button type="submit" class="btn btn-primary mb-3" id="registerBtn">Register</button>
         </form>

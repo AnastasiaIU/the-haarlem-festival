@@ -85,3 +85,10 @@ footer {
 .form-logo {
     height: 60px;
 }
+
+.form-prompt {
+    color: #dc3545;
+    font-size: 0.875em;
+    margin-top: .25rem;
+    display: none;
+}

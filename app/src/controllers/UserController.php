@@ -28,25 +28,35 @@ class UserController
      * @param string $password The password of the user to register.
      * @return UserDTO|null The newly created UserDTO object or null if the user already exists.
      */
-    public function registerUser(string $email, string $password): ?UserDTO
+    public function registerUser(string $email, string $password, string $recaptchaToken): ?UserDTO
     {
-        // Retrieve the user by email
-        $user = $this->userModel->getUser($email);
+        $secretKey = $_ENV['RECAPTCHA_SECRET_KEY'];
+        $url = "https://www.google.com/recaptcha/api/siteverify?secret=$secretKey&response=$recaptchaToken";
+        $response = file_get_contents($url);
+        $response = json_decode($response);
+        if ($response->success) {
+            // Retrieve the user by email
+            $user = $this->userModel->getUser($email);
 
-        // Check if the user already exists
-        if ($user !== null) {
+            // Check if the user already exists
+            if ($user !== null) {
+                http_response_code(400);
+                echo json_encode(['user_error' => 'User already exists. Please use another email.']);
+                return null;
+            }
+
+            // Hash the password and save the user to the database
+            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+            $new_user = $this->userModel->createUser($email, $hashedPassword, UserRole::CUSTOMER);
+
+            $_SESSION['login_user_created'] = 'User created successfully. Please log in.';
+
+            return $new_user;
+        } else {
             http_response_code(400);
-            echo json_encode(['error' => 'User already exists. Please use another email.']);
+            echo json_encode(['captcha_error' => 'Please complete the captcha.']);
             return null;
         }
-
-        // Hash the password and save the user to the database
-        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-        $new_user = $this->userModel->createUser($email, $hashedPassword, UserRole::CUSTOMER);
-
-        $_SESSION['login_user_created'] = 'User created successfully. Please log in.';
-
-        return $new_user;
     }
 
     /**

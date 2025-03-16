@@ -10,7 +10,8 @@ Route::add('/register', function () {
     // Sanitize input
     $email = filter_var(trim($_POST['email']), FILTER_SANITIZE_EMAIL);
     $password = htmlspecialchars(trim($_POST['password']));
+    $recaptchaToken = $_POST['g-recaptcha-response'];
 
     $userController = new UserController();
-    $userController->registerUser($email, $password);
+    $userController->registerUser($email, $password, $recaptchaToken);
 }, "post");
