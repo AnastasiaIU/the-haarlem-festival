@@ -82,6 +82,9 @@ footer {
     opacity: 80%;
 }
 
+/*
+ * FORM STYLES
+ */
 .form-logo {
     height: 60px;
 }
@@ -90,5 +93,12 @@ footer {
     color: #dc3545;
     font-size: 0.875em;
     margin-top: .25rem;
+    display: none;
+}
+
+/**
+ * TINYMCE STYLES
+ */
+.tinymce-save {
     display: none;
 }

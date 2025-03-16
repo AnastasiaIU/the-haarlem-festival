@@ -7,17 +7,19 @@ require_once(__DIR__ . '/../enums/UserRole.php');
  */
 class UserDTO
 {
-    public int $id;
+    private int $id;
     private string $email;
     private string $password;
     private UserRole $role;
+    private DateTime $created_at;
 
-    public function __construct(string $id, string $email, string $password, UserRole $role)
+    public function __construct(string $id, string $email, string $password, UserRole $role, DateTime $created_at)
     {
         $this->id = $id;
         $this->email = $email;
         $this->password = $password;
         $this->role = $role;
+        $this->created_at = $created_at;
     }
 
     // Getters
@@ -31,6 +33,10 @@ class UserDTO
 
     public function getRole(): UserRole {
         return $this->role;
+    }
+
+    public function getCreatedAt(): DateTime {
+        return $this->created_at;
     }
 
     /**
@@ -53,7 +59,8 @@ class UserDTO
         return [
             'id' => $this->id,
             'email' => $this->email,
-            'role' => $this->role->value
+            'role' => $this->role->value,
+            'created_at' => $this->created_at->format('Y-m-d H:i:s')
         ];
     }
 
@@ -62,13 +69,15 @@ class UserDTO
      *
      * @param array $data The associative array containing user data.
      * @return self A new instance of UserDTO populated with the provided data.
+     * @throws DateMalformedStringException
      */
     public static function fromArray(array $data): self {
         return new self(
             $data['id'],
             $data['email'],
             $data['password'],
-            UserRole::from($data['role'])
+            UserRole::from($data['role']),
+            new DateTime($data['created_at'])
         );
     }
 }
