@@ -15,11 +15,7 @@
                 </div>
                 <div class="col-md-2">
                     <h5>Sitemap</h5>
-                    <a class="footer-link" href="/">Home</a>
-                    <a class="footer-link" href="/dance">DANCE!</a>
-                    <a class="footer-link" href="/yummy">Yummy!</a>
-                    <a class="footer-link" href="/strolls">History Strolls</a>
-                    <a class="footer-link" href="/teylers">Magic@Teylers</a>
+                    <ul class="p-0 m-0" id="sitemap"></ul>
                     <a class="footer-link" href="/cart">Shopping Cart</a>
                     <a class="footer-link"
                         <?php if (isset($_SESSION['user'])): ?>
