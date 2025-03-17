@@ -3,7 +3,7 @@
 /**
  * Set env variables and enable error reporting in local environment.
  */
-require_once(__DIR__ . "/../lib/env.php");
+require_once(__DIR__ . "/../env.php");
 require_once(__DIR__ . "/../lib/error_reporting.php");
 
 /**

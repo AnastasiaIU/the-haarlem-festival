@@ -1,5 +1,6 @@
 app/assets/js/argly/node_modules
 app/vendor/
+app/env.php
 
 .DS_Store
 .idea

@@ -26,32 +26,37 @@ class UserController
      *
      * @param string $email The email of the user to register.
      * @param string $password The password of the user to register.
-     * @param UserRole $userRole The role of the user to register.
      * @return UserDTO|null The newly created UserDTO object or null if the user already exists.
      */
-    public function registerUser(string $email, string $password, UserRole $userRole): ?UserDTO
+    public function registerUser(string $email, string $password, string $recaptchaToken): ?UserDTO
     {
-        // Retrieve the user by email
-        $user = $this->userModel->getUser($email);
+        $secretKey = $_ENV['RECAPTCHA_SECRET_KEY'];
+        $url = "https://www.google.com/recaptcha/api/siteverify?secret=$secretKey&response=$recaptchaToken";
+        $response = file_get_contents($url);
+        $response = json_decode($response);
+        if ($response->success) {
+            // Retrieve the user by email
+            $user = $this->userModel->getUser($email);
 
-        // Check if the user already exists
-        if ($user !== null) {
-            // Set error message and form data in session
-            $_SESSION['error'] = 'User already exists. Please use another email.';
-            $_SESSION['form_data'] = ['email' => $email];
-            http_response_code(400);
-        } else {
+            // Check if the user already exists
+            if ($user !== null) {
+                http_response_code(400);
+                echo json_encode(['user_error' => 'User already exists. Please use another email.']);
+                return null;
+            }
+
             // Hash the password and save the user to the database
             $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-            $new_user = $this->userModel->createUser($email, $hashedPassword, $userRole);
+            $new_user = $this->userModel->createUser($email, $hashedPassword, UserRole::CUSTOMER);
 
             $_SESSION['login_user_created'] = 'User created successfully. Please log in.';
-            header('Location: /login');
 
             return $new_user;
+        } else {
+            http_response_code(400);
+            echo json_encode(['captcha_error' => 'Please complete the captcha.']);
+            return null;
         }
-
-        return null;
     }
 
     /**
@@ -71,35 +76,17 @@ class UserController
         $user = $this->userModel->getUser($email);
 
         // Check if the user exists
-        if ($user === null) {
-            $this->setErrorMessageInSession($email, $password);
-        } else {
-            if ($user->verifyPassword($password)) {
-                // Set logged-in user in session
-                $_SESSION['user'] = $user->id;
-
-                // Redirect to the last visited page or default to profile page
-                $redirectUrl = $_SESSION['last_visited_url'] ?? '/profile';
-                header("Location: $redirectUrl");
-                return $user;
-            } else {
-                $this->setErrorMessageInSession($email, $password);
-            }
+        if ($user === null || !$user->verifyPassword($password)) {
+            http_response_code(400);
+            echo json_encode(['error' => 'Wrong email or password. Please, try again.']);
+            return null;
         }
 
-        return null;
-    }
+        $_SESSION['user'] = $user->id;
 
-    /**
-     * Sets an error message and form data in the session.
-     *
-     * @param string $email The email of the user.
-     * @param string $password The password of the user.
-     */
-    public function setErrorMessageInSession(string $email, string $password): void
-    {
-        $_SESSION['login_error'] = 'Wrong email or password. Please, try again.';
-        $_SESSION['login_form_data'] = ['email' => $email, 'password' => $password];
-        http_response_code(400);
+        $redirectUrl = $_SESSION['last_visited_url'] ?? '/profile';
+        echo json_encode(['redirectUrl' => $redirectUrl]);
+
+        return $user;
     }
 }
