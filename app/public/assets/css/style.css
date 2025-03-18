@@ -97,8 +97,15 @@ footer {
 }
 
 /**
- * TINYMCE STYLES
+ * CMS STYLES
  */
 .tinymce-save {
     display: none;
+}
+
+.change-image {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
 }

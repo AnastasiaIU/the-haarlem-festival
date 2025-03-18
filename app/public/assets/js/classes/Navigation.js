@@ -1,9 +1,16 @@
+import { fetchFromApi } from '../main.js';
+
 export class Navigation {
     constructor() {
+        this.init();
+    }
+
+    async init() {
+        this.events = await fetchFromApi('/api/getEvents');
         this.navbar = document.getElementById('navbar');
         this.sitemap = document.getElementById('sitemap');
 
-        for (const { slug, menu_name } of events) {
+        for (const { slug, menu_name } of this.events) {
             const navItem = this.createNavItem(slug, menu_name);
             this.navbar.appendChild(navItem);
             const sitemapItem = this.createSitemapItem(slug, menu_name);

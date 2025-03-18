@@ -1,6 +1,7 @@
-import { LoginForm } from "./classes/LoginForm.js";
-import { RegistrationForm } from "./classes/RegistrationForm.js";
+import {LoginForm} from "./classes/LoginForm.js";
+import {RegistrationForm} from "./classes/RegistrationForm.js";
 import {Navigation} from "./classes/Navigation.js";
+import {EventHero} from "./classes/EventHero.js";
 
 /**
  * Initializes event listeners and functions when the DOM content is fully loaded.
@@ -31,6 +32,10 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     if (path === '/register') {
         new RegistrationForm();
+    }
+
+    if (path === '/' || path === '/dance' || path === '/yummy' || path === '/strolls' || path === '/teylers') {
+        new EventHero();
     }
 
     enableBootstrapFormValidation();
@@ -72,4 +77,17 @@ function setCurrentNavItem(id) {
             item.classList.remove('active');
         }
     });
+}
+
+/**
+ * Fetches data from the given API URL.
+ *
+ * @param {string} url The URL to fetch data from.
+ * @returns {Promise<Object>} A promise that resolves to the JSON response.
+ * @throws {Error} Throws an error if the HTTP response is not ok.
+ */
+export async function fetchFromApi(url) {
+    const response = await fetch(url);
+    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+    return await response.json();
 }
