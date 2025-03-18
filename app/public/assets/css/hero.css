@@ -1,0 +1,66 @@
+.hero-section {
+    position: relative;
+    padding: 0;
+    height: 70vh;
+    display: flex;
+    align-items: stretch;
+}
+
+.hero-image {
+    height: 100%;
+}
+
+#heroImage {
+    height: 100%;
+    position: relative;
+    z-index: 0;
+    object-fit: cover;
+}
+
+.hero-content {
+    height: 100%;
+    aspect-ratio: 0.95 / 1;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: visible;
+}
+
+.hero-shape {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: no-repeat center center / cover;
+    z-index: 1;
+}
+
+/* Ensure Text is Above Shape */
+.hero-title, .hero-text, .btn {
+    position: relative;
+    z-index: 1;
+}
+
+/* 🔹 Mobile: Move Shape Beneath the Image */
+@media (max-width: 768px) {
+    .hero-section .row {
+        flex-direction: column;
+    }
+
+    .hero-content {
+        margin-top: -50px;
+        text-align: center;
+    }
+
+    .hero-shape {
+        top: auto;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        height: 50%;
+        z-index: -1;
+    }
+}

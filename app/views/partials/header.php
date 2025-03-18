@@ -10,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="../../assets/css/colors.css">
     <link rel="stylesheet" type="text/css" href="../../assets/css/style.css">
     <link rel="stylesheet" type="text/css" href="../../assets/css/shopping-cart.css">
+    <link rel="stylesheet" type="text/css" href="../../assets/css/hero.css">
     <link rel="icon" type="image/x-icon" href="../../assets/images/favicon.svg">
     <link href='https://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=Cabin' rel='stylesheet'>
@@ -30,15 +31,25 @@
         <script>
             tinymce.init({
                 selector: '.tinymce', // Target elements with class 'tinymce'
-                inline: true, // Enable inline editing for non-textarea elements
-                toolbar: 'bold italic underline | alignleft aligncenter alignright | undo redo',
-                menubar: false, // Remove the menubar for a cleaner UI
-                plugins: 'autoresize', // Enable autoresize for better UX
-                forced_root_block: false, // Prevents TinyMCE from wrapping content in <p>
+                plugins: [
+                    'anchor', 'autolink', 'charmap', 'codesample', 'emoticons', 'image', 'link', 'lists', 'media', 'searchreplace', 'table', 'visualblocks', 'wordcount'
+                ],
+                toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+                tinycomments_mode: 'embedded',
+                tinycomments_author: 'Author name',
+                mergetags_list: [
+                    {value: 'First.Name', title: 'First Name'},
+                    {value: 'Email', title: 'Email'},
+                ],
+                inline: true,
+                image_list: [
+                    { title: 'My image 1', value: 'https://www.example.com/my1.gif' },
+                    { title: 'My image 2', value: 'http://www.moxiecode.com/my2.gif' }
+                ]
             });
         </script>
         <style>
-            .tinymce-save {
+            .tinymce-save, .change-image {
                 display: inline-block !important;
             }
         </style>

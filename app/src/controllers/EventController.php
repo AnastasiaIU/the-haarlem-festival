@@ -9,7 +9,7 @@ class EventController
 
     public function __construct()
     {
-        $this->eventModel = new eventModel();
+        $this->eventModel = new EventModel();
     }
 
     /**
@@ -20,5 +20,27 @@ class EventController
     public function fetchAllEvents(): array
     {
         return $this->eventModel->fetchAllEvents();
+    }
+
+    /**
+     * Fetches a single event by its slug.
+     *
+     * @param string $slug The slug of the event to fetch.
+     * @return EventDTO|null The event object if found, otherwise null.
+     */
+    public function fetchEventBySlug(string $slug): ?EventDTO
+    {
+        return $this->eventModel->fetchEventBySlug($slug);
+    }
+
+    /**
+     * Fetches a single event by its id.
+     *
+     * @param int $id The id of the event to fetch.
+     * @return EventDTO|null The event object if found, otherwise null.
+     */
+    public function fetchEventById(int $id): ?EventDTO
+    {
+        return $this->eventModel->fetchEventById($id);
     }
 }
