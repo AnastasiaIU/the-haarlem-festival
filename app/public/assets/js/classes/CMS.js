@@ -1,12 +1,21 @@
 export class CMS {
     constructor() {
         document.querySelectorAll('.change-image').forEach(button => {
-            const input = document.querySelector(`input[data-button="${button.id}"]`);
-            button.addEventListener('click', () => {
-                input.click()
-            });
-            input.addEventListener('change', (event) => this.uploadImage(event, input))
-        })
+            this.bindInputToButton(button);
+        });
+    }
+
+    /**
+     * Binds a change image input element to a button element.
+     *
+     * @param button - The button element to bind the input to.
+     */
+    bindInputToButton(button) {
+        const input = document.querySelector(`input[data-button="${button.id}"]`);
+        button.addEventListener('click', () => {
+            input.click()
+        });
+        input.addEventListener('change', (event) => this.uploadImage(event, input))
     }
 
     /**
@@ -68,5 +77,32 @@ export class CMS {
                 }
             })
             .catch(error => console.error("Upload failed:", error));
+    }
+
+    /**
+     * Creates a new button element with the specified text, link, and icon.
+     *
+     * @param button - Object containing the button text, link, and optional icon.
+     * @param className - CSS class to apply to the button.
+     * @returns {HTMLAnchorElement} - The newly created button element.
+     */
+    createButton(button, className) {
+        const newButton = document.createElement('a');
+        newButton.type = 'button';
+        newButton.className = className;
+        newButton.href = `/${button.link}`;
+        newButton.textContent = button.text;
+
+        if (button.icon) {
+            const icon = document.createElement('img');
+            icon.src = `/assets/images/${button.icon}`;
+            icon.alt = "";
+            icon.classList.add("button-icon");
+
+            // Add the icon before the text
+            newButton.prepend(icon);
+        }
+
+        return newButton;
     }
 }

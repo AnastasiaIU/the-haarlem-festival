@@ -3,15 +3,21 @@
 /**
  * Data Transfer Object (DTO) for representing a button.
  */
-class ButtonDTO {
+class ButtonDTO implements JsonSerializable {
     private int $id;
     private int $typeId;
     private string $link;
+    private string $type;
+    private string $text;
+    private ?string $icon;
 
-    public function __construct(int $id, int $typeId, string $link) {
+    public function __construct(int $id, int $typeId, string $link, string $type, string $text, ?string $icon) {
         $this->id = $id;
         $this->typeId = $typeId;
         $this->link = $link;
+        $this->type = $type;
+        $this->text = $text;
+        $this->icon = $icon;
     }
 
     // Getters
@@ -27,6 +33,18 @@ class ButtonDTO {
         return $this->link;
     }
 
+    public function getType(): string {
+        return $this->type;
+    }
+
+    public function getText(): string {
+        return $this->text;
+    }
+
+    public function getIcon(): ?string {
+        return $this->icon;
+    }
+
     /**
      * Converts the ButtonDTO object to an associative array.
      *
@@ -36,7 +54,10 @@ class ButtonDTO {
         return [
             'id' => $this->id,
             'type_id' => $this->typeId,
-            'link' => $this->link
+            'link' => $this->link,
+            'type' => $this->type,
+            'text' => $this->text,
+            'icon' => $this->icon
         ];
     }
 
@@ -50,7 +71,27 @@ class ButtonDTO {
         return new self(
             $data['id'],
             $data['type_id'],
-            $data['link']
+            $data['link'],
+            $data['type'],
+            $data['text'],
+            $data['icon'] ?? null
         );
+    }
+
+    /**
+     * Converts the ButtonDTO object to a JSON-serializable array.
+     *
+     * @return array A JSON-serializable array representing the ButtonDTO object.
+     */
+    public function jsonSerialize(): array
+    {
+        return [
+            'id' => $this->id,
+            'type_id' => $this->typeId,
+            'link' => $this->link,
+            'type' => $this->type,
+            'text' => $this->text,
+            'icon' => $this->icon
+        ];
     }
 }

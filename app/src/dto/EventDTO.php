@@ -131,6 +131,11 @@ class EventDTO implements JsonSerializable {
         );
     }
 
+    /**
+     * Converts the EventDTO object to a JSON-serializable array.
+     *
+     * @return array A JSON-serializable array representing the EventDTO object.
+     */
     public function jsonSerialize(): array
     {
         return [

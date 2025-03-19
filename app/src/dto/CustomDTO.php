@@ -3,7 +3,7 @@
 /**
  * Data Transfer Object (DTO) for representing custom content.
  */
-class CustomDTO {
+class CustomDTO implements JsonSerializable {
     private int $id;
     private string $identifier;
     private string $content;
@@ -52,5 +52,19 @@ class CustomDTO {
             $data['identifier'],
             $data['content']
         );
+    }
+
+    /**
+     * Converts the CustomDTO object to a JSON-serializable array.
+     *
+     * @return array A JSON-serializable array representing the CustomDTO object.
+     */
+    public function jsonSerialize(): array
+    {
+        return [
+            'id' => $this->id,
+            'identifier' => $this->identifier,
+            'content' => $this->content
+        ];
     }
 }

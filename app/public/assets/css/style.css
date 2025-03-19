@@ -38,11 +38,31 @@ body {
     color: white;
 }
 
+.btn-primary-red:hover {
+    background-color: var(--terracotta);
+    color: white;
+}
+
+.btn-primary-red {
+    background-color: var(--punch);
+    color: white;
+}
+
+.button-icon {
+    height: 16px;
+}
+
+.app-badge {
+    width: 120px;
+    height: 40px;
+}
+
 /*
  * NAVBAR STYLES
  */
 .navbar {
     background-color: var(--rufous);
+    z-index: 999;
 }
 
 .navbar-logo {
@@ -108,4 +128,11 @@ footer {
     position: absolute;
     top: 0;
     left: 0;
+}
+
+/*
+ * APP PROMOTION STYLES
+ */
+#appPromotionSubtitle {
+    white-space: nowrap;
 }

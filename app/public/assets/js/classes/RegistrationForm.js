@@ -1,3 +1,6 @@
+/**
+ * Class that handles the registration form.
+ */
 export class RegistrationForm {
     constructor() {
         this.form = document.getElementById("registrationForm");

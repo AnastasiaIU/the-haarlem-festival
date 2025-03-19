@@ -37,6 +37,8 @@ require_once(__DIR__ . "/../routes/teylers.php");
 require_once(__DIR__ . "/../routes/yummy.php");
 require_once(__DIR__ . "/../routes/api/event.php");
 require_once(__DIR__ . "/../routes/api/uploadImage.php");
+require_once(__DIR__ . "/../routes/api/button.php");
+require_once(__DIR__ . "/../routes/api/customElement.php");
 
 // Start the router, enabling handling requests
 Route::run();

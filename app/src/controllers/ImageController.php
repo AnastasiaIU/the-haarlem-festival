@@ -2,6 +2,9 @@
 
 require_once(__DIR__ . '/../models/ImageModel.php');
 
+/**
+ * Controller class for handling image-related operations.
+ */
 class ImageController
 {
     private ImageModel $imageModel;

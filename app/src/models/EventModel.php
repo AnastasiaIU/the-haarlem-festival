@@ -24,20 +24,7 @@ class EventModel extends BaseModel
         $dtos = [];
 
         foreach ($events as $event) {
-            $dto = new EventDTO(
-                $event['id'],
-                $event['slug'],
-                $event['menu_name'],
-                $event['hero_title'],
-                $event['hero_subtitle'],
-                $event['hero_description'],
-                $event['title'],
-                $event['subtitle'],
-                $event['home_page_title'],
-                $event['home_page_description'],
-                $event['image'],
-                $event['shape']
-            );
+            $dto = EventDTO::fromArray($event);
             $dtos[] = $dto;
         }
 
@@ -62,23 +49,10 @@ class EventModel extends BaseModel
         $event = $query->fetch(PDO::FETCH_ASSOC);
 
         if (!$event) {
-            return null; // Return null if no event is found
+            return null;
         }
 
-        return new EventDTO(
-            $event['id'],
-            $event['slug'],
-            $event['menu_name'],
-            $event['hero_title'],
-            $event['hero_subtitle'],
-            $event['hero_description'],
-            $event['title'],
-            $event['subtitle'],
-            $event['home_page_title'],
-            $event['home_page_description'],
-            $event['image'],
-            $event['shape']
-        );
+        return EventDTO::fromArray($event);
     }
 
     /**
@@ -99,22 +73,9 @@ class EventModel extends BaseModel
         $event = $query->fetch(PDO::FETCH_ASSOC);
 
         if (!$event) {
-            return null; // Return null if no event is found
+            return null;
         }
 
-        return new EventDTO(
-            $event['id'],
-            $event['slug'],
-            $event['menu_name'],
-            $event['hero_title'],
-            $event['hero_subtitle'],
-            $event['hero_description'],
-            $event['title'],
-            $event['subtitle'],
-            $event['home_page_title'],
-            $event['home_page_description'],
-            $event['image'],
-            $event['shape']
-        );
+        return EventDTO::fromArray($event);
     }
 }

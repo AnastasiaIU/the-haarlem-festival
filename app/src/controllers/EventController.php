@@ -3,6 +3,9 @@
 require_once(__DIR__ . '/../models/EventModel.php');
 require_once(__DIR__ . '/../dto/EventDTO.php');
 
+/**
+ * Controller class for handling event-related operations.
+ */
 class EventController
 {
     private EventModel $eventModel;

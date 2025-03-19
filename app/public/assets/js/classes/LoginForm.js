@@ -1,3 +1,6 @@
+/**
+ * Class that handles the login form.
+ */
 export class LoginForm {
     constructor() {
         this.form = document.getElementById("loginForm");
