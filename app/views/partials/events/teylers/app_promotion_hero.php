@@ -1,7 +1,15 @@
 <div id="appPromotionHero">
-    <p id="appPromotionTitle" class="h3 text-white fw-bold"></p>
+    <form method="post" class="tinymce-form">
+        <p id="appPromotionTitle" class="tinymce h3 text-white fw-bold" <?php if ($isAdmin) echo 'contenteditable="true"'; ?>></p>
+        <input type="hidden" name="content" class="tinymce-input" data-field_id="appPromotionTitle">
+        <button type="submit" class="tinymce-save">Save</button>
+    </form>
     <div id="appBadges" class="d-flex flex-wrap gap-2 justify-content-end align-items-center">
-        <p id="appPromotionSubtitle" class="text-white fw-bold m-0"></p>
+        <form method="post" class="tinymce-form">
+            <p id="appPromotionSubtitle" class="tinymce text-white fw-bold m-0" <?php if ($isAdmin) echo 'contenteditable="true"'; ?>></p>
+            <input type="hidden" name="content" class="tinymce-input" data-field_id="appPromotionSubtitle">
+            <button type="submit" class="tinymce-save">Save</button>
+        </form>
         <a href="https://play.google.com/store" target="_blank">
             <img class="app-badge" src="/assets/images/GetItOnGooglePlay_Badge_Web_color_English.png"
                  alt="Get it on Google Play"/>

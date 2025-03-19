@@ -1,8 +1,94 @@
+/**
+ * Class that handles the CMS-related operations.
+ */
 export class CMS {
     constructor() {
+        this.init();
+    }
+
+    async init() {
         document.querySelectorAll('.change-image').forEach(button => {
             this.bindInputToButton(button);
         });
+
+        document.querySelectorAll('.tinymce-form').forEach(form => {
+            form.addEventListener('submit', async event => {
+                event.preventDefault();
+                await this.updateContent(event.target);
+            });
+        });
+    }
+
+    /**
+     * Displays a toast notification on the screen.
+     *
+     * @param {string} message - The message to display in the toast.
+     * @param {boolean} [isError=false] - If `true`, the toast will be styled as an error message.
+     *                                    Otherwise, it appears as a success message.
+     */
+    showToast(message, isError = false) {
+        const toast = document.createElement("div");
+        toast.className = "toast-message";
+        if (isError) toast.classList.add("toast-error");
+
+        toast.innerText = message;
+        document.body.appendChild(toast);
+
+        // Auto-remove toast after 3 seconds
+        setTimeout(() => {
+            toast.style.opacity = "0";
+            setTimeout(() => toast.remove(), 500);
+        }, 3000);
+    }
+
+    /**
+     * Updates content in the database by sending a form submission via an API request.
+     *
+     * This function extracts the content from a TinyMCE input field, processes the form data,
+     * and sends an asynchronous POST request to update the content in the database.
+     * A toast notification is displayed based on the success or failure of the operation.
+     *
+     * @async
+     * @param {HTMLFormElement} form - The form element that triggered the update.
+     */
+    async updateContent(form) {
+        const input = form.querySelector('.tinymce-input');
+        const content = document.getElementById(input.dataset.field_id);
+        input.value = content.innerHTML;
+
+        const table = input.dataset.database;
+        const id = input.dataset.id;
+        const column = input.dataset.column;
+
+        const formData = new FormData();
+        formData.append('table', table);
+        formData.append('id', id);
+        formData.append('column', column);
+
+        if (input.value === '<br data-mce-bogus="1">') {
+            formData.append('content', '');
+        } else {
+            formData.append('content', input.value);
+        }
+
+        try {
+            const response = await fetch('/api/uploadContent', {
+                method: 'POST',
+                body: formData
+            });
+
+            if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+
+            const data = await response.json();
+
+            if (data.status === "success") {
+                this.showToast("Content uploaded successfully.");
+            } else {
+                this.showToast(data.message || "Error uploading content.", true);
+            }
+        } catch (error) {
+            this.showToast("Upload failed: " + error.message, true);
+        }
     }
 
     /**
@@ -35,6 +121,22 @@ export class CMS {
         input.dataset.id = id;
         input.dataset.column = column;
         input.dataset.image_id = imageId;
+    }
+
+    /**
+     * Sets the dataset of a change content input element.
+     * The dataset contains the database table name, row id, and column name.
+     *
+     * @param contentId Id of the associated content element.
+     * @param database Database table name.
+     * @param id Row id.
+     * @param column Column name.
+     */
+    setContentInputDataset(contentId, database, id, column) {
+        const input = document.querySelector(`input[data-field_id="${contentId}"]`);
+        input.dataset.database = database;
+        input.dataset.id = id;
+        input.dataset.column = column;
     }
 
     /**

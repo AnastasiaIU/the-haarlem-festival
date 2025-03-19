@@ -32,20 +32,10 @@
             tinymce.init({
                 selector: '.tinymce', // Target elements with class 'tinymce'
                 plugins: [
-                    'anchor', 'autolink', 'charmap', 'codesample', 'emoticons', 'image', 'link', 'lists', 'media', 'searchreplace', 'table', 'visualblocks', 'wordcount'
+                    'anchor', 'autolink', 'charmap', 'emoticons', 'link', 'lists', 'searchreplace', 'table', 'visualblocks', 'wordcount'
                 ],
-                toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
-                tinycomments_mode: 'embedded',
-                tinycomments_author: 'Author name',
-                mergetags_list: [
-                    {value: 'First.Name', title: 'First Name'},
-                    {value: 'Email', title: 'Email'},
-                ],
-                inline: true,
-                image_list: [
-                    { title: 'My image 1', value: 'https://www.example.com/my1.gif' },
-                    { title: 'My image 2', value: 'http://www.moxiecode.com/my2.gif' }
-                ]
+                toolbar: 'undo redo | fontfamily fontsize | bold italic underline strikethrough | link table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
+                inline: true
             });
         </script>
         <style>

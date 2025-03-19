@@ -54,6 +54,9 @@ export class EventHero {
 
         const appPromotionHero = document.getElementById("appPromotionHero");
         appPromotionHero.style.display = "block";
+
+        this.cms.setContentInputDataset(promotionTitle.id, 'custom', appPromotionTitle.id, 'content');
+        this.cms.setContentInputDataset(promotionSubtitle.id, 'custom', appPromotionSubtitle.id, 'content');
     }
 
     /**
@@ -99,6 +102,10 @@ export class EventHero {
         heroTitle.innerHTML = this.event.hero_title;
         heroSubtitle.innerHTML = this.event.hero_subtitle;
         heroText.innerHTML = this.event.hero_description;
+
+        this.cms.setContentInputDataset(heroTitle.id, 'event', this.event.id, 'hero_title');
+        this.cms.setContentInputDataset(heroSubtitle.id, 'event', this.event.id, 'hero_subtitle');
+        this.cms.setContentInputDataset(heroText.id, 'event', this.event.id, 'hero_description');
     }
 
     /**

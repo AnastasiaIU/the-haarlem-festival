@@ -28,7 +28,7 @@
     align-items: flex-start;
     justify-content: center;
     overflow: visible;
-    z-index: 2;
+    z-index: 5;
 }
 
 .hero-shape {

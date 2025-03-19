@@ -8,21 +8,23 @@
         </div>
         <div class="container-fluid d-flex justify-content-center p-0">
             <div class="col-xxl-10 hero-content p-4 gap-1">
-                <h1 class="h3 text-white fw-bold" id="hero-title"></h1>
-                <h2 class="h4 text-white fw-bold" id="hero-subtitle"></h2>
-                <p class="text-white" id="hero-text"></p>
+                <form method="post" class="tinymce-form">
+                    <h1 class="tinymce h3 text-white fw-bold" id="hero-title" <?php if ($isAdmin) echo 'contenteditable="true"'; ?>></h1>
+                    <input type="hidden" name="content" class="tinymce-input" data-field_id="hero-title">
+                    <button type="submit" class="tinymce-save">Save</button>
+                </form>
+                <form method="post" class="tinymce-form">
+                    <h2 class="tinymce h4 text-white fw-bold" id="hero-subtitle" <?php if ($isAdmin) echo 'contenteditable="true"'; ?>></h2>
+                    <input type="hidden" name="content" class="tinymce-input" data-field_id="hero-subtitle">
+                    <button type="submit" class="tinymce-save">Save</button>
+                </form>
+                <form method="post" class="tinymce-form">
+                    <p class="tinymce text-white" id="hero-text" <?php if ($isAdmin) echo 'contenteditable="true"'; ?>></p>
+                    <input type="hidden" name="content" class="tinymce-input" data-field_id="hero-text">
+                    <button type="submit" class="tinymce-save">Save</button>
+                </form>
                 <?php include __DIR__ . '/teylers/app_promotion_hero.php'; ?>
             </div>
         </div>
     </div>
 </section>
-<form action="save_content.php" method="post">
-    <h1 class="tinymce" name="content" <?php if ($isAdmin) echo 'contenteditable="true"'; ?>>HERO</h1>
-    <input type="hidden" name="content" id="hiddenContent">
-    <button type="submit" class="tinymce-save">Save</button>
-</form>
-<script>
-    document.querySelector("form").addEventListener("submit", function () {
-        document.getElementById("hiddenContent").value = document.querySelector(".tinymce").innerHTML;
-    });
-</script>

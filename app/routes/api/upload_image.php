@@ -1,8 +1,11 @@
 <?php
 
 require_once(__DIR__ . '/../../src/controllers/ImageController.php');
+require_once(__DIR__ . '/../../src/services/AuthHandler.php');
 
 Route::add('/api/uploadImage', function () {
+    AuthHandler::checkAdminLoggedIn();
+
     $table = $_POST['table'];
     $column = $_POST['column'];
     $id = $_POST['id'];

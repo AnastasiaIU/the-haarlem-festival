@@ -62,7 +62,7 @@ body {
  */
 .navbar {
     background-color: var(--rufous);
-    z-index: 999;
+    z-index: 5;
 }
 
 .navbar-logo {
@@ -121,6 +121,7 @@ footer {
  */
 .tinymce-save {
     display: none;
+    z-index: 100 !important;
 }
 
 .change-image {
@@ -128,6 +129,11 @@ footer {
     position: absolute;
     top: 0;
     left: 0;
+    z-index: 100 !important;
+}
+
+.tox-tinymce-inline {
+    z-index: 101 !important;
 }
 
 /*
@@ -135,4 +141,26 @@ footer {
  */
 #appPromotionSubtitle {
     white-space: nowrap;
+}
+
+/*
+ * TOAST MESSAGE STYLES
+ */
+.toast-message {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #28a745;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    opacity: 1;
+    transition: opacity 0.5s ease-out;
+    z-index: 1000;
+}
+
+.toast-error {
+    background-color: #dc3545;
 }
