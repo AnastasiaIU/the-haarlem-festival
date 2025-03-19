@@ -7,7 +7,7 @@
             <input class="d-none" type="file" accept="image/*" data-button="heroImageButton">
         </div>
         <div class="container-fluid d-flex justify-content-center p-0">
-            <div class="col-xxl-10 hero-content p-4 gap-1">
+            <div class="col-xxl-10 hero-content px-4 py-5 gap-1">
                 <form method="post" class="tinymce-form">
                     <h1 class="tinymce h3 text-white fw-bold" id="hero-title" <?php if ($isAdmin) echo 'contenteditable="true"'; ?>></h1>
                     <input type="hidden" name="content" class="tinymce-input" data-field_id="hero-title">

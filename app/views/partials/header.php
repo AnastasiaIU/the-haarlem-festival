@@ -11,6 +11,7 @@
     <link rel="stylesheet" type="text/css" href="../../assets/css/style.css">
     <link rel="stylesheet" type="text/css" href="../../assets/css/shopping-cart.css">
     <link rel="stylesheet" type="text/css" href="../../assets/css/hero.css">
+    <link rel="stylesheet" type="text/css" href="../../assets/css/promo.css">
     <link rel="icon" type="image/x-icon" href="../../assets/images/favicon.svg">
     <link href='https://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=Cabin' rel='stylesheet'>

@@ -2,6 +2,7 @@ import { fetchFromApi } from '../main.js';
 import {EventHero} from "./EventHero.js";
 import {LoginForm} from "./LoginForm.js";
 import {RegistrationForm} from "./RegistrationForm.js";
+import {Promo} from "./Promo.js";
 
 /**
  * Class that handles the navigation for the website.
@@ -33,12 +34,12 @@ export class Navigation {
         };
 
         this.routeMap = {
-            '/login': LoginForm,
-            '/register': RegistrationForm,
-            '/dance': EventHero,
-            '/yummy': EventHero,
-            '/strolls': EventHero,
-            '/teylers': EventHero
+            '/login': [LoginForm],
+            '/register': [RegistrationForm],
+            '/dance': [EventHero, Promo],
+            '/yummy': [EventHero, Promo],
+            '/strolls': [EventHero, Promo],
+            '/teylers': [EventHero, Promo]
         };
 
         if (this.navItems.hasOwnProperty(this.path)) {
@@ -46,7 +47,7 @@ export class Navigation {
         }
 
         if (this.routeMap[this.path]) {
-            new this.routeMap[this.path]();
+            this.routeMap[this.path].forEach(ClassRef => new ClassRef());
         }
     }
 
