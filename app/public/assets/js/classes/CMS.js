@@ -198,7 +198,9 @@ export class CMS {
         const newButton = document.createElement('a');
         newButton.type = 'button';
         newButton.className = className;
-        newButton.href = `${button.link}`;
+        if (button.link) {
+            newButton.href = `${button.link}`;
+        }
         newButton.textContent = button.text;
 
         if (button.icon) {

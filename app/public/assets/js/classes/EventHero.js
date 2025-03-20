@@ -90,7 +90,12 @@ export class EventHero {
     async setDanceContent() {
         const buyPassButton = await fetchFromApi(`/api/getButtonById/5`);
         const button = this.cms.createButton(buyPassButton, 'btn btn-primary-red font-p-16 fw-bold');
+
         this.appendToHeroContent(button);
+
+        button.addEventListener('click', () => {
+            document.getElementById("specialOfferContainer").scrollIntoView({behavior: "smooth"});
+        })
     }
 
     /**

@@ -41,6 +41,7 @@ require_once(__DIR__ . "/../routes/api/button.php");
 require_once(__DIR__ . "/../routes/api/custom_element.php");
 require_once(__DIR__ . "/../routes/api/save_content.php");
 require_once(__DIR__ . "/../routes/api/artist.php");
+require_once(__DIR__ . "/../routes/api/pass.php");
 
 // Start the router, enabling handling requests
 Route::run();

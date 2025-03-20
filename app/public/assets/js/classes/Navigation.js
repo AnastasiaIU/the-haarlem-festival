@@ -4,6 +4,7 @@ import {LoginForm} from "./LoginForm.js";
 import {RegistrationForm} from "./RegistrationForm.js";
 import {Promo} from "./Promo.js";
 import {ArtistCard} from "./ArtistCard.js";
+import {DanceSchedule} from "./DanceSchedule.js";
 
 /**
  * Class that handles the navigation for the website.
@@ -33,7 +34,7 @@ export class Navigation {
         this.routeMap = {
             '/login': [LoginForm],
             '/register': [RegistrationForm],
-            '/dance': [EventHero, Promo, ArtistCard],
+            '/dance': [EventHero, Promo, ArtistCard, DanceSchedule],
             '/yummy': [EventHero, Promo],
             '/strolls': [EventHero, Promo],
             '/teylers': [EventHero, Promo]

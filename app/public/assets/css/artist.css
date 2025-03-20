@@ -1,4 +1,4 @@
-.artist-card-image {
+.artist-card-image, .pass-image {
     width: 100%;
     aspect-ratio: 1.1 / 1;
     min-width: 220px;
@@ -8,9 +8,49 @@
     border: 2px solid var(--punch);
 }
 
-.artist-card-image-container {
+.artist-card-image-container, .pass-image-container {
     position: relative;
     min-width: 220px;
+}
+
+#specialOfferContainer {
+    background-color: white;
+    border-radius: 25px;
+}
+
+.offer-date {
+    color: var(--rufous);
+}
+
+.offer-date-container {
+    min-width: 170px;
+}
+
+@media (max-width: 992px) {
+    .pass-image-container {
+        order: 4;
+    }
+
+    .offer-name-container {
+        order: 3;
+    }
+
+    .offer-date-container {
+        order: 2;
+    }
+
+    .pass-text-container {
+        order: 1;
+        padding: 0 !important;
+        margin: 0 !important;
+        width: 100%;
+    }
+
+    .offer-card {
+        align-items: center;
+        text-align: center;
+        gap: 16px;
+    }
 }
 
 @media (max-width: 768px) {
