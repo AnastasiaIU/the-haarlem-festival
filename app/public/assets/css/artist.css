@@ -1,0 +1,27 @@
+.artist-card-image {
+    width: 100%;
+    aspect-ratio: 1.1 / 1;
+    min-width: 220px;
+    min-height: 200px;
+    object-fit: cover;
+    border-radius: 5px;
+    border: 2px solid var(--punch);
+}
+
+.artist-card-image-container {
+    position: relative;
+    min-width: 220px;
+}
+
+@media (max-width: 768px) {
+    .artist-card {
+        flex-direction: column !important;
+        flex-flow: column-reverse !important;
+        align-items: center;
+        gap: 16px;
+    }
+
+    .artist-card-text-container {
+        padding: 0 !important;
+    }
+}

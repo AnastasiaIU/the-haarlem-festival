@@ -2,7 +2,7 @@
  * Class that handles the registration form.
  */
 export class RegistrationForm {
-    constructor() {
+    init() {
         this.form = document.getElementById("registrationForm");
         this.email = document.getElementById("inputEmail");
         this.emailPrompt = document.getElementById("inputEmailPrompt");
@@ -17,6 +17,12 @@ export class RegistrationForm {
         this.email.addEventListener('change', () => this.resetFieldsValidation());
         this.password.addEventListener('change', () => this.resetFieldsValidation());
         this.confirmPassword.addEventListener('change', () => this.resetFieldsValidation());
+    }
+
+    static create() {
+        const instance = new RegistrationForm();
+        instance.init();
+        return instance;
     }
 
     /**

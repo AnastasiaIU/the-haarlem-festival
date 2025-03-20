@@ -3,7 +3,7 @@
 /**
  * Data Transfer Object (DTO) for representing an artist.
  */
-class ArtistDTO {
+class ArtistDTO implements JsonSerializable {
     private int $id;
     private int $eventId;
     private string $slug;
@@ -104,5 +104,25 @@ class ArtistDTO {
             $data['image'],
             $data['card_image']
         );
+    }
+
+    /**
+     * Converts the ArtistDTO object to a JSON-serializable array.
+     *
+     * @return array A JSON-serializable array representing the ArtistDTO object.
+     */
+    public function jsonSerialize(): array
+    {
+        return [
+            'id' => $this->id,
+            'event_id' => $this->eventId,
+            'slug' => $this->slug,
+            'stage_name' => $this->stageName,
+            'genre' => $this->genre,
+            'hero_description' => $this->heroDescription,
+            'card_description' => $this->cardDescription,
+            'image' => $this->image,
+            'card_image' => $this->cardImage
+        ];
     }
 }

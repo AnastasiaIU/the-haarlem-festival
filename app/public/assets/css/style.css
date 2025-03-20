@@ -124,7 +124,7 @@ footer {
     z-index: 100 !important;
 }
 
-.change-image {
+[class*="change-image"] {
     display: none;
     position: absolute;
     top: 0;

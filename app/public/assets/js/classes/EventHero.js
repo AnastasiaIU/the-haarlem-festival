@@ -5,12 +5,8 @@ import {CMS} from "./CMS.js";
  * Class that handles the hero section of the events.
  */
 export class EventHero {
-    constructor() {
-        this.init();
-    }
-
     async init() {
-        this.cms = new CMS();
+        this.cms = await CMS.create();
         this.event = await this.fetchEvent();
 
         this.setBgColor();
@@ -18,6 +14,12 @@ export class EventHero {
         this.setHeroShape();
         this.setCommonContent();
         await this.setSpecialContent();
+    }
+
+    static async create() {
+        const instance = new EventHero();
+        await instance.init();
+        return instance;
     }
 
     /**
@@ -122,7 +124,7 @@ export class EventHero {
     setHeroImage() {
         const heroImage = document.getElementById("heroImage");
         heroImage.src = `/assets/images/${this.event.image}`;
-        this.cms.setImageInputDataset("heroImageButton", 'event', `${this.event.id}`, 'image', `${heroImage.id}`);
+        this.cms.setImageInputDataset("heroImageButton", 'event', `${this.event.id}`, 'image', heroImage.id);
     }
 
     /**

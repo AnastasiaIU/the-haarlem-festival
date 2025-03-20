@@ -2,21 +2,25 @@
  * Class that handles the CMS-related operations.
  */
 export class CMS {
+    static #instance = null;
+
     constructor() {
-        this.init();
+        if (CMS.#instance) {
+            return CMS.#instance;
+        }
+        CMS.#instance = this;
     }
 
     async init() {
-        document.querySelectorAll('.change-image').forEach(button => {
-            this.bindInputToButton(button);
-        });
+        await this.initTinyMceButtons('.change-image', '.tinymce-form');
+    }
 
-        document.querySelectorAll('.tinymce-form').forEach(form => {
-            form.addEventListener('submit', async event => {
-                event.preventDefault();
-                await this.updateContent(event.target);
-            });
-        });
+    static async create() {
+        if (!CMS.#instance) {
+            CMS.#instance = new CMS();
+            await CMS.#instance.init();
+        }
+        return CMS.#instance;
     }
 
     /**
@@ -98,10 +102,12 @@ export class CMS {
      */
     bindInputToButton(button) {
         const input = document.querySelector(`input[data-button="${button.id}"]`);
-        button.addEventListener('click', () => {
-            input.click()
-        });
-        input.addEventListener('change', (event) => this.uploadImage(event, input))
+        if (input) {
+            button.addEventListener('click', () => {
+                input.click()
+            });
+            input.addEventListener('change', (event) => this.uploadImage(event, input))
+        }
     }
 
     /**
@@ -192,7 +198,7 @@ export class CMS {
         const newButton = document.createElement('a');
         newButton.type = 'button';
         newButton.className = className;
-        newButton.href = `/${button.link}`;
+        newButton.href = `${button.link}`;
         newButton.textContent = button.text;
 
         if (button.icon) {
@@ -206,5 +212,44 @@ export class CMS {
         }
 
         return newButton;
+    }
+
+    /**
+     * Initializes CMS for the specified selectors.
+     *
+     * @param textSelector - The selector for text elements.
+     * @param imageSelector - The selector for the image elements.
+     * @param formSelector - The selector for the form elements.
+     */
+    async initTinyMce(textSelector, imageSelector, formSelector) {
+        tinymce.init({
+            selector: `${textSelector}`,
+            plugins: [
+                'anchor', 'autolink', 'charmap', 'emoticons', 'link', 'lists', 'searchreplace', 'table', 'visualblocks', 'wordcount'
+            ],
+            toolbar: 'undo redo | fontfamily fontsize | bold italic underline strikethrough | link table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
+            inline: true
+        });
+
+        await this.initTinyMceButtons(imageSelector, formSelector);
+    }
+
+    /**
+     * Initializes CMS functionality on buttons for the provided selectors.
+     *
+     * @param imageSelector - The selector for the image elements.
+     * @param formSelector - The selector for the form elements.
+     */
+    async initTinyMceButtons(imageSelector, formSelector) {
+        document.querySelectorAll(imageSelector).forEach(button => {
+            this.bindInputToButton(button);
+        });
+
+        document.querySelectorAll(formSelector).forEach(form => {
+            form.addEventListener('submit', async event => {
+                event.preventDefault();
+                await this.updateContent(event.target);
+            });
+        });
     }
 }

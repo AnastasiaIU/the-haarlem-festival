@@ -2,7 +2,7 @@
  * Class that handles the login form.
  */
 export class LoginForm {
-    constructor() {
+    init() {
         this.form = document.getElementById("loginForm");
         this.email = document.getElementById("loginEmail");
         this.password = document.getElementById("loginPassword");
@@ -14,6 +14,12 @@ export class LoginForm {
         this.showPasswordCheck.addEventListener('change', () => this.togglePasswordVisibility());
         this.email.addEventListener('change', () => this.resetCredentialsValidation());
         this.password.addEventListener('change', () => this.resetCredentialsValidation());
+    }
+
+    static create() {
+        const instance = new LoginForm();
+        instance.init();
+        return instance;
     }
 
     /**

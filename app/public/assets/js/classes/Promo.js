@@ -5,19 +5,21 @@ import {CMS} from "./CMS.js";
  * Class that handles the promo section of the events.
  */
 export class Promo {
-    constructor() {
-        this.init();
-    }
-
     async init() {
         if (window.location.pathname === '/teylers') {
             this.disableForTeylers();
         } else {
-            this.cms = new CMS();
+            this.cms = await CMS.create();
             this.event = await this.fetchEvent();
 
             this.setContent();
         }
+    }
+
+    static async create() {
+        const instance = new Promo();
+        await instance.init();
+        return instance;
     }
 
     /**

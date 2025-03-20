@@ -3,15 +3,12 @@ import {EventHero} from "./EventHero.js";
 import {LoginForm} from "./LoginForm.js";
 import {RegistrationForm} from "./RegistrationForm.js";
 import {Promo} from "./Promo.js";
+import {ArtistCard} from "./ArtistCard.js";
 
 /**
  * Class that handles the navigation for the website.
  */
 export class Navigation {
-    constructor() {
-        this.init();
-    }
-
     async init() {
         this.events = await fetchFromApi('/api/getEvents');
         this.navbar = document.getElementById('navbar');
@@ -36,7 +33,7 @@ export class Navigation {
         this.routeMap = {
             '/login': [LoginForm],
             '/register': [RegistrationForm],
-            '/dance': [EventHero, Promo],
+            '/dance': [EventHero, Promo, ArtistCard],
             '/yummy': [EventHero, Promo],
             '/strolls': [EventHero, Promo],
             '/teylers': [EventHero, Promo]
@@ -47,8 +44,16 @@ export class Navigation {
         }
 
         if (this.routeMap[this.path]) {
-            this.routeMap[this.path].forEach(ClassRef => new ClassRef());
+            for (const ClassRef of this.routeMap[this.path]) {
+                await ClassRef.create();
+            }
         }
+    }
+
+    static async create() {
+        const instance = new Navigation();
+        await instance.init();
+        return instance;
     }
 
     /**

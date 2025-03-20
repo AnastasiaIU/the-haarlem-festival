@@ -4,7 +4,7 @@ import {Navigation} from "./classes/Navigation.js";
  * Initializes event listeners and functions when the DOM content is fully loaded.
  */
 document.addEventListener("DOMContentLoaded", async () => {
-    new Navigation();
+    await Navigation.create();
     enableBootstrapFormValidation();
 });
 
