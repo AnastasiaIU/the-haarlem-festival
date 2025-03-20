@@ -1,1 +1,0 @@
-<a href="/dance/artist/<?= $artist; ?>">Artist: <?= $artist; ?></a>

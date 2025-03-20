@@ -3,7 +3,7 @@
 /**
  * Data Transfer Object (DTO) for representing an event.
  */
-class EventDTO {
+class EventDTO implements JsonSerializable {
     private int $id;
     private string $slug;
     private string $menuName;
@@ -129,5 +129,28 @@ class EventDTO {
             $data['image'] ?? null,
             $data['shape'] ?? null
         );
+    }
+
+    /**
+     * Converts the EventDTO object to a JSON-serializable array.
+     *
+     * @return array A JSON-serializable array representing the EventDTO object.
+     */
+    public function jsonSerialize(): array
+    {
+        return [
+            'id' => $this->id,
+            'slug' => $this->slug,
+            'menu_name' => $this->menuName,
+            'hero_title' => $this->heroTitle,
+            'hero_subtitle' => $this->heroSubtitle,
+            'hero_description' => $this->heroDescription,
+            'title' => $this->title,
+            'subtitle' => $this->subtitle,
+            'home_page_title' => $this->homePageTitle,
+            'home_page_description' => $this->homePageDescription,
+            'image' => $this->image,
+            'shape' => $this->shape
+        ];
     }
 }

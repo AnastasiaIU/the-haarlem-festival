@@ -27,6 +27,7 @@ class UserController
      * @param string $email The email of the user to register.
      * @param string $password The password of the user to register.
      * @return UserDTO|null The newly created UserDTO object or null if the user already exists.
+     * @throws DateMalformedStringException
      */
     public function registerUser(string $email, string $password, string $recaptchaToken): ?UserDTO
     {
@@ -69,6 +70,7 @@ class UserController
      * @param string $email The email of the user attempting to log in.
      * @param string $password The password of the user attempting to log in.
      * @return UserDTO|null The UserDTO object if login is successful, or null if login fails.
+     * @throws DateMalformedStringException
      */
     public function attemptLogin(string $email, string $password): ?UserDTO
     {
@@ -82,7 +84,8 @@ class UserController
             return null;
         }
 
-        $_SESSION['user'] = $user->id;
+        $_SESSION['user'] = $user->getId();
+        $_SESSION['user_role'] = $user->getRole()->value;
 
         $redirectUrl = $_SESSION['last_visited_url'] ?? '/profile';
         echo json_encode(['redirectUrl' => $redirectUrl]);

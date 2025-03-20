@@ -10,6 +10,9 @@
     <link rel="stylesheet" type="text/css" href="../../assets/css/colors.css">
     <link rel="stylesheet" type="text/css" href="../../assets/css/style.css">
     <link rel="stylesheet" type="text/css" href="../../assets/css/shopping-cart.css">
+    <link rel="stylesheet" type="text/css" href="../../assets/css/hero.css">
+    <link rel="stylesheet" type="text/css" href="../../assets/css/promo.css">
+    <link rel="stylesheet" type="text/css" href="../../assets/css/artist.css">
     <link rel="icon" type="image/x-icon" href="../../assets/images/favicon.svg">
     <link href='https://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=Cabin' rel='stylesheet'>
@@ -20,7 +23,29 @@
             integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
             crossorigin="anonymous"></script>
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script src="https://cdn.tiny.cloud/1/clwrf6ykpssoswy8p2on10mut3yv9h65futcwnlgkg48h573/tinymce/7/tinymce.min.js"
+            referrerpolicy="origin"></script>
     <script type="module" src="../../assets/js/main.js"></script>
+    <?php
+    $isAdmin = isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'Administrator';
+    ?>
+    <?php if ($isAdmin): ?>
+        <script>
+            tinymce.init({
+                selector: '.tinymce', // Target elements with class 'tinymce'
+                plugins: [
+                    'anchor', 'autolink', 'charmap', 'emoticons', 'link', 'lists', 'searchreplace', 'table', 'visualblocks', 'wordcount'
+                ],
+                toolbar: 'undo redo | fontfamily fontsize | bold italic underline strikethrough | link table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
+                inline: true
+            });
+        </script>
+        <style>
+            .tinymce-save, [class*="change-image"] {
+                display: inline-block !important;
+            }
+        </style>
+    <?php endif; ?>
 </head>
 
 <body class="d-flex flex-column min-vh-100">

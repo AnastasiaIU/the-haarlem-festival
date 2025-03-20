@@ -38,11 +38,31 @@ body {
     color: white;
 }
 
+.btn-primary-red:hover {
+    background-color: var(--terracotta);
+    color: white;
+}
+
+.btn-primary-red {
+    background-color: var(--punch);
+    color: white;
+}
+
+.button-icon {
+    height: 16px;
+}
+
+.app-badge {
+    width: 120px;
+    height: 40px;
+}
+
 /*
  * NAVBAR STYLES
  */
 .navbar {
     background-color: var(--rufous);
+    z-index: 5;
 }
 
 .navbar-logo {
@@ -82,6 +102,9 @@ footer {
     opacity: 80%;
 }
 
+/*
+ * FORM STYLES
+ */
 .form-logo {
     height: 60px;
 }
@@ -91,4 +114,53 @@ footer {
     font-size: 0.875em;
     margin-top: .25rem;
     display: none;
+}
+
+/**
+ * CMS STYLES
+ */
+.tinymce-save {
+    display: none;
+    z-index: 100 !important;
+}
+
+[class*="change-image"] {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 100 !important;
+}
+
+.tox-tinymce-inline {
+    z-index: 101 !important;
+}
+
+/*
+ * APP PROMOTION STYLES
+ */
+#appPromotionSubtitle {
+    white-space: nowrap;
+}
+
+/*
+ * TOAST MESSAGE STYLES
+ */
+.toast-message {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #28a745;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    opacity: 1;
+    transition: opacity 0.5s ease-out;
+    z-index: 1000;
+}
+
+.toast-error {
+    background-color: #dc3545;
 }
