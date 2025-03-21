@@ -5,7 +5,7 @@ require_once(__DIR__ . '/../enums/DayPass.php');
 /**
  * Data Transfer Object (DTO) for representing a festival pass.
  */
-class PassDTO {
+class PassDTO implements JsonSerializable {
     private int $id;
     private float $price;
     private DayPass $day;
@@ -54,5 +54,19 @@ class PassDTO {
             $data['price'],
             DayPass::from($data['day'])
         );
+    }
+
+    /**
+     * Converts the PassDTO object to a JSON-serializable array.
+     *
+     * @return array A JSON-serializable array representing the PassDTO object.
+     */
+    public function jsonSerialize(): array
+    {
+        return [
+            'id' => $this->id,
+            'price' => $this->price,
+            'day' => $this->day->value
+        ];
     }
 }

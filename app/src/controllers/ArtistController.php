@@ -35,4 +35,15 @@ class ArtistController
     {
         return $this->artistModel->fetchArtistById($id);
     }
+
+    /**
+     * Fetches a single artist by its slug.
+     *
+     * @param string $slug The slug of the artist to fetch.
+     * @return ArtistDTO|null The artist object if found, otherwise null.
+     */
+    public function fetchArtistBySlug(string $slug): ?ArtistDTO
+    {
+        return $this->artistModel->fetchArtistBySlug($slug);
+    }
 }

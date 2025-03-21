@@ -54,4 +54,28 @@ class ArtistModel extends BaseModel
 
         return ArtistDTO::fromArray($artist);
     }
+
+    /**
+     * Fetches a single artist by its slug.
+     *
+     * @param string $slug The slug of the artist to fetch.
+     * @return ArtistDTO|null The artist object if found, otherwise null.
+     */
+    public function fetchArtistBySlug(string $slug): ?ArtistDTO
+    {
+        $query = self::$pdo->prepare(
+            'SELECT id, event_id, slug, stage_name, genre, hero_description, card_description, image, card_image
+        FROM artist
+        WHERE slug = :slug'
+        );
+
+        $query->execute([':slug' => $slug]);
+        $artist = $query->fetch(PDO::FETCH_ASSOC);
+
+        if (!$artist) {
+            return null;
+        }
+
+        return ArtistDTO::fromArray($artist);
+    }
 }

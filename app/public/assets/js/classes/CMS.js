@@ -198,7 +198,9 @@ export class CMS {
         const newButton = document.createElement('a');
         newButton.type = 'button';
         newButton.className = className;
-        newButton.href = `${button.link}`;
+        if (button.link) {
+            newButton.href = `${button.link}`;
+        }
         newButton.textContent = button.text;
 
         if (button.icon) {
@@ -222,16 +224,28 @@ export class CMS {
      * @param formSelector - The selector for the form elements.
      */
     async initTinyMce(textSelector, imageSelector, formSelector) {
-        tinymce.init({
-            selector: `${textSelector}`,
-            plugins: [
-                'anchor', 'autolink', 'charmap', 'emoticons', 'link', 'lists', 'searchreplace', 'table', 'visualblocks', 'wordcount'
-            ],
-            toolbar: 'undo redo | fontfamily fontsize | bold italic underline strikethrough | link table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
-            inline: true
-        });
+        try {
+            const response = await fetch('/api/authAdmin');
+            const data = await response.json();
 
-        await this.initTinyMceButtons(imageSelector, formSelector);
+            if (!data.isAdmin) {
+                return;
+            }
+
+            tinymce.init({
+                selector: textSelector,
+                plugins: [
+                    'anchor', 'autolink', 'charmap', 'emoticons', 'link', 'lists', 'searchreplace', 'table', 'visualblocks', 'wordcount'
+                ],
+                toolbar: 'undo redo | fontfamily fontsize | bold italic underline strikethrough | link table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
+                inline: true
+            });
+
+            await this.initTinyMceButtons(imageSelector, formSelector);
+
+        } catch (error) {
+            console.error("CMS initialization failed:", error);
+        }
     }
 
     /**

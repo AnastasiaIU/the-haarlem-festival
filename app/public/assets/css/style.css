@@ -164,3 +164,11 @@ footer {
 .toast-error {
     background-color: #dc3545;
 }
+
+/*
+ * SEPARATOR STYLES
+ */
+hr {
+    color: var(--rufous);
+    opacity: 1;
+}

@@ -6,12 +6,12 @@
 class ButtonDTO implements JsonSerializable {
     private int $id;
     private int $typeId;
-    private string $link;
+    private ?string $link;
     private string $type;
     private string $text;
     private ?string $icon;
 
-    public function __construct(int $id, int $typeId, string $link, string $type, string $text, ?string $icon) {
+    public function __construct(int $id, int $typeId, ?string $link, string $type, string $text, ?string $icon) {
         $this->id = $id;
         $this->typeId = $typeId;
         $this->link = $link;
@@ -71,7 +71,7 @@ class ButtonDTO implements JsonSerializable {
         return new self(
             $data['id'],
             $data['type_id'],
-            $data['link'],
+            $data['link'] ?? null,
             $data['type'],
             $data['text'],
             $data['icon'] ?? null
