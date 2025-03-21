@@ -29,7 +29,7 @@ body {
 }
 
 .btn:hover {
-    background-color: var(--champagne);
+    background-color: var(--manhattan);
     color: var(--rich-espresso);
 }
 

@@ -115,8 +115,8 @@ class DanceShowDTO implements JsonSerializable {
     {
         return [
             'dance_show_id' => $this->id,
-            'venueId' => $this->venueId,
-            'dateTime' => $this->dateTime,
+            'venue_id' => $this->venueId,
+            'date_time' => $this->dateTime,
             'session' => $this->session->value,
             'duration' => $this->duration,
             'capacity' => $this->capacity,

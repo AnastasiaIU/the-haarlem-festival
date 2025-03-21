@@ -16,12 +16,13 @@ class DanceShowController
     }
 
     /**
-     * Fetches all dance shows from the database for the provided artist.
+     * Fetches all dance shows from the database for the provided artist by its slug.
      *
+     * @param string $artistSlug The slug of the artist to fetch.
      * @return array An array of dance show objects.
      */
-    public function fetchAllShows(int $artistId): array
+    public function fetchAllShows(string $artistSlug): array
     {
-        return $this->showModel->fetchAllShows($artistId);
+        return $this->showModel->fetchAllShows($artistSlug);
     }
 }
