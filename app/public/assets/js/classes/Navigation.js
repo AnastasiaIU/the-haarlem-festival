@@ -5,6 +5,7 @@ import {RegistrationForm} from "./RegistrationForm.js";
 import {Promo} from "./Promo.js";
 import {ArtistCard} from "./ArtistCard.js";
 import {DanceSchedule} from "./DanceSchedule.js";
+import {ArtistHero} from "./ArtistHero.js";
 
 /**
  * Class that handles the navigation for the website.
@@ -40,6 +41,8 @@ export class Navigation {
             '/teylers': [EventHero, Promo]
         };
 
+        this.addDynamicRoutes();
+
         if (this.navItems.hasOwnProperty(this.path)) {
             this.setCurrentNavItem(this.navItems[this.path]);
         }
@@ -55,6 +58,18 @@ export class Navigation {
         const instance = new Navigation();
         await instance.init();
         return instance;
+    }
+
+    /**
+     * Adds dynamic routes to the nav items and route map.
+     */
+    addDynamicRoutes() {
+        const artistMatch = this.path.match(/^\/dance\/([a-z0-9-]+)$/);
+
+        if (artistMatch) {
+            this.navItems[this.path] = 'nav-item-dance';
+            this.routeMap[this.path] = [ArtistHero];
+        }
     }
 
     /**

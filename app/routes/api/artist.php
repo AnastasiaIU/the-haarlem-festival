@@ -13,3 +13,9 @@ Route::add('/api/getArtistById/([0-9]+)', function ($artistId) {
     $artist = $artistController->fetchArtistById($artistId);
     echo json_encode($artist);
 });
+
+Route::add('/api/getArtistBySlug/([a-zA-Z0-9_-]*)', function ($artistSlug) {
+    $artistController = new ArtistController();
+    $artist = $artistController->fetchArtistBySlug($artistSlug);
+    echo json_encode($artist);
+});
