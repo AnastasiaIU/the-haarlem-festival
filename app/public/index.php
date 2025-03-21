@@ -43,6 +43,7 @@ require_once(__DIR__ . "/../routes/api/save_content.php");
 require_once(__DIR__ . "/../routes/api/artist.php");
 require_once(__DIR__ . "/../routes/api/pass.php");
 require_once(__DIR__ . "/../routes/api/auth.php");
+require_once(__DIR__ . "/../routes/api/dance_show.php");
 
 // Start the router, enabling handling requests
 Route::run();

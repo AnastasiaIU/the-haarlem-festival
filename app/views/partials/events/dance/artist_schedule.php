@@ -1,5 +1,4 @@
-<section class="special-offer d-flex flex-column">
-    <h2 class="h4 fw-bold mb-5">SPECIAL OFFERS</h2>
+<section class="d-flex flex-column">
     <div class="offer-card d-flex flex-column-reverse flex-lg-row">
         <div class="offer-date-container d-inline-flex flex-column justify-content-between">
             <div class="d-flex flex-column">

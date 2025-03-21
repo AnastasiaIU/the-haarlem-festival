@@ -6,6 +6,7 @@ import {Promo} from "./Promo.js";
 import {ArtistCard} from "./ArtistCard.js";
 import {DanceSchedule} from "./DanceSchedule.js";
 import {ArtistHero} from "./ArtistHero.js";
+import {ArtistSchedule} from "./ArtistSchedule.js";
 
 /**
  * Class that handles the navigation for the website.
@@ -68,7 +69,7 @@ export class Navigation {
 
         if (artistMatch) {
             this.navItems[this.path] = 'nav-item-dance';
-            this.routeMap[this.path] = [ArtistHero];
+            this.routeMap[this.path] = [ArtistHero, ArtistSchedule];
         }
     }
 

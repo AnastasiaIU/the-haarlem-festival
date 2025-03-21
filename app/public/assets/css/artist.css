@@ -13,7 +13,7 @@
     min-width: 220px;
 }
 
-#specialOfferContainer {
+#specialOfferContainer, #artistSchedule {
     background-color: white;
     border-radius: 25px;
 }

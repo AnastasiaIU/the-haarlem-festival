@@ -34,7 +34,7 @@ class VenueDTO {
      */
     public function toArray(): array {
         return [
-            'id' => $this->id,
+            'venue_id' => $this->id,
             'name' => $this->name,
             'address' => $this->address
         ];
@@ -48,7 +48,7 @@ class VenueDTO {
      */
     public static function fromArray(array $data): self {
         return new self(
-            $data['id'],
+            $data['venue_id'],
             $data['name'],
             $data['address']
         );
