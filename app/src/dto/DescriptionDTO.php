@@ -18,27 +18,6 @@ class DescriptionDTO {
         $this->displayOrder = $displayOrder;
     }
 
-    // Getters
-    public function getId(): int {
-        return $this->id;
-    }
-
-    public function getLocationId(): int {
-        return $this->locationId;
-    }
-
-    public function getTitleId(): int {
-        return $this->titleId;
-    }
-
-    public function getDescription(): string {
-        return $this->description;
-    }
-
-    public function getDisplayOrder(): int {
-        return $this->displayOrder;
-    }
-
     /**
      * Converts the DescriptionDTO object to an associative array.
      *

@@ -18,27 +18,6 @@ class GuideDTO {
         $this->image = $image;
     }
 
-    // Getters
-    public function getId(): int {
-        return $this->id;
-    }
-
-    public function getLanguageId(): int {
-        return $this->languageId;
-    }
-
-    public function getName(): string {
-        return $this->name;
-    }
-
-    public function getDescription(): string {
-        return $this->description;
-    }
-
-    public function getImage(): string {
-        return $this->image;
-    }
-
     /**
      * Converts the GuideDTO object to an associative array.
      *

@@ -16,23 +16,6 @@ class TourDTO {
         $this->dateTime = $dateTime;
     }
 
-    // Getters
-    public function getId(): int {
-        return $this->id;
-    }
-
-    public function getGuideId(): int {
-        return $this->guideId;
-    }
-
-    public function getTourTypeId(): int {
-        return $this->tourTypeId;
-    }
-
-    public function getDateTime(): string {
-        return $this->dateTime;
-    }
-
     /**
      * Converts the TourDTO object to an associative array.
      *

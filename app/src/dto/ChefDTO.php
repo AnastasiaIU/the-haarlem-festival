@@ -18,27 +18,6 @@ class ChefDTO {
         $this->description = $description;
     }
 
-    // Getters
-    public function getId(): int {
-        return $this->id;
-    }
-
-    public function getRestaurantId(): int {
-        return $this->restaurantId;
-    }
-
-    public function getName(): string {
-        return $this->name;
-    }
-
-    public function getImage(): string {
-        return $this->image;
-    }
-
-    public function getDescription(): string {
-        return $this->description;
-    }
-
     /**
      * Converts the ChefDTO object to an associative array.
      *

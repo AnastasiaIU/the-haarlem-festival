@@ -14,19 +14,6 @@ class CustomDTO implements JsonSerializable {
         $this->content = $content;
     }
 
-    // Getters
-    public function getId(): int {
-        return $this->id;
-    }
-
-    public function getIdentifier(): string {
-        return $this->identifier;
-    }
-
-    public function getContent(): string {
-        return $this->content;
-    }
-
     /**
      * Converts the CustomDTO object to an associative array.
      *
@@ -61,10 +48,6 @@ class CustomDTO implements JsonSerializable {
      */
     public function jsonSerialize(): array
     {
-        return [
-            'id' => $this->id,
-            'identifier' => $this->identifier,
-            'content' => $this->content
-        ];
+        return self::toArray();
     }
 }

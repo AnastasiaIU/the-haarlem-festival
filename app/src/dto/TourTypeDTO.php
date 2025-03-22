@@ -16,23 +16,6 @@ class TourTypeDTO {
         $this->familyPrice = $familyPrice;
     }
 
-    // Getters
-    public function getId(): int {
-        return $this->id;
-    }
-
-    public function getCapacity(): int {
-        return $this->capacity;
-    }
-
-    public function getSinglePrice(): float {
-        return $this->singlePrice;
-    }
-
-    public function getFamilyPrice(): float {
-        return $this->familyPrice;
-    }
-
     /**
      * Converts the TourTypeDTO object to an associative array.
      *

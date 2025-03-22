@@ -22,35 +22,6 @@ class LocationDTO {
         $this->image = $image;
     }
 
-    // Getters
-    public function getId(): int {
-        return $this->id;
-    }
-
-    public function getEventId(): int {
-        return $this->eventId;
-    }
-
-    public function getSlug(): string {
-        return $this->slug;
-    }
-
-    public function getName(): string {
-        return $this->name;
-    }
-
-    public function getAddress(): string {
-        return $this->address;
-    }
-
-    public function getDescription(): string {
-        return $this->description;
-    }
-
-    public function getImage(): string {
-        return $this->image;
-    }
-
     /**
      * Converts the LocationDTO object to an associative array.
      *

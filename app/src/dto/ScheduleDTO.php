@@ -20,31 +20,6 @@ class ScheduleDTO {
         $this->titleColor = $titleColor;
     }
 
-    // Getters
-    public function getId(): int {
-        return $this->id;
-    }
-
-    public function getDate(): string {
-        return $this->date;
-    }
-
-    public function getTitle(): string {
-        return $this->title;
-    }
-
-    public function getStartTime(): string {
-        return $this->startTime;
-    }
-
-    public function getEndTime(): string {
-        return $this->endTime;
-    }
-
-    public function getTitleColor(): string {
-        return $this->titleColor;
-    }
-
     /**
      * Converts the ScheduleDTO object to an associative array.
      *

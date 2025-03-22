@@ -29,43 +29,6 @@ class DanceShowDTO implements JsonSerializable {
         $this->participants = $participants;
     }
 
-    // Getters
-    public function getId(): int {
-        return $this->id;
-    }
-
-    public function getVenueId(): int {
-        return $this->venueId;
-    }
-
-    public function getDateTime(): string {
-        return $this->dateTime;
-    }
-
-    public function getSession(): SessionType {
-        return $this->session;
-    }
-
-    public function getDuration(): string {
-        return $this->duration;
-    }
-
-    public function getCapacity(): int {
-        return $this->capacity;
-    }
-
-    public function getPrice(): float {
-        return $this->price;
-    }
-
-    public function getDescription(): string {
-        return $this->description;
-    }
-
-    public function getParticipants(): array {
-        return $this->participants;
-    }
-
     /**
      * Converts the DanceShowDTO object to an associative array.
      *
@@ -113,16 +76,6 @@ class DanceShowDTO implements JsonSerializable {
      */
     public function jsonSerialize(): array
     {
-        return [
-            'dance_show_id' => $this->id,
-            'venue_id' => $this->venueId,
-            'date_time' => $this->dateTime,
-            'session' => $this->session->value,
-            'duration' => $this->duration,
-            'capacity' => $this->capacity,
-            'price' => $this->price,
-            'description' => $this->description,
-            'participants' => array_map(fn($p) => $p->toArray(), $this->participants)
-        ];
+        return self::toArray();
     }
 }

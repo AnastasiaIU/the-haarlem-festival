@@ -12,15 +12,6 @@ class TeylersShowDTO {
         $this->name = $name;
     }
 
-    // Getters
-    public function getId(): int {
-        return $this->id;
-    }
-
-    public function getName(): string {
-        return $this->name;
-    }
-
     /**
      * Converts the TeylersShowDTO object to an associative array.
      *

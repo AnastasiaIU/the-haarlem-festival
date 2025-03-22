@@ -16,7 +16,7 @@ class ArtistModel extends BaseModel
     public function fetchAllArtists(): array
     {
         $query = self::$pdo->prepare(
-            'SELECT id, event_id, slug, stage_name, genre, hero_description, card_description, image, card_image
+            'SELECT id, event_id, slug, stage_name, genre, hero_description, card_description, image, card_image, carousel_image1, carousel_image2, carousel_image3, carousel_image4, carousel_image5, carousel_image6
                     FROM artist'
         );
         $query->execute();
@@ -40,7 +40,7 @@ class ArtistModel extends BaseModel
     public function fetchArtistById(int $id): ?ArtistDTO
     {
         $query = self::$pdo->prepare(
-            'SELECT id, event_id, slug, stage_name, genre, hero_description, card_description, image, card_image
+            'SELECT id, event_id, slug, stage_name, genre, hero_description, card_description, image, card_image, carousel_image1, carousel_image2, carousel_image3, carousel_image4, carousel_image5, carousel_image6
         FROM artist
         WHERE id = :id'
         );
@@ -64,7 +64,7 @@ class ArtistModel extends BaseModel
     public function fetchArtistBySlug(string $slug): ?ArtistDTO
     {
         $query = self::$pdo->prepare(
-            'SELECT id, event_id, slug, stage_name, genre, hero_description, card_description, image, card_image
+            'SELECT id, event_id, slug, stage_name, genre, hero_description, card_description, image, card_image, carousel_image1, carousel_image2, carousel_image3, carousel_image4, carousel_image5, carousel_image6
         FROM artist
         WHERE slug = :slug'
         );

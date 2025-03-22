@@ -20,31 +20,6 @@ class TrackDTO {
         $this->cover = $cover;
     }
 
-    // Getters
-    public function getId(): int {
-        return $this->id;
-    }
-
-    public function getArtistId(): int {
-        return $this->artistId;
-    }
-
-    public function getName(): string {
-        return $this->name;
-    }
-
-    public function getTrack(): string {
-        return $this->track;
-    }
-
-    public function getLength(): int {
-        return $this->length;
-    }
-
-    public function getCover(): string {
-        return $this->cover;
-    }
-
     /**
      * Converts the TrackDTO object to an associative array.
      *
