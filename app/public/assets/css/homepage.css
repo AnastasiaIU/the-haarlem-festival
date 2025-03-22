@@ -1,0 +1,893 @@
+/* =======================
+   HOMEPAGE STYLE
+   ======================= */
+
+/* GLOBAL SETTINGS */
+body, html {
+    overflow-x: hidden;
+}
+
+/* =======================
+   1. BANNER (WITH OVAL)
+   ======================= */
+.banner {
+    width: 100%;
+    height: 100%;
+    margin-bottom: -10%;
+    margin-top: -7%;
+}
+.banner img {
+    width: 100%; 
+    height: auto; 
+    object-fit: cover; 
+}
+.oval-container {
+    width: 150vw;
+    height: auto;
+    z-index: 10;
+}
+
+.oval-image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.oval-text-overlay {
+    z-index: 2;
+    width: 70%;
+    max-width: 60%;
+}
+
+.oval-text-overlay h1 {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    color: var(--rufous);
+    white-space: nowrap;
+}
+
+.oval-text-overlay p {
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    color: var(--warm-brown);
+}
+
+/* =======================
+   2. TEYLERS SECTION
+   ======================= */
+.museum-section {
+    width: 100%;
+    z-index: 9;
+    margin-top: -5%;
+}
+
+.museum-banner {
+    width: 95vw;
+    height: auto;
+    object-fit: cover;
+    left: 5%; 
+}
+
+.museum-shape {
+    top: 3%;
+    width: 60%;
+    height: auto;
+    z-index: 2;
+}
+
+.yellow-shape {
+    top: 3%;
+    width: 59%;
+    height: auto;
+    z-index: 1;
+}
+
+.museum-shape img {
+    pointer-events: none;
+}
+
+.museum-shape .text-overlay {
+    z-index: 10;
+    width: 80%;
+    left: 42%;  
+    top: 59%;
+    transform: translate(-50%, -50%);
+}
+
+.app-download {
+    width: 100px; 
+    height: auto;
+}
+
+/* =======================
+   3. YUMMY SECTION
+   ======================= */
+.yummy-section {
+    width: 100%;
+    margin-top: -1%;
+    z-index: 8;
+}
+
+.yummy-banner {
+    width: 85%;
+    height: auto;
+    object-fit: cover;
+}
+
+.yummy-shape {
+    width: 63%;
+    z-index: 1;
+    right: 0;
+}
+
+.yummy-shape img {
+    width: 100%;
+    height: 100%; 
+    object-fit: cover; 
+}
+
+.yummy-shape .text-overlay {
+    z-index: 10;
+    width: 75%; 
+    left: 50%;
+    top: 50%; 
+    transform: translate(-50%, -50%);
+}
+
+/* =======================
+   4. STROLLS SECTION
+   ======================= */
+.strolls-section {
+    width: 100%;
+    z-index: 6;
+    margin-top: -2%;
+}
+
+.strolls-banner {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.strolls-shape {
+    width: 62%;
+    height: 100%;
+    left: 0;
+    z-index: 1;
+}
+
+.strolls-shape img {
+    width: 100%;
+    height: 100%; 
+    object-fit: cover; 
+}
+
+.strolls-shape .text-overlay {
+    z-index: 10;
+    width: 80%;
+    left: 42%;  
+    top: 55%;
+    transform: translate(-50%, -50%);
+}
+
+/* =======================
+   5. DANCE SECTION
+   ======================= */
+.dance-section {
+    width: 100%;
+    z-index: 7;
+}
+
+.dance-banner {
+    width: 82%;
+    height: auto;
+    object-fit: cover;
+}
+
+.dance-shape {
+    width: 62%;
+    height: auto;
+    right: 0;
+    top: -5%;
+    z-index: 2;
+}
+
+.dance-shape img {
+    width: 100%;
+    height: 100%; 
+    object-fit: cover; 
+}
+
+.dance-shape .text-overlay {
+    z-index: 10;
+    width: 75%; 
+    left: 55%;
+    top: 50%; 
+    transform: translate(-50%, -50%);
+}
+
+/* =======================
+   6. SCHEDULE SECTION
+   ======================= */
+.schedule-section {
+    width: 89%;
+    height: auto;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.schedule-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1; 
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%; 
+}
+
+.schedule {
+    width: 100%;
+    overflow-x: hidden;
+    max-width: 100%;
+}
+
+.schedule-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    justify-content: center; 
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--terracotta);
+    max-width: 100%;
+}
+
+.schedule-row:last-child {
+    border-bottom: none;
+}
+
+.date {
+    width: 100px;
+    text-align: left;
+    color: var(--rufous);
+    border-right: 1px solid var(--terracotta);
+}
+
+.weekday {
+    display: block;
+    font-size: 14px;
+    color: var(--warm-brown);
+}
+
+.event {
+    flex: 1;
+    text-align: left;
+    border-right: 1px solid var(--terracotta);
+    margin-left: 1%;
+}
+
+.event:last-child {
+    border-right: none;
+}
+
+.event-title {
+    display: block;
+    font-weight: bold;
+}
+
+/* COLOR CLASSES */
+.teylers { color: var(--deep-teal); }
+.yummy { color: var(--terracotta); }
+.strolls { color: var(--punch); }
+.dance { color: var(--slate-blue); }
+
+.event-time {
+    font-size: 0.9em;
+    color: var(--warm-brown);
+}
+
+.schedule-title {
+    padding-right: 60%;
+}
+
+.schedule-title h2 {
+    color: var(--rich-espresso);
+    font-size: clamp(1.5rem, 3.5vw, 2rem);
+}
+
+.schedule-title p {
+    color: var(--rufous);
+    font-size: clamp(1rem, 2vw, 1.2rem);
+}
+
+/* =======================
+   7. LOCATION SECTION  
+   ======================= */
+.location-title{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 1%;
+}
+.location-title img {
+    width: 25px; 
+    height: auto;
+    display: block;
+}
+
+.location-title h2{
+    color: var(--rich-espresso);
+    font-size: clamp(1.5rem, 3.5vw, 2rem);
+    margin: 0;
+    padding: 0;
+}
+
+.location-section{
+    width: 80%;
+    height: auto;
+}
+
+iframe{
+    width: 100%;
+    height: 100vh;
+}
+
+/* =======================
+   8. MEDIA QUERIES
+   ======================= */
+@media (max-width: 1285px) {
+    /*Events Sections*/
+    .text-overlay h2 {
+        font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+        margin-bottom: 5%;
+    }
+    .text-overlay p {
+        font-size: clamp(0.7rem, 1.3vw, 0.9rem); 
+    }
+    .text-overlay a.btn {
+        
+        font-size: clamp(0.7rem, 1.3vw, 0.9rem);
+    }
+    .app-download {
+        width: 80px; 
+        height: auto;
+    }
+
+    /*Schedule*/
+    .schedule-title h2 {
+        font-size: clamp(1.8rem, 2.5vw, 2.2rem); 
+    }
+    .date{
+        width: 75px;
+    }
+    .schedule-title p {
+        font-size: clamp(1.2rem, 2vw, 1.5rem);
+    }
+    .event-title, .day{
+        font-size: clamp(1rem, 1.5vw, 1.2rem);
+       
+    }
+    .weekday, .event-time {
+        font-size: clamp(0.8rem, 1.2vw, 1rem);
+    }
+}
+
+@media (max-width: 900px) {
+    /*Schedule Section*/
+    .date{
+        width: 50px;
+    }
+    .day, .event-title{
+        font-size: clamp(0.8rem, 1.2vw, 1rem); 
+        margin-bottom: 0px;
+    }
+
+    .weekday, .event-time {
+        font-size: clamp(0.6rem, 1.0vw, 0.7rem);
+        margin-top: 0px;
+    }
+
+    /*Location Section*/
+    .location-title{
+        gap: 10px;
+    }
+    .location-title img {
+        width: 15px; 
+    }
+    .location-title h2{
+        font-size: clamp(1.4rem, 2vw, 1.8rem);
+    }
+    iframe{
+        height: 80vh;
+    }
+
+    /*Teylers Section*/
+    .app-download {
+        width: 70px; 
+        height: auto;
+    }
+    .btn {
+        padding: 6px 12px;
+    }
+    .museum-shape .text-overlay {
+        top: 59%;
+    }
+    .museum-banner {
+        width: 105%; 
+        height: auto;
+        object-fit: cover;
+        position: relative;
+    }
+
+    .museum-banner img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+    }
+
+    .museum-shape, .yellow-shape {
+        width: 65%; 
+        height: auto;
+        position: relative;
+    }
+}
+
+@media (max-width: 768px) {
+    /*Teylers Section*/
+    .app-download {
+        width: 65px; 
+        height: auto;
+    }
+    .btn {
+        padding: 4px 8px;
+    }
+
+    /*Schedule*/
+    .schedule-section{
+        width: 95%;
+    }
+    .schedule-title h2 {
+        font-size: clamp(1.1rem, 1.5vw, 1.5rem);
+    }
+    .schedule-title p {
+        font-size: clamp(0.8rem, 1.2vw, 1rem);
+    }
+    .date{
+        width: 40px;
+    }
+    .day, .event-title{
+        font-size: clamp(0.6rem, 1.0vw, 0.7rem); 
+    }
+    .weekday, .event-time {
+        font-size: clamp(0.5rem, 1.0vw, 0.6rem);
+    }
+
+    /*Location Section*/
+    .location-title{
+        gap: 7px;
+    }
+    .location-title img {
+        width: 13px; 
+    }
+    
+    .location-title h2{
+        font-size: clamp(1.1rem, 1.5vw, 1.5rem);
+    }
+
+    iframe{
+        height: 70vh;
+    }
+
+    /*Teylers Section*/
+    .museum-shape .text-overlay {
+        top: 59%;
+    }
+    .museum-banner {
+        width: 120%; 
+    }
+    .museum-shape, .yellow-shape {
+        width: 75%; 
+    }
+
+    /*Yummy Section*/
+    .yummy-banner {
+        width: 95%; 
+        right: 33%;
+    }
+    .yummy-shape {
+        width:70%; 
+    }
+    .yummy-shape .text-overlay {
+        left: 53%;
+        top: 54%;
+        transform: translate(-50%, -50%);
+    }
+    /*History Section*/
+    .strolls-banner {
+        width: 120%; 
+    }
+    .strolls-shape {
+        width: 75%; 
+    }
+} 
+
+@media (max-width: 650px) {
+
+    /*Banner Section*/
+    .oval-text-overlay h1 {
+        font-size: clamp(1.5rem, 3vw, 2.0rem);
+    }
+    .oval-text-overlay p {
+        font-size: clamp(0.7rem, 2vw, 1.1rem);
+    }
+
+    /*Teylers Section*/
+    .museum-banner {
+        width: 140%; 
+    }
+    .museum-shape, .yellow-shape {
+        width: 90%; 
+        top: -1vh;
+    }
+    .museum-shape .text-overlay {
+        width: 89%;
+        left: 45%;
+        top: 61%;
+        transform: translate(-50%, -50%);
+    }
+
+    /*Yummy Section*/
+    .yummy-banner {
+        width: 112%; 
+        right: 38%;
+    }
+    .yummy-shape {
+        width:82%; 
+    }
+
+    /*History Section*/
+    .strolls-banner {
+        width: 142%; 
+    }
+    .strolls-shape {
+        width: 87%; 
+    }
+
+    /*Schedule Section*/
+    .schedule-title h2 {
+        font-size: clamp(0.8rem, 1.2vw, 0.9rem);
+    }
+    .schedule-title p {
+        font-size: clamp(0.6rem, 1.0vw, 0.7rem);
+    }
+    .date{
+        width: 30px;
+    }
+    .day, .event-title{
+        font-size: clamp(0.5rem, 1.0vw, 0.6rem); 
+    }
+    .weekday, .event-time {
+        font-size: clamp(0.4rem, 1.0vw, 0.5rem);
+    }
+    .schedule-row {
+        gap: 0px;
+        padding: 5px 0;
+    }
+
+    /*Location Section*/
+    iframe{
+        height: 60vh;
+    }
+}
+
+@media (max-width: 510px) {
+    /* Banner Section */
+    .navbar{
+        z-index: 15;
+    }
+    .oval-container {
+        height: 35vw; 
+        z-index: 11;
+    }
+    .oval-image {
+        height: 100%; 
+    }
+    .oval-text-overlay {
+        max-width: 55%; 
+        top: 55%;
+    }
+    .oval-text-overlay h1{
+        white-space: wrap;
+    }
+    .banner{
+        z-index: 10;
+        width: 170%;
+    }
+
+   /*Teylers Section*/
+   .museum-banner {
+    width: 165%; 
+    }
+    .museum-shape, .yellow-shape {
+        width: 106%; 
+    }
+    
+    /*Yummy Section*/
+    .yummy-banner {
+        width: 130%; 
+    }
+    .yummy-shape {
+        width:95%; 
+    }
+
+    /*History Section*/
+    .strolls-banner {
+        width: 160%; 
+    }
+    .strolls-shape {
+        width: 102%; 
+    }
+    
+    /*Dance Section*/
+    .dance-banner{
+        width: 100%;
+    }
+    .dance-shape{
+        width: 75%;
+        height: auto;
+    }
+
+    /*Events Sections*/
+    .text-overlay h2 {
+        font-size: clamp(0.8rem, 2vw, 1rem);
+    }
+    .text-overlay p, .text-overlay a.btn {
+        font-size: clamp(0.6rem, 1vw, 0.7rem); 
+    }
+    .app-download {
+        width: 55px; 
+        height: auto;
+    }
+    a.btn {
+        padding: 4px 8px;
+    }
+
+    /*Schedule Section*/
+    .schedule-section{
+        width: 150%;
+        height: auto;
+        left: 10%;
+    }
+    .schedule {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between; 
+        width: 75%;
+    }
+    .schedule-content{
+        left: 54%;
+        top: 45%;
+    }
+    .schedule-row {
+        display: flex;
+        width: 25%;
+        flex-direction: column;
+        align-items: flex-start;
+        border-right: 1px solid var(--terracotta);
+        border-bottom: 0;
+        padding: 0 5px;
+    }
+    .schedule-row:nth-child(4n) {
+        border-right: none;
+    }
+    .schedule-row:last-child {
+        border-bottom: none;
+    }
+    .events-container {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        gap: 5px;
+    }
+    .event {
+        width: 100%;
+        text-align: left;
+        border-bottom: 1px solid var(--terracotta);
+        border-right: 0;
+        padding: 5px 0;
+    }
+    .event:last-child {
+        border-bottom: none; 
+    }
+    .schedule-title {
+        padding-right: 70%;
+    }
+    .schedule-title h2 {
+        font-size: clamp(1.1rem, 1.5vw, 1.5rem);
+    }
+    .schedule-title p {
+        font-size: clamp(0.8rem, 1.2vw, 1rem);
+    }
+    .date{
+        width: 40px;
+        width: 100%;
+        text-align: left;
+        border-right: none;
+        padding-bottom: 3px;
+        font-weight: bold;
+    }
+    .day, .event-title{
+        font-size: clamp(0.6rem, 1.0vw, 0.7rem); 
+    }
+    .weekday, .event-time {
+        font-size: clamp(0.5rem, 1.0vw, 0.6rem);
+    }
+}
+
+    @media (max-width: 380px) {
+    /*Teylers Section*/
+    .museum-section{
+        margin-top: -60%;
+    }
+    .museum-banner {
+        width: 382%; 
+        left: -5%;
+    }
+    .museum-shape, .yellow-shape {
+        width: 230%; 
+    }
+    .museum-shape .text-overlay {
+        width: 45%;
+        left: 22%;
+        top: 61%;
+    }
+    /*Yummy Section*/
+    .yummy-banner {
+        width: 280%; 
+    }
+    .yummy-shape {
+        width:195%; 
+        left: -10%;
+    }
+    .yummy-shape .text-overlay {
+        width: 45%;
+        left: 35%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+    /*Strolls Section*/
+    .strolls-banner {
+        width: 340%; 
+    }
+    .strolls-shape .text-overlay{
+        width: 95%;
+        left: 50%;  
+        top: 50%;
+    }
+    /*Dance Section*/
+    .dance-banner{
+        width: 250%;
+    }
+    .dance-shape{
+        width: 180%;
+        right: -55%; 
+    }
+    .dance-shape .text-overlay{
+        width: 45%; 
+        left: 40%;
+    }
+    /*Banner Section*/
+    .oval-container {
+        height: 66vw; 
+    }
+    .banner{
+        width: 180%;
+    }
+    /*Schedule Section*/
+    .schedule-section{
+        width: 900%;
+        left: 90%;
+    }
+    .schedule {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        width: 25%;
+    }
+    .schedule-content{
+        left: 77%;
+        top: 50%;
+    }
+    .schedule-row {
+        border-right: 0;
+        border-bottom: 0;
+    }
+    .schedule-title {
+        padding-right: 99%;
+    }
+}
+
+@media (max-width: 240px ){
+    /*Teylers Section*/
+    .museum-section{
+        margin-top: -170%;
+    }
+    .museum-banner {
+        width: 1000%; 
+        left: -5%;
+    }
+    .museum-shape, .yellow-shape {
+        width: 650%; 
+    }
+    .museum-shape .text-overlay {
+        width: 18%;
+        left: 8%;
+    }
+    .download-section {
+        flex-direction: column; 
+        align-items: center;
+        gap: 5px;
+    }
+    /*Yummy Section*/
+    .yummy-banner {
+        width: 620%; 
+    }
+    .yummy-shape {
+        width:440%; 
+        left: -50%;
+    }
+    .yummy-shape .text-overlay {
+        width: 26%;
+        left: 23%;
+        top: 53%;
+    }
+    /*Strolls Section*/
+    .strolls-banner {
+        width: 950%; 
+    }
+    .strolls-shape .text-overlay{
+        width: 105%;
+        left: 47%;  
+        top: 50%;
+    }
+    /*Dance Section*/
+    .dance-banner{
+        width: 500%;
+    }
+    .dance-shape{
+        width: 375%;
+        right: -55%; 
+    }
+    .dance-shape .text-overlay{
+        width: 25%; 
+        left: 70%;
+    }
+    /*Banner Section*/
+    .oval-container {
+        height: 200vw; 
+    }
+    .banner{
+        width: 400%;
+    }
+    /*Schedule Section*/
+    .schedule-section{
+        width: 1200%;
+    }
+    .schedule {
+        width: 25%;
+    }
+    .schedule-content{
+        left: 78%;
+        top: 50%;
+    }
+    .schedule-row {
+        border-right: 0;
+        border-bottom: 0;
+    }
+    .schedule-title {
+        padding-right: 99%;
+    }
+}
