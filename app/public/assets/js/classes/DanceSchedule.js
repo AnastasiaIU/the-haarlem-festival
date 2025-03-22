@@ -16,6 +16,9 @@ export class DanceSchedule {
         return instance;
     }
 
+    /**
+     * Sets the prices of the different passes.
+     */
     setPrices() {
         const fridayPass = document.getElementById("pass-friday-price");
         const saturdayPass = document.getElementById("pass-saturday-price");

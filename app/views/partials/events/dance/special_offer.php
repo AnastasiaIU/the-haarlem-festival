@@ -1,5 +1,7 @@
 <section class="special-offer d-flex flex-column">
-    <h2 class="h4 fw-bold mb-5">SPECIAL OFFERS</h2>
+    <div class="offer-title d-flex">
+        <h2 class="h4 fw-bold mb-5 d-block">SPECIAL OFFERS</h2>
+    </div>
     <div class="offer-card d-flex flex-column-reverse flex-lg-row">
         <div class="offer-date-container d-inline-flex flex-column justify-content-between">
             <div class="d-flex flex-column">
@@ -7,7 +9,7 @@
                 <p class="m-0">Friday</p>
                 <p>20:00</p>
             </div>
-            <div class="d-inline-flex align-items-center">
+            <div class="d-inline-flex align-items-center  justify-content-end">
                 <p class="fw-bold m-0" id="pass-friday-price"></p>
                 <a type="button" class="btn btn-primary ms-3 font-p-16 fw-bold text-nowrap">Add to cart</a>
             </div>
@@ -38,7 +40,7 @@
                 <p class="m-0">Saturday</p>
                 <p>14:00</p>
             </div>
-            <div class="d-inline-flex align-items-center">
+            <div class="d-inline-flex align-items-center  justify-content-end">
                 <p class="fw-bold m-0" id="pass-saturday-price"></p>
                 <a type="button" class="btn btn-primary ms-3 font-p-16 fw-bold text-nowrap">Add to cart</a>
             </div>
@@ -68,7 +70,7 @@
                 <p class="m-0">Sunday</p>
                 <p>14:00</p>
             </div>
-            <div class="d-inline-flex align-items-center">
+            <div class="d-inline-flex align-items-center justify-content-end">
                 <p class="fw-bold m-0" id="pass-sunday-price"></p>
                 <a type="button" class="btn btn-primary ms-3 font-p-16 fw-bold text-nowrap">Add to cart</a>
             </div>
@@ -98,7 +100,7 @@
                 <p class="m-0">Friday</p>
                 <p>20:00</p>
             </div>
-            <div class="d-inline-flex align-items-center">
+            <div class="d-inline-flex align-items-center justify-content-end">
                 <p class="fw-bold m-0" id="pass-all-access-price"></p>
                 <a type="button" class="btn btn-primary ms-3 font-p-16 fw-bold text-nowrap">Add to cart</a>
             </div>

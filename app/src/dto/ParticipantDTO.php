@@ -1,15 +1,17 @@
 <?php
 
+require_once(__DIR__ . '/ArtistDTO.php');
+
 /**
  * Data Transfer Object (DTO) for representing a participant in a dance show.
  */
 class ParticipantDTO {
     private int $danceShowId;
-    private int $artistId;
+    private ArtistDTO $artist;
 
-    public function __construct(int $danceShowId, int $artistId) {
+    public function __construct(int $danceShowId, ArtistDTO $artist) {
         $this->danceShowId = $danceShowId;
-        $this->artistId = $artistId;
+        $this->artist = $artist;
     }
 
     // Getters
@@ -17,8 +19,8 @@ class ParticipantDTO {
         return $this->danceShowId;
     }
 
-    public function getArtistId(): int {
-        return $this->artistId;
+    public function getArtist(): ArtistDTO {
+        return $this->artist;
     }
 
     /**
@@ -29,7 +31,7 @@ class ParticipantDTO {
     public function toArray(): array {
         return [
             'dance_show_id' => $this->danceShowId,
-            'artist_id' => $this->artistId
+            'artist' => $this->artist->toArray()
         ];
     }
 
@@ -42,7 +44,7 @@ class ParticipantDTO {
     public static function fromArray(array $data): self {
         return new self(
             $data['dance_show_id'],
-            $data['artist_id']
+            ArtistDTO::fromArray($data)
         );
     }
 }

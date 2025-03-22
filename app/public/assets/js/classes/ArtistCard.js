@@ -19,6 +19,9 @@ export class ArtistCard {
         return instance;
     }
 
+    /**
+     * Populates the artist cards with data from the API.
+     */
     async populateCards() {
         let buttonId = 7;
 
