@@ -88,11 +88,13 @@ body, html {
     z-index: 10;
     width: 80%;
     left: 42%;  
-    top: 59%;
+    top: 61%;
     transform: translate(-50%, -50%);
 }
-
-.app-download {
+#appBadges{
+    padding-right: 10%;
+}
+.app-badge{
     width: 100px; 
     height: auto;
 }
@@ -351,7 +353,7 @@ iframe{
         
         font-size: clamp(0.7rem, 1.3vw, 0.9rem);
     }
-    .app-download {
+    .app-badge {
         width: 80px; 
         height: auto;
     }
@@ -405,7 +407,7 @@ iframe{
     }
 
     /*Teylers Section*/
-    .app-download {
+    .app-badge {
         width: 70px; 
         height: auto;
     }
@@ -437,7 +439,7 @@ iframe{
 
 @media (max-width: 768px) {
     /*Teylers Section*/
-    .app-download {
+    .app-badge {
         width: 65px; 
         height: auto;
     }
@@ -647,7 +649,7 @@ iframe{
     .text-overlay p, .text-overlay a.btn {
         font-size: clamp(0.6rem, 1vw, 0.7rem); 
     }
-    .app-download {
+    .app-badge {
         width: 55px; 
         height: auto;
     }

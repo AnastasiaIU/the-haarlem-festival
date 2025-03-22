@@ -1,5 +1,3 @@
-<link rel="stylesheet" href="/assets/css/homepage.css">
-<script src="/assets/js/homepage.js"></script>
 <main class="container-fluid d-flex flex-column flex-grow-1 align-items-center p-0">
     <section class="banner col-12 col-md-6 col-lg-5 col-xl-4"> 
         <div>
@@ -31,14 +29,8 @@
                     <a href="" class="btn btn-primary h5 " data-button-id="1"></a>
                     <a href="#map-section" class="btn btn-primary h5"></a>
                 </div>
-
-                <div class="app-section ">
-                    <p class="custom_teyler h4 fw-bold text-white mt-1"></p>
-                </div>
                 <div class="download-section d-flex align-items-center gap-2">
-                    <p class="h5 text-white m-0"></p>
-                    <a href="#"><img src="" class="app-download" alt="Get it on Google Play"></a>
-                    <a href="#"><img src="" class="app-download" alt="Download on App Store"></a>
+                    <?php include __DIR__ . '/events/teylers/app_promotion_hero.php'; ?>
                 </div>
             </div>
         </div>

@@ -1,4 +1,10 @@
+import {CMS} from "./classes/CMS.js";
+import {fetchFromApi} from "./main.js";
+
 document.addEventListener("DOMContentLoaded", async function () {
+    if(window.location.pathname === "/"){
+
+    
     const scheduleContainer = document.querySelector(".schedule");
 
     // Function to fetch the homepage banner
@@ -54,24 +60,26 @@ document.addEventListener("DOMContentLoaded", async function () {
         }
     }
 
+    async function setTeylersContent() {
+            const appPromotionTitle = await fetchFromApi('/api/getCustomByIdentifier/app_promotion_title');
+            const appPromotionSubtitle = await fetchFromApi('/api/getCustomByIdentifier/app_promotion_subtitle');
+
+            const promotionTitle = document.getElementById("appPromotionTitle");
+            const promotionSubtitle = document.getElementById("appPromotionSubtitle");
+    
+            promotionTitle.innerHTML = appPromotionTitle.content;
+            promotionSubtitle.innerHTML = appPromotionSubtitle.content;
+    
+            const appPromotionHero = document.getElementById("appPromotionHero");
+            appPromotionHero.style.display = "block";
+
+            const cms = await CMS.create();
+            cms.setContentInputDataset(promotionTitle.id, 'custom', appPromotionTitle.id, 'content');
+            cms.setContentInputDataset(promotionSubtitle.id, 'custom', appPromotionSubtitle.id, 'content');
+        }
+
     async function fetchCustomData() {
         try {
-            const titleResponse = await fetch('/api/getCustomByIdentifier/app_promotion_title');
-            const titleData = await titleResponse.json();
-            document.querySelector(".custom_teyler").textContent = titleData.content;
-
-            const subtitleResponse = await fetch('/api/getCustomByIdentifier/app_promotion_subtitle');
-            const subtitleData = await subtitleResponse.json();
-            document.querySelector(".download-section p").textContent = subtitleData.content;
-
-            const image1Response = await fetch('/api/getCustomByIdentifier/app_promotion_image_1');
-            const image1Data = await image1Response.json();
-            document.querySelector(".download-section a:nth-of-type(1) img").src = `/assets/images/${image1Data.content}`;
-
-            const image2Response = await fetch('/api/getCustomByIdentifier/app_promotion_image_2');
-            const image2Data = await image2Response.json();
-            document.querySelector(".download-section a:nth-of-type(2) img").src = `/assets/images/${image2Data.content}`;
-
             let response = await fetch('/api/getCustomByIdentifier/schedule_title');
             let data = await response.json();
             document.querySelector(".custom_schedule_title").textContent = data.content;
@@ -80,7 +88,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             data = await response.json();
             document.querySelector(".custom_schedule_subtitle").textContent = data.content;
         } catch (error) {
-            console.error("Error fetching app promotion data:", error);
+            console.error("Error fetching custom data:", error);
         }
     }
 
@@ -127,6 +135,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     await fetchHomepageBannerData();
     await fetchEventsData();
     await fetchCustomData();
+    await setTeylersContent();
 
 
     function renderSchedule(schedule) {
@@ -204,7 +213,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
 
 
-    fetchSchedule();
+    fetchSchedule();}
 });
 
 function formatTime(timeString) {

@@ -38,13 +38,3 @@
         </div>
     </div>
 </nav>
-<?php
-require_once(__DIR__ . '/../../src/controllers/EventController.php');
-
-$eventController = new EventController();
-$events = $eventController->fetchAllEvents();
-?>
-<script>
-    // Pass the PHP variable to JavaScript
-    const events = JSON.parse('<?php echo addslashes(json_encode($events, JSON_UNESCAPED_UNICODE | JSON_HEX_APOS | JSON_HEX_QUOT)); ?>');
-</script>

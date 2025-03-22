@@ -13,6 +13,7 @@
     <link rel="stylesheet" type="text/css" href="../../assets/css/hero.css">
     <link rel="stylesheet" type="text/css" href="../../assets/css/promo.css">
     <link rel="stylesheet" type="text/css" href="../../assets/css/artist.css">
+    <link rel="stylesheet" type="text/css" href="../../assets/css/homepage.css">
     <link rel="icon" type="image/x-icon" href="../../assets/images/favicon.svg">
     <link href='https://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=Cabin' rel='stylesheet'>
@@ -26,6 +27,7 @@
     <script src="https://cdn.tiny.cloud/1/clwrf6ykpssoswy8p2on10mut3yv9h65futcwnlgkg48h573/tinymce/7/tinymce.min.js"
             referrerpolicy="origin"></script>
     <script type="module" src="../../assets/js/main.js"></script>
+    <script type="module" src="../../assets/js/homepage.js"></script>
     <?php
     $isAdmin = isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'Administrator';
     ?>
