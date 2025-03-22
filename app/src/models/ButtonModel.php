@@ -32,4 +32,18 @@ class ButtonModel extends BaseModel
 
         return ButtonDTO::fromArray($button);
     }
+
+    public function fetchTextByType(string $type): ?string
+    {
+        $query = self::$pdo->prepare(
+            'SELECT text 
+            FROM button_type 
+            WHERE type = :type'
+        );
+
+        $query->execute([':type' => $type]);
+        $result = $query->fetch(PDO::FETCH_ASSOC);
+
+        return $result ? $result['text'] : null;
+    }
 }

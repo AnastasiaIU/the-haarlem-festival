@@ -24,4 +24,9 @@ class ButtonController
     {
         return $this->buttonModel->fetchButtonById($id);
     }
+
+    public function fetchTextByType(string $type): ?string
+    {
+        return $this->buttonModel->fetchTextByType($type);
+    }
 }

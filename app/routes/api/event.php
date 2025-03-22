@@ -19,3 +19,9 @@ Route::add('/api/getEventById/([0-9]+)', function ($eventId) {
     $event = $eventController->fetchEventById($eventId);
     echo json_encode($event);
 });
+
+Route::add('/api/getHomepage', function () {
+    $eventController = new EventController();
+    $homepageEvent = $eventController->fetchEventById(1); 
+    echo json_encode($homepageEvent);
+});
