@@ -7,6 +7,7 @@ import {ArtistCard} from "./ArtistCard.js";
 import {DanceSchedule} from "./DanceSchedule.js";
 import {ArtistHero} from "./ArtistHero.js";
 import {ArtistSchedule} from "./ArtistSchedule.js";
+import {FoodFilter} from "./FoodFilter.js";
 
 /**
  * Class that handles the navigation for the website.
@@ -37,7 +38,7 @@ export class Navigation {
             '/login': [LoginForm],
             '/register': [RegistrationForm],
             '/dance': [EventHero, Promo, ArtistCard, DanceSchedule],
-            '/yummy': [EventHero, Promo],
+            '/yummy': [EventHero, Promo, FoodFilter],
             '/strolls': [EventHero, Promo],
             '/teylers': [EventHero, Promo]
         };
