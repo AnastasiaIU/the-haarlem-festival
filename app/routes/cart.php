@@ -10,3 +10,7 @@ Route::add('/cart', function () {
 Route::add('/cart/checkout', function () {
     require_once(__DIR__ . "/../views/pages/checkout.php");
 });
+
+Route::add('/cart/checkout/confirmation', function () {
+    require_once(__DIR__ . "/../views/pages/completed-payment.php");
+});

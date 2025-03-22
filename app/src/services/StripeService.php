@@ -3,8 +3,8 @@
 use Stripe\Stripe;
 use Stripe\PaymentIntent;
 use Stripe\Exception\ApiErrorException;
+
 require(__DIR__ . "/../../vendor/autoload.php");
-require_once(__DIR__ . "/../../lib/env.php");
 
 class StripeService {
     public function __construct() {

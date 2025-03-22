@@ -152,3 +152,34 @@
 .cart-items p:nth-child(3) {
     text-align: center;
 }
+
+/* COMPLETED-PAYMENT */
+
+.completed-payment-container {
+    margin: 40px;
+}
+
+.completed-payment-information {
+    width: 35%;
+}
+
+.order-header {
+    font-size: 32px;
+}
+
+.order-line-separation {
+    border-color: #666666;
+    margin: 40px 0;
+}
+
+.confirmation-number-information {
+    color: var(--rufous);
+    font-weight: bold;
+    margin: 32px 0 0 0;
+}
+
+.confirmation-code {
+    color: var(--rufous);
+    font-size: 40px;
+    margin: 24px 0 32px 0;
+}
