@@ -30,6 +30,14 @@
     min-width: 170px;
 }
 
+.tracks-header {
+    color: var(--rufous);
+}
+
+#artistTracks {
+    max-width: 650px;
+}
+
 @media (max-width: 992px) {
     .pass-image-container, .show-image-container {
         order: 4 !important;
@@ -71,5 +79,9 @@
 
     .artist-card-text-container {
         padding: 0 !important;
+    }
+
+    #artistTracks {
+        flex-direction: column;
     }
 }

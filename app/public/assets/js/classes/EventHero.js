@@ -153,7 +153,7 @@ export class EventHero {
      * @returns {Promise<Object>} The event object.
      */
     async fetchEvent() {
-        let pathSegments = window.location.pathname.split('/').filter(segment => segment !== '');
+        const pathSegments = window.location.pathname.split('/').filter(segment => segment !== '');
         const slug = pathSegments.length ? pathSegments[pathSegments.length - 1] : null;
         const endpoint = slug ? `/api/getEventBySlug/${slug}` : '/api/getEventById/1';
 

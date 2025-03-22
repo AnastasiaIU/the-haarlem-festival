@@ -10,6 +10,7 @@ import {ArtistSchedule} from "./ArtistSchedule.js";
 import {FoodFilter} from "./FoodFilter.js";
 import {Carousel} from "./Carousel.js";
 import {ArtistCarousel} from "./ArtistCarousel.js";
+import {Track} from "./Track.js";
 
 /**
  * Class that handles the navigation for the website.
@@ -72,7 +73,7 @@ export class Navigation {
 
         if (artistMatch) {
             this.navItems[this.path] = 'nav-item-dance';
-            this.routeMap[this.path] = [ArtistHero, ArtistSchedule, Carousel, ArtistCarousel];
+            this.routeMap[this.path] = [ArtistHero, ArtistSchedule, Carousel, ArtistCarousel, Track];
         }
     }
 
