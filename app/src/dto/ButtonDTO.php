@@ -20,31 +20,6 @@ class ButtonDTO implements JsonSerializable {
         $this->icon = $icon;
     }
 
-    // Getters
-    public function getId(): int {
-        return $this->id;
-    }
-
-    public function getTypeId(): int {
-        return $this->typeId;
-    }
-
-    public function getLink(): string {
-        return $this->link;
-    }
-
-    public function getType(): string {
-        return $this->type;
-    }
-
-    public function getText(): string {
-        return $this->text;
-    }
-
-    public function getIcon(): ?string {
-        return $this->icon;
-    }
-
     /**
      * Converts the ButtonDTO object to an associative array.
      *
@@ -85,13 +60,6 @@ class ButtonDTO implements JsonSerializable {
      */
     public function jsonSerialize(): array
     {
-        return [
-            'id' => $this->id,
-            'type_id' => $this->typeId,
-            'link' => $this->link,
-            'type' => $this->type,
-            'text' => $this->text,
-            'icon' => $this->icon
-        ];
+        return self::toArray();
     }
 }

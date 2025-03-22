@@ -12,15 +12,6 @@ class ServedFoodDTO {
         $this->foodId = $foodId;
     }
 
-    // Getters
-    public function getRestaurantId(): int {
-        return $this->restaurantId;
-    }
-
-    public function getFoodId(): int {
-        return $this->foodId;
-    }
-
     /**
      * Converts the ServedFoodDTO object to an associative array.
      *

@@ -14,19 +14,6 @@ class ImageDTO {
         $this->image = $image;
     }
 
-    // Getters
-    public function getId(): int {
-        return $this->id;
-    }
-
-    public function getLocationId(): int {
-        return $this->locationId;
-    }
-
-    public function getImage(): string {
-        return $this->image;
-    }
-
     /**
      * Converts the ImageDTO object to an associative array.
      *

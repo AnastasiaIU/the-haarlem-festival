@@ -14,15 +14,6 @@ class ParticipantDTO {
         $this->artist = $artist;
     }
 
-    // Getters
-    public function getDanceShowId(): int {
-        return $this->danceShowId;
-    }
-
-    public function getArtist(): ArtistDTO {
-        return $this->artist;
-    }
-
     /**
      * Converts the ParticipantDTO object to an associative array.
      *

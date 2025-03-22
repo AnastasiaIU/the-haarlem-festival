@@ -20,27 +20,6 @@ class BookingDTO {
         $this->quantity = $quantity;
     }
 
-    // Getters
-    public function getId(): int {
-        return $this->id;
-    }
-
-    public function getUserId(): int {
-        return $this->userId;
-    }
-
-    public function getTicketType(): TicketType {
-        return $this->ticketType;
-    }
-
-    public function getTicketId(): int {
-        return $this->ticketId;
-    }
-
-    public function getQuantity(): int {
-        return $this->quantity;
-    }
-
     /**
      * Converts the BookingDTO object to an associative array.
      *

@@ -12,15 +12,6 @@ class TitleDTO {
         $this->title = $title;
     }
 
-    // Getters
-    public function getId(): int {
-        return $this->id;
-    }
-
-    public function getTitle(): string {
-        return $this->title;
-    }
-
     /**
      * Converts the TitleDTO object to an associative array.
      *

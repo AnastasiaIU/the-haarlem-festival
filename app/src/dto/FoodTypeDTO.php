@@ -18,27 +18,6 @@ class FoodTypeDTO implements JsonSerializable {
         $this->textColor = $textColor;
     }
 
-    // Getters
-    public function getId(): int {
-        return $this->id;
-    }
-
-    public function getName(): string {
-        return $this->name;
-    }
-
-    public function getIcon(): string {
-        return $this->icon;
-    }
-
-    public function getBgColor(): string {
-        return $this->bgColor;
-    }
-
-    public function getTextColor(): string {
-        return $this->textColor;
-    }
-
     /**
      * Converts the FoodTypeDTO object to an associative array.
      *
@@ -77,12 +56,6 @@ class FoodTypeDTO implements JsonSerializable {
      */
     public function jsonSerialize(): array
     {
-        return [
-            'id' => $this->id,
-            'name' => $this->name,
-            'icon' => $this->icon,
-            'bgColor' => $this->bgColor,
-            'textColor' => $this->textColor
-        ];
+        return self::toArray();
     }
 }

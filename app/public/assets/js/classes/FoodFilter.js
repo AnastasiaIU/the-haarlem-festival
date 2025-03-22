@@ -44,6 +44,7 @@ export class FoodFilter {
         const text = lastFilter.querySelector('.filter-text');
 
         icon.src = `/assets/images/${filter.icon}`;
+        icon.alt = `${filter.name} icon`;
         text.innerHTML = filter.name;
     }
 

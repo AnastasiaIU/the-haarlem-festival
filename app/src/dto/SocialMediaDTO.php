@@ -16,23 +16,6 @@ class SocialMediaDTO {
         $this->link = $link;
     }
 
-    // Getters
-    public function getId(): int {
-        return $this->id;
-    }
-
-    public function getPlatformId(): int {
-        return $this->platformId;
-    }
-
-    public function getRestaurantId(): int {
-        return $this->restaurantId;
-    }
-
-    public function getLink(): string {
-        return $this->link;
-    }
-
     /**
      * Converts the SocialMediaDTO object to an associative array.
      *

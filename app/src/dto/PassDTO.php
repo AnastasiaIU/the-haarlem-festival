@@ -16,19 +16,6 @@ class PassDTO implements JsonSerializable {
         $this->day = $day;
     }
 
-    // Getters
-    public function getId(): int {
-        return $this->id;
-    }
-
-    public function getPrice(): float {
-        return $this->price;
-    }
-
-    public function getDay(): DayPass {
-        return $this->day;
-    }
-
     /**
      * Converts the PassDTO object to an associative array.
      *
@@ -63,10 +50,6 @@ class PassDTO implements JsonSerializable {
      */
     public function jsonSerialize(): array
     {
-        return [
-            'id' => $this->id,
-            'price' => $this->price,
-            'day' => $this->day->value
-        ];
+        return self::toArray();
     }
 }

@@ -12,15 +12,6 @@ class LanguageDTO {
         $this->language = $language;
     }
 
-    // Getters
-    public function getId(): int {
-        return $this->id;
-    }
-
-    public function getLanguage(): string {
-        return $this->language;
-    }
-
     /**
      * Converts the LanguageDTO object to an associative array.
      *
