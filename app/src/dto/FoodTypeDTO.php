@@ -3,7 +3,7 @@
 /**
  * Data Transfer Object (DTO) for representing a food type.
  */
-class FoodTypeDTO {
+class FoodTypeDTO implements JsonSerializable {
     private int $id;
     private string $name;
     private string $icon;
@@ -68,5 +68,21 @@ class FoodTypeDTO {
             $data['bg_color'],
             $data['text_color']
         );
+    }
+
+    /**
+     * Converts the FoodTypeDTO object to a JSON-serializable array.
+     *
+     * @return array A JSON-serializable array representing the FoodTypeDTO object.
+     */
+    public function jsonSerialize(): array
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'icon' => $this->icon,
+            'bgColor' => $this->bgColor,
+            'textColor' => $this->textColor
+        ];
     }
 }

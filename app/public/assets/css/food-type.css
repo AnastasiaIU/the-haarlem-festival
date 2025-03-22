@@ -1,0 +1,8 @@
+.food-filter-disabled {
+    border: 2px solid #6A7AB340;
+    border-radius: 5px;
+}
+
+.filter-text {
+    color: #41479B;
+}
