@@ -37,55 +37,6 @@ class EventDTO implements JsonSerializable {
         $this->shape = $shape;
     }
 
-    // Getters
-    public function getId(): int {
-        return $this->id;
-    }
-
-    public function getSlug(): string {
-        return $this->slug;
-    }
-
-    public function getMenuName(): string {
-        return $this->menuName;
-    }
-
-    public function getHeroTitle(): ?string {
-        return $this->heroTitle;
-    }
-
-    public function getHeroSubtitle(): ?string {
-        return $this->heroSubtitle;
-    }
-
-    public function getHeroDescription(): ?string {
-        return $this->heroDescription;
-    }
-
-    public function getTitle(): ?string {
-        return $this->title;
-    }
-
-    public function getSubtitle(): ?string {
-        return $this->subtitle;
-    }
-
-    public function getHomePageTitle(): ?string {
-        return $this->homePageTitle;
-    }
-
-    public function getHomePageDescription(): ?string {
-        return $this->homePageDescription;
-    }
-
-    public function getImage(): ?string {
-        return $this->image;
-    }
-
-    public function getShape(): ?string {
-        return $this->shape;
-    }
-
     /**
      * Converts the EventDTO object to an associative array.
      *
@@ -138,19 +89,6 @@ class EventDTO implements JsonSerializable {
      */
     public function jsonSerialize(): array
     {
-        return [
-            'id' => $this->id,
-            'slug' => $this->slug,
-            'menu_name' => $this->menuName,
-            'hero_title' => $this->heroTitle,
-            'hero_subtitle' => $this->heroSubtitle,
-            'hero_description' => $this->heroDescription,
-            'title' => $this->title,
-            'subtitle' => $this->subtitle,
-            'home_page_title' => $this->homePageTitle,
-            'home_page_description' => $this->homePageDescription,
-            'image' => $this->image,
-            'shape' => $this->shape
-        ];
+        return self::toArray();
     }
 }

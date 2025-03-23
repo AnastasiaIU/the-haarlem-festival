@@ -18,27 +18,6 @@ class ReservationDTO {
         $this->comment = $comment;
     }
 
-    // Getters
-    public function getId(): int {
-        return $this->id;
-    }
-
-    public function getDateTime(): string {
-        return $this->dateTime;
-    }
-
-    public function getAdults(): int {
-        return $this->adults;
-    }
-
-    public function getKids(): int {
-        return $this->kids;
-    }
-
-    public function getComment(): ?string {
-        return $this->comment;
-    }
-
     /**
      * Converts the ReservationDTO object to an associative array.
      *

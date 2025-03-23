@@ -1,3 +1,7 @@
+#artistMainContent {
+    position: relative;
+}
+
 .artist-card-image, .pass-image, .show-image {
     width: 100%;
     aspect-ratio: 1.1 / 1;
@@ -24,6 +28,14 @@
 
 .offer-date-container, .show-date-container {
     min-width: 170px;
+}
+
+.tracks-header {
+    color: var(--rufous);
+}
+
+#artistTracks {
+    max-width: 650px;
 }
 
 @media (max-width: 992px) {
@@ -67,5 +79,9 @@
 
     .artist-card-text-container {
         padding: 0 !important;
+    }
+
+    #artistTracks {
+        flex-direction: column;
     }
 }

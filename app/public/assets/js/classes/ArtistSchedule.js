@@ -176,7 +176,7 @@ export class ArtistSchedule {
      * @returns {Promise<Object>} The dance show object.
      */
     async fetchDanceShows() {
-        let pathSegments = window.location.pathname.split('/').filter(segment => segment !== '');
+        const pathSegments = window.location.pathname.split('/').filter(segment => segment !== '');
         const slug = pathSegments[pathSegments.length - 1];
 
         return await fetchFromApi(`/api/getDanceShowsByArtist/${slug}`);

@@ -16,22 +16,6 @@ class VenueDTO implements JsonSerializable
         $this->address = $address;
     }
 
-    // Getters
-    public function getId(): int
-    {
-        return $this->id;
-    }
-
-    public function getName(): string
-    {
-        return $this->name;
-    }
-
-    public function getAddress(): string
-    {
-        return $this->address;
-    }
-
     /**
      * Converts the VenueDTO object to an associative array.
      *
@@ -68,10 +52,6 @@ class VenueDTO implements JsonSerializable
      */
     public function jsonSerialize(): array
     {
-        return [
-            'venue_id' => $this->id,
-            'name' => $this->name,
-            'address' => $this->address
-        ];
+        return self::toArray();
     }
 }

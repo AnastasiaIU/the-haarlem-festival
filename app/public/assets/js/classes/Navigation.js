@@ -1,4 +1,4 @@
-import { fetchFromApi } from '../main.js';
+import {fetchFromApi} from '../main.js';
 import {EventHero} from "./EventHero.js";
 import {LoginForm} from "./LoginForm.js";
 import {RegistrationForm} from "./RegistrationForm.js";
@@ -7,6 +7,10 @@ import {ArtistCard} from "./ArtistCard.js";
 import {DanceSchedule} from "./DanceSchedule.js";
 import {ArtistHero} from "./ArtistHero.js";
 import {ArtistSchedule} from "./ArtistSchedule.js";
+import {FoodFilter} from "./FoodFilter.js";
+import {Carousel} from "./Carousel.js";
+import {ArtistCarousel} from "./ArtistCarousel.js";
+import {Track} from "./Track.js";
 
 /**
  * Class that handles the navigation for the website.
@@ -37,7 +41,7 @@ export class Navigation {
             '/login': [LoginForm],
             '/register': [RegistrationForm],
             '/dance': [EventHero, Promo, ArtistCard, DanceSchedule],
-            '/yummy': [EventHero, Promo],
+            '/yummy': [EventHero, Promo, FoodFilter],
             '/strolls': [EventHero, Promo],
             '/teylers': [EventHero, Promo]
         };
@@ -69,7 +73,7 @@ export class Navigation {
 
         if (artistMatch) {
             this.navItems[this.path] = 'nav-item-dance';
-            this.routeMap[this.path] = [ArtistHero, ArtistSchedule];
+            this.routeMap[this.path] = [ArtistHero, ArtistSchedule, Carousel, ArtistCarousel, Track];
         }
     }
 
@@ -93,7 +97,7 @@ export class Navigation {
      * Create nav items for each event.
      */
     createNavItems() {
-        for (const { slug, menu_name } of this.events) {
+        for (const {slug, menu_name} of this.events) {
             const navItem = this.createNavItem(slug, menu_name);
             this.navbar.appendChild(navItem);
             const sitemapItem = this.createSitemapItem(slug, menu_name);

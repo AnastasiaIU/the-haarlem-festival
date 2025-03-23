@@ -130,6 +130,9 @@ footer {
     top: 0;
     left: 0;
     z-index: 100 !important;
+    background-color: whitesmoke;
+    color: black;
+    border: 1px solid black;
 }
 
 .tox-tinymce-inline {

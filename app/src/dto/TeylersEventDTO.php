@@ -16,23 +16,6 @@ class TeylersEventDTO {
         $this->endDateTime = $endDateTime;
     }
 
-    // Getters
-    public function getId(): int {
-        return $this->id;
-    }
-
-    public function getShowId(): int {
-        return $this->showId;
-    }
-
-    public function getStartDateTime(): string {
-        return $this->startDateTime;
-    }
-
-    public function getEndDateTime(): string {
-        return $this->endDateTime;
-    }
-
     /**
      * Converts the TeylersEventDTO object to an associative array.
      *
