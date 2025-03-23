@@ -49,8 +49,9 @@ export class Track {
         iframe.src = `https://open.spotify.com/embed/track/${trackId}`;
         iframe.width = '300';
         iframe.height = '80';
-        iframe.allowTransparency = true;
+        iframe.allowFullScreen=""
         iframe.allow = 'encrypted-media';
+        iframe.loading="lazy";
 
         return iframe;
     }

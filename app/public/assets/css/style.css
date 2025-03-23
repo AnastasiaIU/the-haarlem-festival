@@ -175,3 +175,20 @@ hr {
     color: var(--rufous);
     opacity: 1;
 }
+
+/*
+ * MAP STYLES
+ */
+.event-map {
+    width: 100%;
+    aspect-ratio: 1.1 / 1;
+    max-height: 1000px;
+}
+
+@media (max-width: 1399px) {
+    .event-map {
+        width: 100%;
+        aspect-ratio: 0.8 / 1;
+        padding: 0 16px 16px 16px;
+    }
+}
