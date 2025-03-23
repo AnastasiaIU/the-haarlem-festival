@@ -5,7 +5,7 @@ require_once(__DIR__ . '/../enums/Michelin.php');
 /**
  * Data Transfer Object (DTO) for representing a restaurant.
  */
-class RestaurantDTO
+class RestaurantDTO implements JsonSerializable
 {
     private int $id;
     private int $eventId;
@@ -74,7 +74,7 @@ class RestaurantDTO
             'name' => $this->name,
             'address' => $this->address,
             'stars' => $this->stars,
-            'michelin' => $this->michelin->value,
+            'michelin' => $this->michelin?->value,
             'description' => $this->description,
             'card_description' => $this->cardDescription,
             'capacity' => $this->capacity,
@@ -100,6 +100,8 @@ class RestaurantDTO
      */
     public static function fromArray(array $data): self
     {
+        $michelin = isset($data['michelin']) ? Michelin::from($data['michelin']) : null;
+
         return new self(
             $data['id'],
             $data['event_id'],
@@ -107,7 +109,7 @@ class RestaurantDTO
             $data['name'],
             $data['address'],
             $data['stars'],
-            Michelin::from($data['michelin']) ?? null,
+            $michelin,
             $data['description'],
             $data['card_description'],
             $data['capacity'],
@@ -123,5 +125,15 @@ class RestaurantDTO
             $data['start_date'],
             $data['end_date']
         );
+    }
+
+    /**
+     * Converts the EventDTO object to a JSON-serializable array.
+     *
+     * @return array A JSON-serializable array representing the EventDTO object.
+     */
+    public function jsonSerialize(): array
+    {
+        return self::toArray();
     }
 }

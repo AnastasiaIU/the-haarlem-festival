@@ -6,3 +6,12 @@
 .filter-text {
     color: #41479B;
 }
+
+.filter-icon, .location-icon {
+    width: 24px;
+    height: 24px;
+}
+
+.locations-header {
+    color: var(--rufous);
+}
