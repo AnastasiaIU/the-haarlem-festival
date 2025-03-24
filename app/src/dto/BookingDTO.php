@@ -9,15 +9,17 @@ class BookingDTO {
     private int $id;
     private string $orderNumber;
     private int $userId;
+    private string $name;
     private string $receivingEmail;
     private TicketType $ticketType;
     private int $ticketId;
     private int $quantity;
 
-    public function __construct(int $id, string $orderNumber, int $userId, string $receivingEmail, TicketType $ticketType, int $ticketId, int $quantity) {
+    public function __construct(int $id, string $orderNumber, int $userId, string $name, string $receivingEmail, TicketType $ticketType, int $ticketId, int $quantity) {
         $this->id = $id;
         $this->orderNumber = $orderNumber;
         $this->userId = $userId;
+        $this->name = $name;
         $this->receivingEmail = $receivingEmail;
         $this->ticketType = $ticketType;
         $this->ticketId = $ticketId;
@@ -61,7 +63,10 @@ class BookingDTO {
     public function toArray(): array {
         return [
             'id' => $this->id,
+            'order_number' => $this->orderNumber,
             'user_id' => $this->userId,
+            'name' => $this->name,
+            'receiving_email' => $this->receivingEmail,
             'ticket_type' => $this->ticketType->value,
             'ticket_id' => $this->ticketId,
             'quantity' => $this->quantity
@@ -79,6 +84,7 @@ class BookingDTO {
             $data['id'],
             $data['order_number'],
             $data['user_id'],
+            $data['name'],
             $data['receiving_email'],
             TicketType::from($data['ticket_type']),
             $data['ticket_id'],

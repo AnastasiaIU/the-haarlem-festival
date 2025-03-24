@@ -1,4 +1,5 @@
 import { fetchFromApi } from './main.js';
+import { Booking } from './classes/Booking.js';
 
 document.addEventListener('DOMContentLoaded', async function () {
     let cartData = JSON.parse(localStorage.getItem('cart')) || [];
@@ -20,18 +21,23 @@ document.addEventListener('DOMContentLoaded', async function () {
     });
 
     combinedTickets.forEach(item => {
+        let ticketContainer = document.createElement('div');
+        ticketContainer.classList.add('cart-item-c');
+    
         let nameElement = document.createElement('p');
         nameElement.textContent = item.name;
-        cartItemsContainer.appendChild(nameElement);
-
+        ticketContainer.appendChild(nameElement);
+    
         let quantityElement = document.createElement('p');
         quantityElement.textContent = item.quantity;
-        cartItemsContainer.appendChild(quantityElement);
-
+        ticketContainer.appendChild(quantityElement);
+    
         let priceElement = document.createElement('p');
-        priceElement.textContent = `€${item.price}`;
-        cartItemsContainer.appendChild(priceElement);
-
+        priceElement.textContent = item.price * item.quantity.toFixed(2);
+        ticketContainer.appendChild(priceElement);
+    
+        cartItemsContainer.appendChild(ticketContainer);
+    
         totalPrice += item.price * item.quantity;
     });
 
@@ -77,6 +83,22 @@ document.addEventListener('DOMContentLoaded', async function () {
     const form = document.getElementById('payment-form');
     form.addEventListener('submit', async function (event) {
         event.preventDefault();
+
+        const email = document.getElementById('email').value;
+        const repeatEmail = document.getElementById('repeatEmail').value;
+        const name = document.getElementById('name').value;
+
+        if (!email || !repeatEmail || !name) {
+            const errorElement = document.getElementById('errorMessage');
+            errorElement.textContent = 'Please fill in all required fields.';
+            return;
+        }
+
+        if (email !== repeatEmail) {
+            const errorElement = document.getElementById('errorMessage');
+            errorElement.textContent = 'The email addresses do not match.';
+            return;
+        }
     
         try {
             const response = await fetch('/api/stripe/create-payment-intent', {
@@ -106,7 +128,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                     payment_method: {
                         ideal: idealBank,
                     },
-                    return_url: 'http://localhost/',
+                    return_url: 'http://localhost/cart/checkout/confirmation',
                 });
     
                 if (result.error) {

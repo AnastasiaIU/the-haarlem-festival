@@ -4,6 +4,8 @@
         <hr class="my-4" style="border-color: black;">
         <p>This information is used to issue tickets and send them to the provided email.</p>
         <div>
+            <p id="errorMessage" class="error-message">
+            </p>
             <div class="my-3 input-container">
                 <label for="email">Email:*</label>
                 <input class="input-field" type="email" id="email" name="email" placeholder="Enter your email" required>
@@ -38,7 +40,6 @@
                     <strong>Price</strong>
                 </div>
                 <div id="cart-items">
-
                 </div>
                 <hr class="my-5" style="border-color: black;">
                 <div class="d-flex total-price">

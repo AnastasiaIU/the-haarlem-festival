@@ -140,7 +140,7 @@
     border-radius: 4px;
 }
 
-.plan-headers, .cart-items {
+.plan-headers, .cart-item-c {
     display: grid;
     grid-template-columns: 2fr 1fr 1fr;
     margin-top: 32px;
@@ -148,9 +148,13 @@
 
 .plan-headers strong:nth-child(2), 
 .plan-headers strong:nth-child(3),
-.cart-items p:nth-child(2),
-.cart-items p:nth-child(3) {
+.cart-item-c p:nth-child(2),
+.cart-item-c p:nth-child(3) {
     text-align: center;
+}
+
+.error-message {
+    color: var(--punch);
 }
 
 /* COMPLETED-PAYMENT */
