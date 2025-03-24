@@ -7,12 +7,10 @@ Route::add('/api/stripe/create-payment-intent', function () {
 
     $input = json_decode(file_get_contents('php://input'), true);
     $amount = $input['amount'];
-    $currency = $input['currency'];
-    $payment_method_type = $input['payment_method_type'];
     $tickets = $input['tickets'];
 
     $stripeService = new StripeService();
-    $response = $stripeService->createPayment($amount, $currency, $payment_method_type, $tickets);
+    $response = $stripeService->createPayment($amount, $tickets);
 
     echo json_encode($response);
 }, 'post');

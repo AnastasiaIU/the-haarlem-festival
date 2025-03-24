@@ -8,32 +8,33 @@
             </p>
             <div class="my-3 input-container">
                 <label for="email">Email:*</label>
-                <input class="input-field" type="email" id="email" name="email" placeholder="Enter your email" required>
+                <input class="input-field" type="email" id="email" name="email" placeholder="Enter your email">
             </div>
             <div class="my-3 input-container">
                 <label for="email">Repeat email:*</label>
-                <input class="input-field" type="email" id="repeatEmail" name="repeatEmail" placeholder="Repeat your email" required>
-            </div>
-            <div class="my-3 input-container">
-                <label for="name">Name:*</label>
-                <input class="input-field" type="text" id="name" name="name" placeholder="Enter your name" required>
+                <input class="input-field" type="email" id="repeatEmail" name="repeatEmail" placeholder="Repeat your email">
             </div>
         </div>
         <h3>Payment</h3>
         <hr class="my-4" style="border-color: black;">
-        <p>Choose payment method.</p>
-        <form id="payment-form" method="post">
-            <div id="ideal-bank-element">
-                <!-- A Stripe iDEAL Bank Element will be inserted here. -->
+        <div class="d-flex align-items-center payment-method">
+            <div class="custom-radio">
+                <input type="radio" name="payment-method" value="ideal" class="payment-radio-button" checked>
+                <span class="radio-mark"></span>
             </div>
-            <div id="ideal-errors" role="alert"></div>
-            <button type="submit">Pay with iDEAL</button>
+            <label class="fw-bold">iDEAL</label>
+            <img src="../../assets/images/ideal-logo.svg" alt="iDEAL" class="payment-image ms-auto">
+        </div>
+        <form id="payment-form" method="post">
+            <div id="ideal-bank-element" class="select-bank">
+            </div>
+            <div id="ideal-errors" class="error-message" role="alert"></div>
+            <button type="submit" class="btn btn-primary">Pay with iDEAL</button>
         </form>
     </div>
     <aside class="aside-container ms-auto">
         <div class="personal-plan-background">
             <div class="plan-container">
-                <h3>My Personal Plan</h3>
                 <div class="plan-headers">
                     <strong>Events</strong>
                     <strong>Quantity</strong>

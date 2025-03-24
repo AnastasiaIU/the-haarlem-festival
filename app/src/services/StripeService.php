@@ -2,6 +2,7 @@
 
 use Stripe\Stripe;
 use Stripe\PaymentIntent;
+use Stripe\PaymentMethod;
 use Stripe\Exception\ApiErrorException;
 
 require(__DIR__ . "/../../vendor/autoload.php");
@@ -11,7 +12,7 @@ class StripeService {
         Stripe::setApiKey($_ENV['STRIPE_SECRET_KEY']);
     }
 
-    public function createPayment(int $amount, string $currency, string $payment_method_type, array $tickets) {
+    public function createPayment(int $amount, array $tickets) {
         try {
             $metadata = [];
             foreach ($tickets as $index => $ticket) {
@@ -20,10 +21,15 @@ class StripeService {
                 $metadata["product_{$index}_price"] = $ticket['price'];
             }
 
+            $paymentMethod = PaymentMethod::create([
+                'type' => 'ideal', 
+            ]);
+
             $paymentIntent = PaymentIntent::create([
                 'amount' => $amount,
-                'currency' => $currency,
-                'payment_method_types' => [$payment_method_type],
+                'currency' => 'eur',
+                'payment_method' => $paymentMethod->id,
+                'payment_method_types' => [$paymentMethod->type],
                 'metadata' => $metadata
             ]);
 

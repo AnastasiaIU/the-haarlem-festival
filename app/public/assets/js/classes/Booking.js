@@ -3,7 +3,6 @@ export class Booking {
         this.id = id;
         this.orderNumber = orderNumber;
         this.userId = userId;
-        this.name = name;
         this.receivingEmail = receivingEmail;
         this.ticketType = ticketType;
         this.ticketId = ticketId;
@@ -11,24 +10,28 @@ export class Booking {
     }
 
     async createBooking() {
-        const response = await fetch('/api/booking', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                name: this.name,
-                receivingEmail: this.receivingEmail,
-                ticketType: this.ticketType,
-                ticketId: this.ticketId,
-                quantity: this.quantity,
-            }),
-        });
+        try {
+            const response = await fetch('/api/booking', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    receivingEmail: this.receivingEmail,
+                    ticketType: this.ticketType,
+                    ticketId: this.ticketId,
+                    quantity: this.quantity,
+                }),
+            });
 
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            return await response.json();
+        } catch (error) {
+            console.error('Error posting to Stripe:', error);
+            throw error;
         }
-
-        return await response.json();
     }
 }

@@ -101,36 +101,36 @@ export class ShoppingCart {
                 </div>
                 <div class="d-flex flex-column">
                     ${Array.from(subTypeGroups.entries()).map(([subType, tickets]) => {
-                        if (subType !== null) {
-                            return `
+                if (subType !== null) {
+                    return `
                                 <div class="subtype-quantity">
                                     <p class="text-center m-0">${subType}</p>
                                 </div>
                             `;
-                        }
-                    }).join('')}
+                }
+            }).join('')}
                 </div>
                 <div class="d-flex flex-column">
                     ${Array.from(subTypeGroups.entries()).map(([subType, tickets]) => {
-                        const quantity = tickets.length;
-                        return `
+                const quantity = tickets.length;
+                return `
                                 <div class="quantity-controls">
                                     <button class="decrease-quantity" data-id="${tickets[0].id}">-</button>
                                     <span class="quantity">${quantity}</span>
                                     <button class="increase-quantity" data-id="${tickets[0].id}">+</button>
                                 </div>
                         `;
-                    }).join('')}
+            }).join('')}
                 </div>
                 <div class="d-flex flex-column">
                     ${Array.from(subTypeGroups.entries()).map(([subType, tickets]) => {
-                        const price = tickets[0].price;
-                        return `
+                const price = tickets[0].price;
+                return `
                                 <div class="subtype-quantity">
                                     <p class="m-0">€${parseFloat(price).toFixed(2)}</p>
                                 </div>
                         `;
-                    }).join('')}
+            }).join('')}
                 </div>
                 <div class="item-total">€${(Array.from(subTypeGroups.values()).reduce((total, tickets) => total + (tickets[0].price * tickets.length), 0)).toFixed(2)}</div>
                 <button class="remove-item" data-code="${code}">Remove</button>
@@ -158,5 +158,51 @@ export class ShoppingCart {
         });
 
         this.updateTotalPriceInDOM();
+    }
+
+    getCombineTickets(cart) {
+        const combinedTickets = new Map();
+
+        cart.forEach(tickets => {
+            tickets.forEach(item => {
+                const key = `${item.name}-${item.subType}`;
+                if (combinedTickets.has(key)) {
+                    combinedTickets.get(key).quantity += 1;
+                } else {
+                    combinedTickets.set(key, { ...item, quantity: 1 });
+                }
+            });
+        });
+
+        return combinedTickets;
+    }
+
+    renderTickets(combinedTickets, cartItemsContainer, totalPriceElement) {
+        let totalPrice = 0;
+        
+        combinedTickets.forEach(item => {
+            const ticketContainer = document.createElement('div');
+            ticketContainer.classList.add('cart-item-c');
+
+            const nameElement = document.createElement('p');
+            nameElement.textContent = item.name;
+            ticketContainer.appendChild(nameElement);
+
+            const quantityElement = document.createElement('p');
+            quantityElement.textContent = item.quantity;
+            ticketContainer.appendChild(quantityElement);
+
+            const priceElement = document.createElement('p');
+            priceElement.textContent = (item.price * item.quantity).toFixed(2);
+            ticketContainer.appendChild(priceElement);
+
+            cartItemsContainer.appendChild(ticketContainer);
+
+            totalPrice += item.price * item.quantity;
+        });
+
+        totalPriceElement.textContent = `€${totalPrice.toFixed(2)}`;
+
+        return totalPrice;
     }
 }
