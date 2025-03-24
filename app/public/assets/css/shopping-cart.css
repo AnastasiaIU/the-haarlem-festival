@@ -160,6 +160,7 @@
 /* COMPLETED-PAYMENT */
 
 .completed-payment-container {
+    height: 100vh;
     margin: 40px;
 }
 
