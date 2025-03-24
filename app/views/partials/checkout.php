@@ -51,5 +51,4 @@
 </div>
 
 <script src="https://js.stripe.com/v3/"></script>
-<!-- <script src="https://www.paypal.com/sdk/js?client-id=YOUR_PAYPAL_CLIENT_ID&currency=USD"></script> -->
 <script type="module" src="../../assets/js/checkout.js"></script>

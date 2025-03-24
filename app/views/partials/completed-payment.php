@@ -10,3 +10,5 @@
         <p>See you at The Festival!</p>
     </div>
 </div>
+
+<script type="module" src="../../assets/js/order-confirmation.js"></script> 
