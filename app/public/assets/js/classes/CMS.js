@@ -1,3 +1,5 @@
+const MAX_SIZE_MB = 2;
+
 /**
  * Class that handles the CMS-related operations.
  */
@@ -160,6 +162,11 @@ export class CMS {
         const file = event.target.files[0];
         if (!file) return;
 
+        if (file.size > MAX_SIZE_MB * 1024 * 1024) {
+            this.showToast(`File too large. Max allowed is ${MAX_SIZE_MB}MB.`, true);
+            return;
+        }
+
         const table = input.dataset.database;
         const id = input.dataset.id;
         const column = input.dataset.column;
@@ -180,11 +187,14 @@ export class CMS {
                 if (data.status === "success" && data.imagePath && imageElement) {
                     // Append a timestamp to force browser cache refresh
                     imageElement.src = `${data.imagePath}?t=${new Date().getTime()}`;
+                    this.showToast("Image uploaded successfully.");
                 } else {
-                    console.error(data.message || "Error uploading image.");
+                    this.showToast(data.message || "Error uploading image.", true);
                 }
             })
-            .catch(error => console.error("Upload failed:", error));
+            .catch(error => {
+                this.showToast(error.message || "Upload failed unexpectedly.", true);
+            });
     }
 
     /**

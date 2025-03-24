@@ -1,17 +1,42 @@
 .food-filter-disabled {
     border: 2px solid #6A7AB340;
     border-radius: 5px;
-}
-
-.filter-text {
+    background-color: transparent;
     color: #41479B;
 }
 
-.filter-icon, .location-icon {
+.food-filter-disabled:hover {
+    background-color: lightblue;
+}
+
+.food-type {
+    border-radius: 5px;
+}
+
+.filter-icon, .location-icon, .michelin-icon, .restaurant-stars img {
     width: 24px;
     height: 24px;
 }
 
 .locations-header {
     color: var(--rufous);
+}
+
+.michelin-text {
+    color: #C1282D;
+}
+
+.restaurant-address a {
+    color: var(--rufous);
+    font-style: italic;
+}
+
+@media (max-width: 991px) {
+    .restaurant-card-img {
+        order: 1 !important;
+    }
+
+    .restaurant-card-text {
+        order: 2 !important;
+    }
 }

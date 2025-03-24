@@ -2,6 +2,7 @@
 
 require_once(__DIR__ . "/BaseModel.php");
 require_once(__DIR__ . '/../dto/RestaurantDTO.php');
+require_once(__DIR__ . '/FoodTypeModel.php');
 
 /**
  * RestaurantModel class extends BaseModel to interact with the RESTAURANT entity in the database.
@@ -16,15 +17,18 @@ class RestaurantModel extends BaseModel
     public function fetchAllRestaurants(): array
     {
         $query = self::$pdo->prepare(
-            'SELECT id, event_id, slug, name, address, stars, michelin, description, card_description, capacity, full_price, adult_price, kids_price, duration, sessions, first_session, menu, phone, email, start_date, end_date
+            'SELECT id, event_id, slug, name, address, stars, michelin, description, card_description, capacity, full_price, adult_price, kids_price, duration, sessions, first_session, menu, phone, email, start_date, end_date, carousel_image1, carousel_image2, carousel_image3, carousel_image4, carousel_image5, carousel_image6
                     FROM restaurant'
         );
         $query->execute();
         $restaurants = $query->fetchAll(PDO::FETCH_ASSOC);
         $dtos = [];
 
+        $foodTypeModel = new FoodTypeModel();
+
         foreach ($restaurants as $restaurant) {
-            $dto = RestaurantDTO::fromArray($restaurant);
+            $foodTypes = $foodTypeModel->fetchFoodTypesForRestaurant($restaurant['id']);
+            $dto = RestaurantDTO::fromArray($restaurant, $foodTypes);
             $dtos[] = $dto;
         }
 
@@ -40,11 +44,10 @@ class RestaurantModel extends BaseModel
     public function fetchRestaurantBySlug(string $slug): ?RestaurantDTO
     {
         $query = self::$pdo->prepare(
-            'SELECT id, event_id, slug, name, address, stars, michelin, description, card_description, capacity, full_price, adult_price, kids_price, duration, sessions, first_session, menu, phone, email, start_date, end_date
+            'SELECT id, event_id, slug, name, address, stars, michelin, description, card_description, capacity, full_price, adult_price, kids_price, duration, sessions, first_session, menu, phone, email, start_date, end_date, carousel_image1, carousel_image2, carousel_image3, carousel_image4, carousel_image5, carousel_image6
         FROM restaurant
         WHERE slug = :slug'
         );
-
         $query->execute([':slug' => $slug]);
         $restaurant = $query->fetch(PDO::FETCH_ASSOC);
 
@@ -52,6 +55,9 @@ class RestaurantModel extends BaseModel
             return null;
         }
 
-        return RestaurantDTO::fromArray($restaurant);
+        $foodTypeModel = new FoodTypeModel();
+        $foodTypes = $foodTypeModel->fetchFoodTypesForRestaurant($restaurant['id']);
+
+        return RestaurantDTO::fromArray($restaurant, $foodTypes);
     }
 }

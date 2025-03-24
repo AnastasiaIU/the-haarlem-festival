@@ -1,5 +1,6 @@
 import {fetchFromApi} from "../main.js";
 import {CMS} from "./CMS.js";
+import {Carousel} from "./Carousel.js";
 
 /**
  * Class that handles the artist carousel.
@@ -10,6 +11,8 @@ export class ArtistCarousel {
         this.artist = await this.fetchArtist();
 
         this.bindImages();
+
+        await Carousel.create();
     }
 
     static async create() {
@@ -18,12 +21,20 @@ export class ArtistCarousel {
         return instance;
     }
 
+    /**
+     * Binds carousel images for the current artist.
+     */
     bindImages() {
         for (let i = 1; i <= 6; i++) {
             this.setCarouselImage(i);
         }
     }
 
+    /**
+     * Sets the image source and CMS bindings for a specific artist carousel image.
+     *
+     * @param {number} index - The numeric index of the image slot (1 to 6).
+     */
     setCarouselImage(index) {
         const imageKey = `carousel_image${index}`;
         const imageSrc = `/assets/images/${this.artist[imageKey]}`;

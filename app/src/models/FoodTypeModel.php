@@ -30,4 +30,29 @@ class FoodTypeModel extends BaseModel
 
         return $dtos;
     }
+
+    /**
+     * Fetches all food types of the restaurant from the database.
+     *
+     * @return array An array of food type objects.
+     */
+    public function fetchFoodTypesForRestaurant(int $restaurantId): array
+    {
+        $query = self::$pdo->prepare(
+            'SELECT id, name, icon, bg_color, text_color
+                    FROM food_type
+                    JOIN served_food ON id = food_id 
+                    WHERE restaurant_id = :restaurant_id'
+        );
+        $query->execute([':restaurant_id' => $restaurantId]);
+        $foodTypes = $query->fetchAll(PDO::FETCH_ASSOC);
+        $dtos = [];
+
+        foreach ($foodTypes as $foodType) {
+            $dto = FoodTypeDTO::fromArray($foodType);
+            $dtos[] = $dto;
+        }
+
+        return $dtos;
+    }
 }

@@ -48,5 +48,10 @@
 </footer>
 
 </body>
+<div id="pageLoader" class="d-flex justify-content-center align-items-center vh-100 bg-white position-fixed top-0 start-0 w-100">
+    <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+</div>
 
 </html>

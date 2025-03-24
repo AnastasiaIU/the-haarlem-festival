@@ -7,10 +7,10 @@ import {ArtistCard} from "./ArtistCard.js";
 import {DanceSchedule} from "./DanceSchedule.js";
 import {ArtistHero} from "./ArtistHero.js";
 import {ArtistSchedule} from "./ArtistSchedule.js";
-import {FoodFilter} from "./FoodFilter.js";
-import {Carousel} from "./Carousel.js";
 import {ArtistCarousel} from "./ArtistCarousel.js";
 import {Track} from "./Track.js";
+import {Restaurant} from "./Restaurant.js";
+import {RestaurantCard} from "./RestaurantCard.js";
 
 /**
  * Class that handles the navigation for the website.
@@ -41,12 +41,25 @@ export class Navigation {
             '/login': [LoginForm],
             '/register': [RegistrationForm],
             '/dance': [EventHero, Promo, ArtistCard, DanceSchedule],
-            '/yummy': [EventHero, Promo, FoodFilter],
+            '/yummy': [EventHero, Promo, RestaurantCard],
             '/strolls': [EventHero, Promo],
             '/teylers': [EventHero, Promo]
         };
 
+        this.styles = {
+            '/dance': ['hero', 'promo', 'artist', 'artist-carousel'],
+            '/yummy': ['hero', 'promo', 'restaurant', 'restaurant-carousel'],
+            '/strolls': ['hero', 'promo'],
+            '/teylers': ['hero', 'promo', 'teylers']
+        };
+
         this.addDynamicRoutes();
+
+        if (this.styles[this.path]) {
+            for (const style of this.styles[this.path]) {
+                this.loadPageStyles(`/assets/css/${style}.css`);
+            }
+        }
 
         if (this.navItems.hasOwnProperty(this.path)) {
             this.setCurrentNavItem(this.navItems[this.path]);
@@ -57,6 +70,17 @@ export class Navigation {
                 await ClassRef.create();
             }
         }
+
+        // Add delay before hiding the loader
+        await new Promise(resolve => setTimeout(resolve, 1000));
+
+        // Fade out and remove loader
+        const loader = document.getElementById('pageLoader');
+        if (loader) {
+            loader.style.opacity = '0';
+            loader.style.pointerEvents = 'none';
+            setTimeout(() => loader.remove(), 300);
+        }
     }
 
     static async create() {
@@ -65,15 +89,30 @@ export class Navigation {
         return instance;
     }
 
+    loadPageStyles(href) {
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = href;
+        document.head.appendChild(link);
+    }
+
     /**
      * Adds dynamic routes to the nav items and route map.
      */
     addDynamicRoutes() {
         const artistMatch = this.path.match(/^\/dance\/([a-z0-9-]+)$/);
+        const restaurantMatch = this.path.match(/^\/yummy\/([a-z0-9-]+)$/);
 
         if (artistMatch) {
             this.navItems[this.path] = 'nav-item-dance';
-            this.routeMap[this.path] = [ArtistHero, ArtistSchedule, Carousel, ArtistCarousel, Track];
+            this.routeMap[this.path] = [ArtistHero, ArtistSchedule, ArtistCarousel, Track];
+            this.styles[this.path] = ['hero', 'artist', 'artist-carousel'];
+        }
+
+        if (restaurantMatch) {
+            this.navItems[this.path] = 'nav-item-yummy';
+            this.routeMap[this.path] = [EventHero, Promo, Restaurant];
+            this.styles[this.path] = ['hero', 'promo', 'restaurant', 'restaurant-carousel'];
         }
     }
 

@@ -28,13 +28,21 @@ class RestaurantDTO implements JsonSerializable
     private string $email;
     private string $startDate;
     private string $endDate;
+    private string $carouselImage1;
+    private string $carouselImage2;
+    private string $carouselImage3;
+    private string $carouselImage4;
+    private string $carouselImage5;
+    private string $carouselImage6;
+    private array $foodTypes;
 
     public function __construct(
         int    $id, int $eventId, string $slug, string $name, string $address,
         int    $stars, ?Michelin $michelin, string $description, string $cardDescription,
         int    $capacity, float $fullPrice, float $adultPrice, float $kidsPrice,
         float  $duration, int $sessions, string $firstSession, string $menu,
-        string $phone, string $email, string $startDate, string $endDate
+        string $phone, string $email, string $startDate, string $endDate, string $carouselImage1, string $carouselImage2,
+        string $carouselImage3, string $carouselImage4, string $carouselImage5, string $carouselImage6, array $foodTypes
     )
     {
         $this->id = $id;
@@ -58,6 +66,13 @@ class RestaurantDTO implements JsonSerializable
         $this->email = $email;
         $this->startDate = $startDate;
         $this->endDate = $endDate;
+        $this->carouselImage1 = $carouselImage1;
+        $this->carouselImage2 = $carouselImage2;
+        $this->carouselImage3 = $carouselImage3;
+        $this->carouselImage4 = $carouselImage4;
+        $this->carouselImage5 = $carouselImage5;
+        $this->carouselImage6 = $carouselImage6;
+        $this->foodTypes = $foodTypes;
     }
 
     /**
@@ -88,42 +103,56 @@ class RestaurantDTO implements JsonSerializable
             'phone' => $this->phone,
             'email' => $this->email,
             'start_date' => $this->startDate,
-            'end_date' => $this->endDate
+            'end_date' => $this->endDate,
+            'carousel_image1' => $this->carouselImage1,
+            'carousel_image2' => $this->carouselImage2,
+            'carousel_image3' => $this->carouselImage3,
+            'carousel_image4' => $this->carouselImage4,
+            'carousel_image5' => $this->carouselImage5,
+            'carousel_image6' => $this->carouselImage6,
+            'food_types' => array_map(fn($p) => $p->toArray(), $this->foodTypes)
         ];
     }
 
     /**
      * Creates a RestaurantDTO instance from an associative array.
      *
-     * @param array $data The associative array containing restaurant data.
+     * @param array $restaurant The associative array containing restaurant data.
      * @return self A new instance of RestaurantDTO populated with the provided data.
      */
-    public static function fromArray(array $data): self
+    public static function fromArray(array $restaurant, array $foodTypes): self
     {
-        $michelin = isset($data['michelin']) ? Michelin::from($data['michelin']) : null;
+        $michelin = isset($restaurant['michelin']) ? Michelin::from($restaurant['michelin']) : null;
 
         return new self(
-            $data['id'],
-            $data['event_id'],
-            $data['slug'],
-            $data['name'],
-            $data['address'],
-            $data['stars'],
+            $restaurant['id'],
+            $restaurant['event_id'],
+            $restaurant['slug'],
+            $restaurant['name'],
+            $restaurant['address'],
+            $restaurant['stars'],
             $michelin,
-            $data['description'],
-            $data['card_description'],
-            $data['capacity'],
-            $data['full_price'],
-            $data['adult_price'],
-            $data['kids_price'],
-            $data['duration'],
-            $data['sessions'],
-            $data['first_session'],
-            $data['menu'],
-            $data['phone'],
-            $data['email'],
-            $data['start_date'],
-            $data['end_date']
+            $restaurant['description'],
+            $restaurant['card_description'],
+            $restaurant['capacity'],
+            $restaurant['full_price'],
+            $restaurant['adult_price'],
+            $restaurant['kids_price'],
+            $restaurant['duration'],
+            $restaurant['sessions'],
+            $restaurant['first_session'],
+            $restaurant['menu'],
+            $restaurant['phone'],
+            $restaurant['email'],
+            $restaurant['start_date'],
+            $restaurant['end_date'],
+            $restaurant['carousel_image1'],
+            $restaurant['carousel_image2'],
+            $restaurant['carousel_image3'],
+            $restaurant['carousel_image4'],
+            $restaurant['carousel_image5'],
+            $restaurant['carousel_image6'],
+            $foodTypes
         );
     }
 
