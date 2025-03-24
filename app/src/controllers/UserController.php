@@ -26,10 +26,9 @@ class UserController
      *
      * @param string $email The email of the user to register.
      * @param string $password The password of the user to register.
-     * @return UserDTO|null The newly created UserDTO object or null if the user already exists.
      * @throws DateMalformedStringException
      */
-    public function registerUser(string $email, string $password, string $recaptchaToken): ?UserDTO
+    public function registerUser(string $email, string $password, string $recaptchaToken): void
     {
         $secretKey = $_ENV['RECAPTCHA_SECRET_KEY'];
         $url = "https://www.google.com/recaptcha/api/siteverify?secret=$secretKey&response=$recaptchaToken";
@@ -43,20 +42,20 @@ class UserController
             if ($user !== null) {
                 http_response_code(400);
                 echo json_encode(['user_error' => 'User already exists. Please use another email.']);
-                return null;
+                exit;
             }
 
             // Hash the password and save the user to the database
             $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-            $new_user = $this->userModel->createUser($email, $hashedPassword, UserRole::CUSTOMER);
+            $this->userModel->createUser($email, $hashedPassword, UserRole::CUSTOMER);
 
             $_SESSION['login_user_created'] = 'User created successfully. Please log in.';
 
-            return $new_user;
+            http_response_code(200);
+            echo json_encode(['success' => 'User created successfully. Please log in.']);
         } else {
             http_response_code(400);
             echo json_encode(['captcha_error' => 'Please complete the captcha.']);
-            return null;
         }
     }
 
@@ -69,10 +68,9 @@ class UserController
      *
      * @param string $email The email of the user attempting to log in.
      * @param string $password The password of the user attempting to log in.
-     * @return UserDTO|null The UserDTO object if login is successful, or null if login fails.
      * @throws DateMalformedStringException
      */
-    public function attemptLogin(string $email, string $password): ?UserDTO
+    public function attemptLogin(string $email, string $password): void
     {
         // Retrieve the user by email
         $user = $this->userModel->getUser($email);
@@ -81,7 +79,7 @@ class UserController
         if ($user === null || !$user->verifyPassword($password)) {
             http_response_code(400);
             echo json_encode(['error' => 'Wrong email or password. Please, try again.']);
-            return null;
+            exit;
         }
 
         $_SESSION['user'] = $user->getId();
@@ -89,7 +87,5 @@ class UserController
 
         $redirectUrl = $_SESSION['last_visited_url'] ?? '/profile';
         echo json_encode(['redirectUrl' => $redirectUrl]);
-
-        return $user;
     }
 }

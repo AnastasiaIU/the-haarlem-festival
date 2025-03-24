@@ -5,11 +5,15 @@
     color: #41479B;
 }
 
-.food-filter-disabled:hover {
+.food-filter-enabled {
+    border: none;
+}
+
+.food-filter-disabled:hover, .food-filter-enabled:hover {
     background-color: lightblue;
 }
 
-.food-type {
+.food-type, .food-filter-enabled {
     border-radius: 5px;
 }
 
@@ -29,6 +33,18 @@
 .restaurant-address a {
     color: var(--rufous);
     font-style: italic;
+}
+
+.restaurant-price-full {
+    text-decoration: line-through;
+}
+
+.restaurant-price {
+    color: var(--rufous);
+}
+
+.restaurant-card {
+    display: flex;
 }
 
 @media (max-width: 991px) {

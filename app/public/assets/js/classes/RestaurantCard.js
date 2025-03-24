@@ -17,14 +17,99 @@ export class RestaurantCard {
         await this.setFiltersPrompt();
         this.populateFoodFilters();
         this.populateCards();
+        this.enableFiltering();
 
         await Carousel.create();
+        await this.cms.initTinyMce('.tinymce-restaurant-card', '.change-image-restaurant-card', '.tinymce-form-restaurant-card');
     }
 
     static async create() {
         const instance = new RestaurantCard();
         await instance.init();
         return instance;
+    }
+
+    /**
+     * Enables filtering by attaching click event listeners to all filter buttons.
+     * When a filter is clicked, it toggles active state and filters restaurant cards accordingly.
+     */
+    enableFiltering() {
+        const filters = document.querySelectorAll('.food-filter-disabled');
+        filters.forEach((filter) => {
+            filter.addEventListener('click', event => this.toggleFilter(event.currentTarget, filters));
+        });
+    }
+
+    /**
+     * Toggles a filter's active state and updates the visibility of restaurant cards.
+     * Only one filter can be enabled at a time. Re-clicking an active filter resets all filters.
+     *
+     * @param {HTMLElement} clickedFilter - The filter button that was clicked.
+     * @param {NodeList} filters - All filter buttons in the filter group.
+     */
+    toggleFilter(clickedFilter, filters) {
+        const cards = this.restaurantCardsContainer.querySelectorAll('.restaurant-card');
+        const filterName = clickedFilter.querySelector('.filter-text').innerHTML;
+
+        const isCurrentlyEnabled = clickedFilter.classList.contains('food-filter-enabled');
+
+        // Reset all filters to disabled
+        filters.forEach(filter => {
+            if (filter.classList.contains('food-filter-enabled')) {
+                filter.classList.remove('food-filter-enabled');
+            }
+            if (!filter.classList.contains('food-filter-disabled')) {
+                filter.classList.add('food-filter-disabled');
+            }
+
+            const text = filter.querySelector('.filter-text');
+            filter.style.backgroundColor = 'transparent';
+            text.style.color = '#41479B';
+        });
+
+        // If clicked filter was already active, show all cards
+        if (isCurrentlyEnabled) {
+            cards.forEach((card, i) => {
+                this.setImageOrder(card, i % 2 !== 0);
+                this.setPriceOrder(card, i % 2 !== 0);
+                card.style.display = 'flex';
+            });
+            return;
+        }
+
+        // Enable the clicked filter
+        clickedFilter.classList.remove('food-filter-disabled');
+        clickedFilter.classList.add('food-filter-enabled');
+        const clickedFilterName = clickedFilter.querySelector('.filter-text').innerHTML;
+        const selectedFilter = this.filters.find(filter => filter.name === clickedFilterName);
+        this.setFilterColor(selectedFilter, clickedFilter);
+
+        // Filter restaurant cards based on selected food type
+        let i = 0;
+        cards.forEach(card => {
+            const foodTypes = [...card.querySelectorAll('.food-type-text')].map(el => el.innerHTML);
+            if (foodTypes.includes(filterName)) {
+                this.setImageOrder(card, i % 2 !== 0);
+                this.setPriceOrder(card, i % 2 !== 0);
+                ++i;
+                card.style.display = 'flex';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+
+    /**
+     * Applies background and text color styling to an active filter element.
+     *
+     * @param {Object} foodType - An object containing `bg_color` and `text_color` properties.
+     * @param {HTMLElement} element - The filter button to apply styles to.
+     */
+    setFilterColor(foodType, element) {
+        const text = element.querySelector('.filter-text');
+
+        element.style.backgroundColor = `#${foodType.bg_color}`;
+        text.style.color = `#${foodType.text_color}`;
     }
 
     /**
@@ -93,6 +178,13 @@ export class RestaurantCard {
         }
     }
 
+    /**
+     * Binds all restaurant data to the last `.restaurant-card` element inside the container.
+     * This includes carousel setup, restaurant name, description, pricing, stars, and metadata.
+     *
+     * @param {Object} restaurant - The restaurant object containing data like slug, name, prices, etc.
+     * @param {boolean} left - Determines whether the card layout should be reversed (for alternating card layouts).
+     */
     bindDataToRestaurantCard(restaurant, left) {
         const restaurantCards = this.restaurantCardsContainer.querySelectorAll('.restaurant-card');
         const restaurantCard = restaurantCards[restaurantCards.length - 1];
@@ -114,23 +206,78 @@ export class RestaurantCard {
         this.setDescription(restaurant, restaurantCard);
         this.setButtonLink(restaurant, restaurantCard);
         this.setPrice(restaurant, restaurantCard);
+        this.setPriceOrder(restaurantCard, left);
     }
 
+    /**
+     * Applies conditional ordering to the price container in a restaurant card
+     * to support alternating card layouts.
+     *
+     * @param {HTMLElement} restaurantCard - The restaurant card element to update.
+     * @param {boolean} left - Whether to reverse the flex layout (true) or reset it (false).
+     */
+    setPriceOrder(restaurantCard, left) {
+        if (left) {
+            const priceContainer = restaurantCard.querySelector('.restaurant-bottom-container');
+            priceContainer.classList.add('flex-row-reverse', 'justify-self-end');
+        } else {
+            const priceContainer = restaurantCard.querySelector('.restaurant-bottom-container');
+
+            if (priceContainer.classList.contains('flex-row-reverse')) {
+                priceContainer.classList.remove('flex-row-reverse');
+            }
+            if (priceContainer.classList.contains('justify-self-end')) {
+                priceContainer.classList.remove('justify-self-end');
+            }
+        }
+    }
+
+    /**
+     * Formats and injects full, adult, and kids pricing into the restaurant card.
+     *
+     * @param {Object} restaurant - The restaurant object with pricing fields.
+     * @param {HTMLElement} restaurantCard - The target card to insert price info into.
+     */
     setPrice(restaurant, restaurantCard) {
-        restaurantCard.querySelector('.restaurant-price-full').innerHTML = `${restaurant.full_price}`;
-        restaurantCard.querySelector('.restaurant-price').innerHTML = restaurant.adult_price;
+        const fullPrice = restaurant.full_price.toFixed(2).replace('.', ',');
+        const adultPrice = restaurant.adult_price.toFixed(2).replace('.', ',');
+        const kidsPrice = restaurant.kids_price.toFixed(2).replace('.', ',');
+
+        restaurantCard.querySelector('.restaurant-price-full').innerHTML = `&nbsp;€${fullPrice}&nbsp;`;
+        restaurantCard.querySelector('.restaurant-price').innerHTML = `€${adultPrice} (€${kidsPrice})`;
     }
 
+    /**
+     * Sets the "Learn More" or CTA button link based on restaurant slug.
+     *
+     * @param {Object} restaurant - The restaurant object containing the slug.
+     * @param {HTMLElement} restaurantCard - The restaurant card to update.
+     */
     setButtonLink(restaurant, restaurantCard) {
         const button = restaurantCard.querySelector('.restaurant-card-button a');
         button.href = `/yummy/${restaurant.slug}`;
     }
 
+    /**
+     * Populates the restaurant card's description text.
+     *
+     * @param {Object} restaurant - The restaurant object with `card_description`.
+     * @param {HTMLElement} restaurantCard - The card to receive the description.
+     */
     setDescription(restaurant, restaurantCard) {
         const description = restaurantCard.querySelector('.restaurant-description');
         description.innerHTML = restaurant.card_description;
     }
 
+    /**
+     * Adjusts the Michelin badge display based on the restaurant's Michelin status.
+     *
+     * - Hides the icon if the value is 'Nominated'.
+     * - Completely hides the container if no Michelin info exists.
+     *
+     * @param {Object} restaurant - The restaurant object containing a `michelin` field.
+     * @param {HTMLElement} restaurantCard - The card where the Michelin info will be applied.
+     */
     setMichelin(restaurant, restaurantCard) {
         const michelin = restaurant.michelin;
 
@@ -145,6 +292,12 @@ export class RestaurantCard {
         }
     }
 
+    /**
+     * Renders visual star rating using images based on `restaurant.stars`.
+     *
+     * @param {Object} restaurant - The restaurant object with a numeric `stars` field.
+     * @param {HTMLElement} restaurantCard - The card where stars are appended.
+     */
     setStars(restaurant, restaurantCard) {
         const starsContainer = restaurantCard.querySelector('.restaurant-stars');
         starsContainer.innerHTML = '';
@@ -161,6 +314,12 @@ export class RestaurantCard {
         }
     }
 
+    /**
+     * Creates a star icon element.
+     *
+     * @param {string} colorName - The color of the star ('rufous' or 'gray').
+     * @returns {HTMLImageElement} - The created <img> star element.
+     */
     createStar(colorName) {
         const star = document.createElement('img');
         star.src = `/assets/images/star_${colorName}.svg`;
@@ -169,6 +328,13 @@ export class RestaurantCard {
         return star;
     }
 
+    /**
+     * Sets the clickable Google Maps link and visible address in the card.
+     * The map link uses restaurant name + "haarlem" as search terms.
+     *
+     * @param {Object} restaurant - The restaurant object with name and address.
+     * @param {HTMLElement} restaurantCard - The card to update.
+     */
     setAddress(restaurant, restaurantCard) {
         const address = restaurantCard.querySelector('.restaurant-address a');
 
@@ -200,26 +366,42 @@ export class RestaurantCard {
                 container.appendChild(clone);
             }
 
-            this.bindDataToType(foodType, container);
+            const foodTypes = container.querySelectorAll('.food-type');
+            const lastType = foodTypes[foodTypes.length - 1];
+            this.bindDataToType(foodType, lastType);
         }
     }
 
-    bindDataToType(foodType, container) {
-        const foodTypes = container.querySelectorAll('.food-type');
-        const lastType = foodTypes[foodTypes.length - 1];
-        const icon = lastType.querySelector('.food-type-icon');
-        const text = lastType.querySelector('.food-type-text');
+    /**
+     * Binds a food type's visual data (icon, name, and colors) to a given DOM element.
+     *
+     * @param {Object} foodType - The food type object.
+     * @param {HTMLElement} element - The DOM element representing a single food type badge or tag.
+     */
+    bindDataToType(foodType, element) {
+        const icon = element.querySelector('.food-type-icon');
+        const text = element.querySelector('.food-type-text');
 
-        lastType.style.backgroundColor = `#${foodType.bg_color}`;
+        element.style.backgroundColor = `#${foodType.bg_color}`;
         icon.src = `/assets/images/${foodType.icon}`;
         icon.alt = `${foodType.name} icon`;
         text.innerHTML = foodType.name;
         text.style.color = `#${foodType.text_color}`;
     }
 
+    /**
+     * Sets the restaurant name inside a card and binds it to a CMS content input for inline editing.
+     *
+     * @param {Object} restaurant - The restaurant object.
+     * @param {HTMLElement} restaurantCard - The DOM element representing the restaurant card.
+     */
     setName(restaurant, restaurantCard) {
         const name = restaurantCard.querySelector('.restaurant-name');
         name.innerHTML = restaurant.name;
+        name.id = `restaurantName_${restaurant.slug}`;
+        name.nextElementSibling.dataset.field_id = name.id;
+
+        this.cms.setContentInputDataset(name.id, 'restaurant', restaurant.id, 'name');
     }
 
     /**
@@ -247,8 +429,11 @@ export class RestaurantCard {
         imageOne.src = imageSrc;
 
         const cmsButton = imageOne.nextElementSibling;
-        const cmsInput = cmsButton.nextElementSibling;
         cmsButton.id = `${imageOne.id}Button`;
+        cmsButton.classList.remove('change-image');
+        cmsButton.classList.add('change-image-restaurant-card');
+
+        const cmsInput = cmsButton.nextElementSibling;
         cmsInput.dataset.button = cmsButton.id;
 
         this.cms.setImageInputDataset(cmsButton.id, 'restaurant', restaurant.id, imageKey, imageOne.id);

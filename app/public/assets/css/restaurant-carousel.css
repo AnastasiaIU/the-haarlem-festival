@@ -31,4 +31,16 @@
         min-width: auto;
         min-height: auto;
     }
+
+    .restaurant-bottom-container {
+        justify-content: center;
+    }
+
+    .restaurant-price-container {
+        order: 1;
+    }
+
+    .restaurant-card-button {
+        order: 2;
+    }
 }
