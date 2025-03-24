@@ -7,7 +7,6 @@ document.addEventListener('DOMContentLoaded', async function () {
     let totalPriceElement = document.getElementById('total-price');
     let totalPrice = 0;
 
-    // Combine tickets with the same name and subType
     let combinedTickets = new Map();
     cart.forEach(tickets => {
         tickets.forEach(item => {
@@ -20,7 +19,6 @@ document.addEventListener('DOMContentLoaded', async function () {
         });
     });
 
-    // Display combined tickets
     combinedTickets.forEach(item => {
         let nameElement = document.createElement('p');
         nameElement.textContent = item.name;
@@ -58,11 +56,9 @@ document.addEventListener('DOMContentLoaded', async function () {
         }
     };
 
-    // Create an instance of the iDEAL Bank Element
     var idealBank = elements.create('idealBank', { style: style });
     idealBank.mount('#ideal-bank-element');
 
-    // Handle real-time validation errors from the iDEAL Bank Element
     idealBank.addEventListener('change', function (event) {
         var displayError = document.getElementById('ideal-errors');
         if (event.error) {
@@ -79,12 +75,10 @@ document.addEventListener('DOMContentLoaded', async function () {
     }));
 
     const form = document.getElementById('payment-form');
-    // Handle form submission for iDEAL
     form.addEventListener('submit', async function (event) {
         event.preventDefault();
     
         try {
-            // Create a Payment Intent on the server
             const response = await fetch('/api/stripe/create-payment-intent', {
                 method: 'POST',
                 headers: {
@@ -92,7 +86,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                 },
                 body: JSON.stringify({
                     payment_method_type: 'ideal',
-                    amount: Math.round(totalPrice * 100), // Convert to cents
+                    amount: Math.round(totalPrice * 100),
                     currency: 'eur',
                     tickets: tickets,
                 }),
