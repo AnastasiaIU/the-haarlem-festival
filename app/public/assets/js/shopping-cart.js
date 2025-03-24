@@ -17,4 +17,6 @@ document.addEventListener('DOMContentLoaded', function () {
     cart.addItem(ticket4);
     cart.addItem(ticket5);
     cart.addItem(ticket6);
+
+    localStorage.setItem('cart', JSON.stringify(Array.from(cart.items.entries())));
 });

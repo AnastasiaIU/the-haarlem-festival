@@ -10,7 +10,7 @@ require_once(__DIR__ . "/../lib/error_reporting.php");
  * Enable the ErrorHandler class for using the error and exception handlers.
  */
 require_once(__DIR__ . '/../src/services/ErrorHandler.php');
-ErrorHandler::register();
+//ErrorHandler::register();
 
 /**
  * Start user session.
@@ -48,6 +48,7 @@ require_once(__DIR__ . "/../routes/api/venue.php");
 require_once(__DIR__ . "/../routes/api/schedule.php");
 require_once(__DIR__ . "/../routes/api/food_type.php");
 require_once(__DIR__ . "/../routes/api/restaurant.php");
+require_once(__DIR__ . "/../routes/api/stripe.php");
 
 // Start the router, enabling handling requests
 Route::run();

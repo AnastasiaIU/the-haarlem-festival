@@ -20,42 +20,12 @@
         <h3>Payment</h3>
         <hr class="my-4" style="border-color: black;">
         <p>Choose payment method.</p>
-        <form id="payment-form" action="../../routes/api/stripe.php" method="post">
-            <div class="form-row">
-                <label for="payment-method">Payment Method:</label>
-                <select id="payment-method" name="payment_method" required>
-                    <option value="card">Credit or Debit Card</option>
-                    <option value="ideal">iDEAL</option>
-                    <option value="paypal">PayPal</option>
-                    <option value="apple_pay">Apple Pay</option>
-                    <option value="google_pay">Google Pay</option>
-                </select>
+        <form id="payment-form" method="post">
+            <div id="ideal-bank-element">
+                <!-- A Stripe iDEAL Bank Element will be inserted here. -->
             </div>
-            <div id="card-payment" class="payment-method">
-                <div class="form-row">
-                    <label for="card-element">
-                        Credit or debit card
-                    </label>
-                    <div id="card-element">
-                        <!-- A Stripe Element will be inserted here. -->
-                    </div>
-                    <!-- Used to display form errors. -->
-                    <div id="card-errors" role="alert"></div>
-                </div>
-            </div>
-            <div id="ideal-payment" class="payment-method" style="display: none;">
-                <div class="form-row">
-                    <label for="ideal-bank-element">
-                        iDEAL Bank
-                    </label>
-                    <div id="ideal-bank-element">
-                        <!-- A Stripe Element will be inserted here. -->
-                    </div>
-                    <!-- Used to display form errors. -->
-                    <div id="ideal-errors" role="alert"></div>
-                </div>
-            </div>
-            <button type="submit">Submit Payment</button>
+            <div id="ideal-errors" role="alert"></div>
+            <button type="submit">Pay with iDEAL</button>
         </form>
     </div>
     <aside class="aside-container ms-auto">
@@ -81,4 +51,5 @@
 </div>
 
 <script src="https://js.stripe.com/v3/"></script>
+<!-- <script src="https://www.paypal.com/sdk/js?client-id=YOUR_PAYPAL_CLIENT_ID&currency=USD"></script> -->
 <script type="module" src="../../assets/js/checkout.js"></script>
