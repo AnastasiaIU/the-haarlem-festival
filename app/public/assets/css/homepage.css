@@ -91,10 +91,10 @@ body, html {
     top: 61%;
     transform: translate(-50%, -50%);
 }
-#appBadges{
+.download-section #appBadges{
     padding-right: 10%;
 }
-.app-badge{
+.download-section .app-badge{
     width: 100px; 
     height: auto;
 }
@@ -332,6 +332,11 @@ body, html {
     height: auto;
 }
 
+.homepage-map{
+    width: 100%;
+    height: 100vh;
+}
+
 /* =======================
    8. MEDIA QUERIES
    ======================= */
@@ -348,7 +353,7 @@ body, html {
         
         font-size: clamp(0.7rem, 1.3vw, 0.9rem);
     }
-    .app-badge {
+    .download-section .app-badge {
         width: 80px; 
         height: auto;
     }
@@ -397,9 +402,12 @@ body, html {
     .location-title h2{
         font-size: clamp(1.4rem, 2vw, 1.8rem);
     }
+    .homepage-map {
+        height: 80vh;
+    }
 
     /*Teylers Section*/
-    .app-badge {
+    .download-section .app-badge {
         width: 70px; 
         height: auto;
     }
@@ -431,7 +439,7 @@ body, html {
 
 @media (max-width: 768px) {
     /*Teylers Section*/
-    .app-badge {
+    .download-section .app-badge {
         width: 65px; 
         height: auto;
     }
@@ -470,7 +478,9 @@ body, html {
     .location-title h2{
         font-size: clamp(1.1rem, 1.5vw, 1.5rem);
     }
-
+    .homepage-map{
+        height: 70vh;
+    }
     /*Teylers Section*/
     .museum-shape .text-overlay {
         top: 59%;
@@ -566,6 +576,10 @@ body, html {
         gap: 0px;
         padding: 5px 0;
     }
+    /*Location Section*/
+    .homepage-map{
+        height: 60vh;
+    }
 }
 
 @media (max-width: 510px) {
@@ -632,7 +646,7 @@ body, html {
     .text-overlay p, .text-overlay a.btn {
         font-size: clamp(0.6rem, 1vw, 0.7rem); 
     }
-    .app-badge {
+    .download-section .app-badge {
         width: 55px; 
         height: auto;
     }
