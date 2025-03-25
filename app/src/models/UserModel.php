@@ -39,9 +39,8 @@ class UserModel extends BaseModel
      * @param string $email The email of the new user.
      * @param string $hashedPassword The already hashed password.
      * @param UserRole $role The role of the new user.
-     * @return UserDTO|null The created user as a DTO or null if creation fails.
      */
-    public function createUser(string $email, string $hashedPassword, UserRole $role): ?UserDTO
+    public function createUser(string $email, string $hashedPassword, UserRole $role): void
     {
         try {
             self::$pdo->beginTransaction();
@@ -58,25 +57,13 @@ class UserModel extends BaseModel
 
             if (!$success) {
                 self::$pdo->rollBack(); // Revert changes if insertion fails
-                return null;
+                exit;
             }
-
-            // Retrieve the last inserted ID within the transaction
-            $userId = self::$pdo->lastInsertId();
 
             // Commit the transaction
             self::$pdo->commit();
-
-            return UserDTO::fromArray([
-                'id' => $userId,
-                'email' => $email,
-                'password' => $hashedPassword,
-                'role' => $role->value
-            ]);
-
         } catch (Exception $e) {
             self::$pdo->rollBack(); // Ensure rollback in case of failure
-            return null;
         }
     }
 }

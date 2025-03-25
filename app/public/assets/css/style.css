@@ -19,6 +19,12 @@ body {
     height: 24px;
 }
 
+#pageLoader {
+    transition: opacity 0.3s ease;
+    opacity: 1;
+    z-index: 9999;
+}
+
 /*
  * BUTTON STYLES
  */

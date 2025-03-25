@@ -1,7 +1,6 @@
 <?php
 
 require_once(__DIR__ . '/../enums/SessionType.php');
-require_once(__DIR__ . '/ParticipantDTO.php');
 
 /**
  * Data Transfer Object (DTO) for representing a dance show.
