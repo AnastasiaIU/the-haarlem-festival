@@ -22,6 +22,15 @@ class UserDTO
         $this->created_at = $created_at;
     }
 
+    // Getters
+    public function getId(): int {
+        return $this->id;
+    }
+
+    public function getRole(): UserRole {
+        return $this->role;
+    }
+
     /**
      * Verifies if the provided password matches the stored hashed password.
      *

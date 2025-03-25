@@ -6,13 +6,13 @@
             <button type="submit" class="tinymce-save">Save</button>
         </form>
         <div id="foodTypes" class="d-flex flex-wrap gap-2">
-            <div class="food-filter-disabled d-flex align-items-center gap-2 py-1 px-3">
+            <button class="food-filter-disabled d-flex align-items-center gap-2 py-1 px-3">
                 <img class="filter-icon" src="" alt="">
-                <p class="filter-text m-0"></p>
-            </div>
+                <span class="filter-text m-0"></span>
+            </button>
         </div>
     </section>
-    <section id="restaurantCards" class="col-xxl-8 d-flex flex-column m-0 p-0">
+    <section id="restaurantCards" class="d-flex flex-column w-100 m-0 p-0 gap-5">
         <?php include __DIR__ . '/restaurant_card.php' ?>
     </section>
     <section class="event-map col-xxl-8 d-flex flex-column m-0">
