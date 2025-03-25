@@ -47,6 +47,10 @@
     display: flex;
 }
 
+#restaurantMainContent {
+    position: relative;
+}
+
 @media (max-width: 991px) {
     .restaurant-card-img {
         order: 1 !important;

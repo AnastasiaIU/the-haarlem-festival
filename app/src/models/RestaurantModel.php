@@ -17,7 +17,7 @@ class RestaurantModel extends BaseModel
     public function fetchAllRestaurants(): array
     {
         $query = self::$pdo->prepare(
-            'SELECT id, event_id, slug, name, address, stars, michelin, description, card_description, capacity, full_price, adult_price, kids_price, duration, sessions, first_session, menu, phone, email, start_date, end_date, carousel_image1, carousel_image2, carousel_image3, carousel_image4, carousel_image5, carousel_image6
+            'SELECT id, event_id, slug, name, address, stars, michelin, description, card_description, capacity, full_price, adult_price, kids_price, duration, sessions, first_session, menu, phone, email, start_date, end_date, carousel_image1, carousel_image2, carousel_image3, carousel_image4, carousel_image5, carousel_image6, image
                     FROM restaurant'
         );
         $query->execute();
@@ -44,7 +44,7 @@ class RestaurantModel extends BaseModel
     public function fetchRestaurantBySlug(string $slug): ?RestaurantDTO
     {
         $query = self::$pdo->prepare(
-            'SELECT id, event_id, slug, name, address, stars, michelin, description, card_description, capacity, full_price, adult_price, kids_price, duration, sessions, first_session, menu, phone, email, start_date, end_date, carousel_image1, carousel_image2, carousel_image3, carousel_image4, carousel_image5, carousel_image6
+            'SELECT id, event_id, slug, name, address, stars, michelin, description, card_description, capacity, full_price, adult_price, kids_price, duration, sessions, first_session, menu, phone, email, start_date, end_date, carousel_image1, carousel_image2, carousel_image3, carousel_image4, carousel_image5, carousel_image6, image
         FROM restaurant
         WHERE slug = :slug'
         );

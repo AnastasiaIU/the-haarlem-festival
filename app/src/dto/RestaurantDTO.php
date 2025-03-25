@@ -34,6 +34,7 @@ class RestaurantDTO implements JsonSerializable
     private string $carouselImage4;
     private string $carouselImage5;
     private string $carouselImage6;
+    private string $image;
     private array $foodTypes;
 
     public function __construct(
@@ -41,8 +42,9 @@ class RestaurantDTO implements JsonSerializable
         int    $stars, ?Michelin $michelin, string $description, string $cardDescription,
         int    $capacity, float $fullPrice, float $adultPrice, float $kidsPrice,
         float  $duration, int $sessions, string $firstSession, string $menu,
-        string $phone, string $email, string $startDate, string $endDate, string $carouselImage1, string $carouselImage2,
-        string $carouselImage3, string $carouselImage4, string $carouselImage5, string $carouselImage6, array $foodTypes
+        string $phone, string $email, string $startDate, string $endDate, string $carouselImage1,
+        string $carouselImage2, string $carouselImage3, string $carouselImage4, string $carouselImage5,
+        string $carouselImage6, string $image, array $foodTypes
     )
     {
         $this->id = $id;
@@ -72,6 +74,7 @@ class RestaurantDTO implements JsonSerializable
         $this->carouselImage4 = $carouselImage4;
         $this->carouselImage5 = $carouselImage5;
         $this->carouselImage6 = $carouselImage6;
+        $this->image = $image;
         $this->foodTypes = $foodTypes;
     }
 
@@ -110,6 +113,7 @@ class RestaurantDTO implements JsonSerializable
             'carousel_image4' => $this->carouselImage4,
             'carousel_image5' => $this->carouselImage5,
             'carousel_image6' => $this->carouselImage6,
+            'image' => $this->image,
             'food_types' => array_map(fn($p) => $p->toArray(), $this->foodTypes)
         ];
     }
@@ -152,14 +156,15 @@ class RestaurantDTO implements JsonSerializable
             $restaurant['carousel_image4'],
             $restaurant['carousel_image5'],
             $restaurant['carousel_image6'],
+            $restaurant['image'],
             $foodTypes
         );
     }
 
     /**
-     * Converts the EventDTO object to a JSON-serializable array.
+     * Converts the RestaurantDTO object to a JSON-serializable array.
      *
-     * @return array A JSON-serializable array representing the EventDTO object.
+     * @return array A JSON-serializable array representing the RestaurantDTO object.
      */
     public function jsonSerialize(): array
     {

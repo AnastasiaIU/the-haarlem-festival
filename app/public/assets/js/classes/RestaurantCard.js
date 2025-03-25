@@ -267,6 +267,9 @@ export class RestaurantCard {
     setDescription(restaurant, restaurantCard) {
         const description = restaurantCard.querySelector('.restaurant-description');
         description.innerHTML = restaurant.card_description;
+        description.id = `restaurantDescription_${restaurant.slug}`;
+        description.nextElementSibling.dataset.field_id = description.id;
+        this.cms.setContentInputDataset(description.id, 'restaurant', restaurant.id, 'card_description');
     }
 
     /**
