@@ -22,7 +22,7 @@
     height: 24px;
 }
 
-.locations-header {
+.locations-header, .book-header, .restaurant-price {
     color: var(--rufous);
 }
 
@@ -39,16 +39,16 @@
     text-decoration: line-through;
 }
 
-.restaurant-price {
-    color: var(--rufous);
-}
-
 .restaurant-card {
     display: flex;
 }
 
 #restaurantMainContent {
     position: relative;
+}
+
+.book-card button {
+    justify-self: end;
 }
 
 @media (max-width: 991px) {

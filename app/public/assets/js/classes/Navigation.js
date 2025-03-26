@@ -11,6 +11,7 @@ import {ArtistCarousel} from "./ArtistCarousel.js";
 import {Track} from "./Track.js";
 import {RestaurantCard} from "./RestaurantCard.js";
 import {RestaurantHero} from "./RestaurantHero.js";
+import {RestaurantSchedule} from "./RestaurantSchedule.js";
 
 /**
  * Class that handles the navigation for the website.
@@ -111,7 +112,7 @@ export class Navigation {
 
         if (restaurantMatch) {
             this.navItems[this.path] = 'nav-item-yummy';
-            this.routeMap[this.path] = [RestaurantHero];
+            this.routeMap[this.path] = [RestaurantHero, RestaurantSchedule];
             this.styles[this.path] = ['hero', 'restaurant', 'restaurant-carousel'];
         }
     }
