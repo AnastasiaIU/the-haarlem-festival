@@ -3,43 +3,34 @@
 require_once(__DIR__ . '/BaseModel.php');
 
 class BookingModel extends BaseModel {
-    public function createBooking(string $orderNumber, int $userId, string $receivingEmail, TicketType $ticketType, int $ticketId, int $quantity): ?BookingDTO {
+    public function createBookings($bookings, $orderNumber, $receivingEmail, $userId): ?array {
         try {
             self::$pdo->beginTransaction();
 
             $query = self::$pdo->prepare('INSERT INTO booking (order_number, user_id, receiving_email, ticket_type, ticket_id, quantity) VALUES (:order_number, :user_id, :receiving_email, :ticket_type, :ticket_id, :quantity)');
 
-            $success = $query->execute([
-                ':order_number' => $orderNumber,
-                ':user_id' => $userId,
-                ':receiving_email' => $receivingEmail,
-                ':ticket_type' => $ticketType->value,
-                ':ticket_id' => $ticketId,
-                ':quantity' => $quantity
-            ]);
+            foreach ($bookings as $booking) {
+                $success = $query->execute([
+                    ':order_number' => $orderNumber,
+                    ':user_id' => $userId,
+                    ':receiving_email' => $receivingEmail,
+                    ':ticket_type' => $booking['ticketType'],
+                    ':ticket_id' => $booking['ticketId'],
+                    ':quantity' => $booking['quantity']
+                ]);
+            }
 
             if (!$success) {
                 self::$pdo->rollBack();
-                return null;
+                return ['error' => 'Failed to create booking. no success'];
             }
 
-            $bookingId = self::$pdo->lastInsertId();
-
             self::$pdo->commit();
-
-            return BookingDTO::fromArray([
-                'id' => $bookingId,
-                'order_number' => $orderNumber,
-                'user_id' => $userId,
-                'receiving_email' => $receivingEmail,
-                'ticket_type' => $ticketType->value,
-                'ticket_id' => $ticketId,
-                'quantity' => $quantity
-            ]);
+            return ['order_number' => $orderNumber, 'receiving_email' => $receivingEmail];
             
         } catch (Exception $e) {
             self::$pdo->rollBack();
-            return null;
+            return ['error' => 'Failed to create booking. Exception: ' . $e->getMessage()];
         }
     }
 }

@@ -103,6 +103,10 @@
     margin: 20px 0;
 }
 
+.item-price {
+    margin: 0;
+}
+
 /* CHECKOUT */
 
 .payment-container {
@@ -148,8 +152,8 @@
 
 .plan-headers strong:nth-child(2), 
 .plan-headers strong:nth-child(3),
-.cart-item-c p:nth-child(2),
-.cart-item-c p:nth-child(3) {
+.cart-item-c div:nth-child(2),
+.cart-item-c div:nth-child(3) {
     text-align: center;
 }
 

@@ -10,11 +10,11 @@ class BookingController {
         $this->bookingModel = new BookingModel();
     }
 
-    public function createBooking(string $receivingEmail, TicketType $ticketType, int $ticketId, int $quantity) {
+    public function createBooking($bookings, $receivingEmail): ?array {
         $numberGeneratorHandler = new NumberGeneratorHandler();
         $orderNumber = $numberGeneratorHandler->generateNumber();
         $userId = $_SESSION['user'];
 
-        return $this->bookingModel->createBooking($orderNumber, $userId, $receivingEmail, $ticketType, $ticketId, $quantity);
+        return $this->bookingModel->createBookings($bookings, $orderNumber, $receivingEmail, $userId);
     }
 }

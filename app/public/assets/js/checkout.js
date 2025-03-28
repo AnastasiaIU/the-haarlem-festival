@@ -1,26 +1,26 @@
 import { StripeHandler } from './classes/StripeHandler.js';
-import { Booking } from './classes/Booking.js';
 import { ShoppingCart } from './classes/ShoppingCart.js';
 
 document.addEventListener('DOMContentLoaded', async function () {
-    let cartData = JSON.parse(localStorage.getItem('cart')) || [];
-    let cart = new Map(cartData);
     let cartItemsContainer = document.getElementById('cart-items');
     let totalPriceElement = document.getElementById('total-price');
     const paymentForm = document.getElementById('payment-form');
-    const shoppingCart = new ShoppingCart();
+    const shoppingCart = ShoppingCart.getInstance();
     const stripeHandler = new StripeHandler();
-    const booking = new Booking();
+    const totalPrice = Math.round(shoppingCart.getTotalPrice() * 100);
 
-    const combinedTickets = shoppingCart.getCombineTickets(cart);
-    const totalPrice = shoppingCart.renderTickets(combinedTickets, cartItemsContainer, totalPriceElement);
+    shoppingCart.renderCheckout(cartItemsContainer, totalPriceElement);
     stripeHandler.init();
 
-    const tickets = Array.from(combinedTickets.values()).map(item => ({
-        name: item.name,
-        quantity: item.quantity,
-        price: Math.round(item.price * 100)
-    }));
+    const tickets = Array.from(shoppingCart.items.values()).map((ticketsGroup) => {
+        const item = ticketsGroup[0];
+        const quantity = ticketsGroup.length;
+        return {
+            name: item.name + (item.subType ? ` (${item.subType})` : ''),
+            quantity: quantity,
+            price: Math.round(item.price * 100)
+        };
+    });
 
     paymentForm.addEventListener('submit', async function (event) {
         event.preventDefault();
@@ -39,6 +39,8 @@ document.addEventListener('DOMContentLoaded', async function () {
             errorElement.textContent = 'The email addresses do not match.';
             return;
         }
+
+        localStorage.setItem('email', email);
     
         try {
             const data = await stripeHandler.createPayment(totalPrice, tickets);
@@ -48,6 +50,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                 errorElement.textContent = data.error.message;
             } else {
                 const result = await stripeHandler.confirmPayment(data.clientSecret);
+                console.log(result);
                 if (result.error) {
                     const errorElement = document.getElementById('ideal-errors');
                     errorElement.textContent = result.error.message;

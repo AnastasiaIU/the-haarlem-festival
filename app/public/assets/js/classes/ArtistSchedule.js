@@ -1,4 +1,5 @@
-import {fetchFromApi} from "../main.js";
+import { fetchFromApi } from "../main.js";
+import { setButton } from "../main.js";
 
 /**
  * Class that handles an artist schedule.
@@ -54,7 +55,7 @@ export class ArtistSchedule {
         this.setDate(show, lastShowCard);
         this.setPrice(show, lastShowCard);
         await this.setText(show, lastShowCard);
-        this.setButton(show, lastShowCard);
+        await this.assignButton(show, lastShowCard);
 
         this.reorderImage(lastShowCard, left);
     }
@@ -65,8 +66,12 @@ export class ArtistSchedule {
      * @param show The dance show object.
      * @param showCard The show card element.
      */
-    setButton(show, showCard) {
-        // Set the button for a card here
+    async assignButton(show, showCard) {
+        const ticketButton = showCard.querySelector('.show-button');
+        const pathSegments = window.location.pathname.split('/').filter(segment => segment !== '');
+        const slug = pathSegments[pathSegments.length - 1];
+        const cartItem = await fetchFromApi(`/api/cart-item/dance-show/${show.dance_show_id}/${slug}`);
+        await setButton(ticketButton, cartItem);
     }
 
     /**
@@ -126,7 +131,7 @@ export class ArtistSchedule {
      * @returns {string} The formatted date string, e.g. 'Friday 25th at 23:00'.
      */
     getFormattedDate(date) {
-        const dayOfWeek = date.toLocaleDateString(undefined, {weekday: 'long'});
+        const dayOfWeek = date.toLocaleDateString(undefined, { weekday: 'long' });
         const day = date.getDate();
         const hours = String(date.getHours()).padStart(2, '0');
         const minutes = String(date.getMinutes()).padStart(2, '0');
@@ -152,7 +157,7 @@ export class ArtistSchedule {
         const showTime = showCard.querySelector('.show-time');
 
         const date = new Date(show.date_time.replace(' ', 'T'));
-        const options = {weekday: 'long'};
+        const options = { weekday: 'long' };
 
         showDate.innerHTML = date.getDate();
         showDay.innerHTML = date.toLocaleDateString('en-US', options);

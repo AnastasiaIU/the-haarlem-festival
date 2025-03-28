@@ -1,4 +1,5 @@
-import {fetchFromApi} from "../main.js";
+import { fetchFromApi } from "../main.js";
+import { setButton } from "../main.js";
 
 /**
  * Class that handles the DANCE! event schedule.
@@ -8,6 +9,7 @@ export class DanceSchedule {
         this.passes = await fetchFromApi('/api/getPasses');
 
         this.setPrices();
+        await this.setButtons();
     }
 
     static async create() {
@@ -29,5 +31,14 @@ export class DanceSchedule {
         saturdayPass.innerHTML = `€${this.passes[1].price}`;
         sundayPass.innerHTML = `€${this.passes[2].price}`;
         allAccessPass.innerHTML = `€${this.passes[3].price}`;
+    }
+
+    async setButtons() {
+        const passButtons = document.querySelectorAll(".pass-button");
+
+        for (let i = 0; i < passButtons.length; i++) {
+            const cartItem = await fetchFromApi(`/api/cart-item/pass/${this.passes[i].id}`);
+            setButton(passButtons[i], cartItem);
+        }
     }
 }

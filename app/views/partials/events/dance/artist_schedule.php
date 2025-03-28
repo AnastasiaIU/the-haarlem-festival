@@ -7,7 +7,7 @@
         </div>
         <div class="d-inline-flex align-items-center justify-content-end">
             <p class="show-price fw-bold m-0"></p>
-            <a type="button" class="show-button btn btn-primary ms-3 font-p-16 fw-bold text-nowrap">Add to cart</a>
+            <buttonm type="button" class="show-button btn btn-primary ms-3 font-p-16 fw-bold text-nowrap">Add to cart</button>
         </div>
     </div>
     <div class="show-name-container flex-grow-1">

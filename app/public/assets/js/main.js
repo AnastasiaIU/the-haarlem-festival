@@ -1,11 +1,16 @@
-import {Navigation} from "./classes/Navigation.js";
+import { Navigation } from "./classes/Navigation.js";
+import { ShoppingCart } from "./classes/ShoppingCart.js";
+import { CartItem } from "./classes/CartItem.js";
 
+let shoppingCart;
 /**
  * Initializes event listeners and functions when the DOM content is fully loaded.
  */
 document.addEventListener("DOMContentLoaded", async () => {
     await Navigation.create();
     enableBootstrapFormValidation();
+
+    shoppingCart = ShoppingCart.getInstance();
 });
 
 /**
@@ -41,4 +46,13 @@ export async function fetchFromApi(url) {
     const response = await fetch(url);
     if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
     return await response.json();
+}
+
+export async function setButton(button, value) {
+    button.setAttribute("value", JSON.stringify(value));
+    button.addEventListener("click", function () {
+        const value = JSON.parse(this.getAttribute("value"));
+        const cartItem = new CartItem(value.ticket_id, value.item_name, value.date, value.price, value.item_type, value.image_path, value.item_sub_type);
+        shoppingCart.addItem(cartItem);
+    });
 }
