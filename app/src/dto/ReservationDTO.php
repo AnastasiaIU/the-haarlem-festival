@@ -5,13 +5,15 @@
  */
 class ReservationDTO {
     private int $id;
+    private int $restaurantId;
     private string $dateTime;
     private int $adults;
     private int $kids;
     private ?string $comment;
 
-    public function __construct(int $id, string $dateTime, int $adults, int $kids, ?string $comment) {
+    public function __construct(int $id, int $restaurantId, string $dateTime, int $adults, int $kids, ?string $comment) {
         $this->id = $id;
+        $this->restaurantId = $restaurantId;
         $this->dateTime = $dateTime;
         $this->adults = $adults;
         $this->kids = $kids;
@@ -26,6 +28,7 @@ class ReservationDTO {
     public function toArray(): array {
         return [
             'id' => $this->id,
+            'restaurant_id' => $this->restaurantId,
             'date_time' => $this->dateTime,
             'adults' => $this->adults,
             'kids' => $this->kids,
@@ -42,6 +45,7 @@ class ReservationDTO {
     public static function fromArray(array $data): self {
         return new self(
             $data['id'],
+            $data['restaurant_id'],
             $data['date_time'],
             $data['adults'],
             $data['kids'],

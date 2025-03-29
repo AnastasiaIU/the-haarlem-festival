@@ -48,6 +48,7 @@ require_once(__DIR__ . "/../routes/api/venue.php");
 require_once(__DIR__ . "/../routes/api/schedule.php");
 require_once(__DIR__ . "/../routes/api/food_type.php");
 require_once(__DIR__ . "/../routes/api/restaurant.php");
+require_once(__DIR__ . "/../routes/api/tour.php");
 
 // Start the router, enabling handling requests
 Route::run();

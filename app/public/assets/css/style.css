@@ -63,6 +63,13 @@ body {
     height: 40px;
 }
 
+.btn:disabled {
+    background-color: var(--gray);
+    color: #898A8D;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
 /*
  * NAVBAR STYLES
  */

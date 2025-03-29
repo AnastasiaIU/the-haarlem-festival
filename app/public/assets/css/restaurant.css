@@ -22,7 +22,7 @@
     height: 24px;
 }
 
-.locations-header {
+.locations-header, .book-header, .restaurant-price {
     color: var(--rufous);
 }
 
@@ -39,16 +39,51 @@
     text-decoration: line-through;
 }
 
-.restaurant-price {
-    color: var(--rufous);
-}
-
 .restaurant-card {
     display: flex;
 }
 
 #restaurantMainContent {
     position: relative;
+}
+
+.book-card button {
+    justify-self: end;
+}
+
+.modal-content {
+    background-color: var(--champagne);
+    border-radius: 0;
+    border: none;
+}
+
+.modal-title {
+    color: var(--rufous);
+}
+
+.modal-header, .modal-footer {
+    border: none;
+}
+
+.btn:hover {
+    color: white;
+}
+
+.btn-people-amount {
+    background-color: transparent;
+    padding: 4px 10px;
+}
+
+.btn-check:hover+.btn, .btn-check:checked:hover+.btn {
+    background-color: var(--manhattan);
+    border-radius: 50%;
+    color: white;
+}
+
+.btn-check:checked+.btn {
+    background-color: var(--rufous);
+    border-radius: 50%;
+    color: white;
 }
 
 @media (max-width: 991px) {

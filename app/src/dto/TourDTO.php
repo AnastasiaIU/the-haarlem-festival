@@ -1,18 +1,21 @@
 <?php
 
+require_once(__DIR__ . '/TourTypeDTO.php');
+require_once(__DIR__ . '/GuideDTO.php');
+
 /**
  * Data Transfer Object (DTO) for representing a tour.
  */
-class TourDTO {
+class TourDTO implements JsonSerializable {
     private int $id;
-    private int $guideId;
-    private int $tourTypeId;
+    private GuideDTO $guide;
+    private TourTypeDTO $tourType;
     private string $dateTime;
 
-    public function __construct(int $id, int $guideId, int $tourTypeId, string $dateTime) {
+    public function __construct(int $id, GuideDTO $guide, TourTypeDTO $tourType, string $dateTime) {
         $this->id = $id;
-        $this->guideId = $guideId;
-        $this->tourTypeId = $tourTypeId;
+        $this->guide = $guide;
+        $this->tourType = $tourType;
         $this->dateTime = $dateTime;
     }
 
@@ -24,8 +27,8 @@ class TourDTO {
     public function toArray(): array {
         return [
             'id' => $this->id,
-            'guide_id' => $this->guideId,
-            'tour_type_id' => $this->tourTypeId,
+            'guide' => $this->guide->toArray(),
+            'tour_type' => $this->tourType->toArray(),
             'date_time' => $this->dateTime
         ];
     }
@@ -39,9 +42,19 @@ class TourDTO {
     public static function fromArray(array $data): self {
         return new self(
             $data['id'],
-            $data['guide_id'],
-            $data['tour_id'],
+            GuideDTO::fromArray($data),
+            TourTypeDTO::fromArray($data),
             $data['date_time']
         );
+    }
+
+    /**
+     * Converts the TourDTO object to a JSON-serializable array.
+     *
+     * @return array A JSON-serializable array representing the TourDTO object.
+     */
+    public function jsonSerialize(): array
+    {
+        return self::toArray();
     }
 }
