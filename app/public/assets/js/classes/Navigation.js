@@ -12,6 +12,7 @@ import {Track} from "./Track.js";
 import {RestaurantCard} from "./RestaurantCard.js";
 import {RestaurantHero} from "./RestaurantHero.js";
 import {RestaurantSchedule} from "./RestaurantSchedule.js";
+import {StrollsSchedule} from "./StrollsSchedule.js";
 
 /**
  * Class that handles the navigation for the website.
@@ -34,6 +35,7 @@ export class Navigation {
             '/profile': 'nav-item-profile',
             '/register': '',
             '/strolls': 'nav-item-strolls',
+            '/strolls/schedule': 'nav-item-strolls',
             '/teylers': 'nav-item-teylers',
             '/yummy': 'nav-item-yummy'
         };
@@ -44,6 +46,7 @@ export class Navigation {
             '/dance': [EventHero, Promo, ArtistCard, DanceSchedule],
             '/yummy': [EventHero, Promo, RestaurantCard],
             '/strolls': [EventHero, Promo],
+            '/strolls/schedule': [StrollsSchedule],
             '/teylers': [EventHero, Promo]
         };
 
@@ -51,6 +54,7 @@ export class Navigation {
             '/dance': ['hero', 'promo', 'artist', 'artist-carousel'],
             '/yummy': ['hero', 'promo', 'restaurant', 'restaurant-carousel'],
             '/strolls': ['hero', 'promo'],
+            '/strolls/schedule': ['strolls'],
             '/teylers': ['hero', 'promo', 'teylers']
         };
 

@@ -3,7 +3,7 @@
 /**
  * Data Transfer Object (DTO) for representing a schedule entry.
  */
-class ScheduleDTO {
+class ScheduleDTO implements JsonSerializable {
     private int $id;
     private string $date;
     private string $title;
@@ -51,5 +51,15 @@ class ScheduleDTO {
             $data['end_time'],
             $data['title_color']
         );
+    }
+
+    /**
+     * Converts the ScheduleDTO object to a JSON-serializable array.
+     *
+     * @return array A JSON-serializable array representing the ScheduleDTO object.
+     */
+    public function jsonSerialize(): array
+    {
+        return self::toArray();
     }
 }

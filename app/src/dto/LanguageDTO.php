@@ -3,7 +3,7 @@
 /**
  * Data Transfer Object (DTO) for representing a language.
  */
-class LanguageDTO {
+class LanguageDTO implements JsonSerializable {
     private int $id;
     private string $language;
 
@@ -19,7 +19,7 @@ class LanguageDTO {
      */
     public function toArray(): array {
         return [
-            'id' => $this->id,
+            'language_id' => $this->id,
             'language' => $this->language
         ];
     }
@@ -32,8 +32,18 @@ class LanguageDTO {
      */
     public static function fromArray(array $data): self {
         return new self(
-            $data['id'],
+            $data['language_id'],
             $data['language']
         );
+    }
+
+    /**
+     * Converts the LanguageDTO object to a JSON-serializable array.
+     *
+     * @return array A JSON-serializable array representing the LanguageDTO object.
+     */
+    public function jsonSerialize(): array
+    {
+        return self::toArray();
     }
 }

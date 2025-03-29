@@ -1,18 +1,20 @@
 <?php
 
+require_once(__DIR__ . '/LanguageDTO.php');
+
 /**
  * Data Transfer Object (DTO) for representing a guide.
  */
 class GuideDTO {
     private int $id;
-    private int $languageId;
+    private LanguageDTO $language;
     private string $name;
     private string $description;
     private string $image;
 
-    public function __construct(int $id, int $languageId, string $name, string $description, string $image) {
+    public function __construct(int $id, LanguageDTO $language, string $name, string $description, string $image) {
         $this->id = $id;
-        $this->languageId = $languageId;
+        $this->language = $language;
         $this->name = $name;
         $this->description = $description;
         $this->image = $image;
@@ -25,8 +27,8 @@ class GuideDTO {
      */
     public function toArray(): array {
         return [
-            'id' => $this->id,
-            'language_id' => $this->languageId,
+            'guide_id' => $this->id,
+            'language' => $this->language,
             'name' => $this->name,
             'description' => $this->description,
             'image' => $this->image
@@ -41,8 +43,8 @@ class GuideDTO {
      */
     public static function fromArray(array $data): self {
         return new self(
-            $data['id'],
-            $data['language_id'],
+            $data['guide_id'],
+            LanguageDTO::fromArray($data),
             $data['name'],
             $data['description'],
             $data['image']

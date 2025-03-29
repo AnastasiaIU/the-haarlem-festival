@@ -78,7 +78,7 @@ export class EventHero {
      */
     async setStrollsContent() {
         const buyTicketsButton = await fetchFromApi(`/api/getButtonById/6`);
-        const button = this.cms.createButton(buyTicketsButton, 'btn btn-primary font-p-16 fw-bold');
+        const button = this.cms.createButton(buyTicketsButton, 'btn btn-primary font-p-16 fw-bold py-2 px-3');
         this.appendToHeroContent(button);
     }
 
@@ -89,7 +89,7 @@ export class EventHero {
      */
     async setDanceContent() {
         const buyPassButton = await fetchFromApi(`/api/getButtonById/5`);
-        const button = this.cms.createButton(buyPassButton, 'btn btn-primary-red font-p-16 fw-bold');
+        const button = this.cms.createButton(buyPassButton, 'btn btn-primary-red font-p-16 fw-bold py-2 px-3');
 
         this.appendToHeroContent(button);
 

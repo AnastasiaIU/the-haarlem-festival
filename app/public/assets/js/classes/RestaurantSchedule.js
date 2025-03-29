@@ -257,10 +257,12 @@ export class RestaurantSchedule {
         const titleElement = document.querySelector('.book-header');
         const title = await fetchFromApi('/api/getCustomByIdentifier/book_table_title');
         titleElement.innerHTML = title.content;
+        this.cms.setContentInputDataset(titleElement.id, 'custom', title.id, 'content');
 
         const descriptionElement = document.querySelector('.book-description');
         const description = await fetchFromApi('/api/getCustomByIdentifier/book_table_description');
         descriptionElement.innerHTML = description.content;
+        this.cms.setContentInputDataset(descriptionElement.id, 'custom', description.id, 'content');
     }
 
     /**
