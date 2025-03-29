@@ -3,6 +3,7 @@
 require_once(__DIR__ . "/BaseModel.php");
 require_once(__DIR__ . '/../dto/RestaurantDTO.php');
 require_once(__DIR__ . '/FoodTypeModel.php');
+require_once(__DIR__ . '/ReservationModel.php');
 
 /**
  * RestaurantModel class extends BaseModel to interact with the RESTAURANT entity in the database.
@@ -25,10 +26,12 @@ class RestaurantModel extends BaseModel
         $dtos = [];
 
         $foodTypeModel = new FoodTypeModel();
+        $reservationModel = new ReservationModel();
 
         foreach ($restaurants as $restaurant) {
             $foodTypes = $foodTypeModel->fetchFoodTypesForRestaurant($restaurant['id']);
-            $dto = RestaurantDTO::fromArray($restaurant, $foodTypes);
+            $reservations = $reservationModel->fetchReservationForRestaurant($restaurant['id']);
+            $dto = RestaurantDTO::fromArray($restaurant, $foodTypes, $reservations);
             $dtos[] = $dto;
         }
 
@@ -58,6 +61,9 @@ class RestaurantModel extends BaseModel
         $foodTypeModel = new FoodTypeModel();
         $foodTypes = $foodTypeModel->fetchFoodTypesForRestaurant($restaurant['id']);
 
-        return RestaurantDTO::fromArray($restaurant, $foodTypes);
+        $reservationModel = new ReservationModel();
+        $reservations = $reservationModel->fetchReservationForRestaurant($restaurant['id']);
+
+        return RestaurantDTO::fromArray($restaurant, $foodTypes, $reservations);
     }
 }

@@ -36,6 +36,7 @@ class RestaurantDTO implements JsonSerializable
     private string $carouselImage6;
     private string $image;
     private array $foodTypes;
+    private array $reservations;
 
     public function __construct(
         int    $id, int $eventId, string $slug, string $name, string $address,
@@ -44,7 +45,7 @@ class RestaurantDTO implements JsonSerializable
         float  $duration, int $sessions, string $firstSession, string $menu,
         string $phone, string $email, string $startDate, string $endDate, string $carouselImage1,
         string $carouselImage2, string $carouselImage3, string $carouselImage4, string $carouselImage5,
-        string $carouselImage6, string $image, array $foodTypes
+        string $carouselImage6, string $image, array $foodTypes, array $reservations
     )
     {
         $this->id = $id;
@@ -76,6 +77,7 @@ class RestaurantDTO implements JsonSerializable
         $this->carouselImage6 = $carouselImage6;
         $this->image = $image;
         $this->foodTypes = $foodTypes;
+        $this->reservations = $reservations;
     }
 
     /**
@@ -114,7 +116,8 @@ class RestaurantDTO implements JsonSerializable
             'carousel_image5' => $this->carouselImage5,
             'carousel_image6' => $this->carouselImage6,
             'image' => $this->image,
-            'food_types' => array_map(fn($p) => $p->toArray(), $this->foodTypes)
+            'food_types' => array_map(fn($p) => $p->toArray(), $this->foodTypes),
+            'reservations' => array_map(fn($p) => $p->toArray(), $this->reservations)
         ];
     }
 
@@ -124,7 +127,7 @@ class RestaurantDTO implements JsonSerializable
      * @param array $restaurant The associative array containing restaurant data.
      * @return self A new instance of RestaurantDTO populated with the provided data.
      */
-    public static function fromArray(array $restaurant, array $foodTypes): self
+    public static function fromArray(array $restaurant, array $foodTypes, array $reservations): self
     {
         $michelin = isset($restaurant['michelin']) ? Michelin::from($restaurant['michelin']) : null;
 
@@ -157,7 +160,8 @@ class RestaurantDTO implements JsonSerializable
             $restaurant['carousel_image5'],
             $restaurant['carousel_image6'],
             $restaurant['image'],
-            $foodTypes
+            $foodTypes,
+            $reservations
         );
     }
 
