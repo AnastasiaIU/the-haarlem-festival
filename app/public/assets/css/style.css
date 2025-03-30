@@ -19,6 +19,10 @@ body {
     height: 24px;
 }
 
+.icon-32 {
+    height: 32px;
+}
+
 #pageLoader {
     transition: opacity 0.3s ease;
     opacity: 1;

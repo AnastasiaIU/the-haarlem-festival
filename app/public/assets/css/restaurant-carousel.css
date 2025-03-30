@@ -1,46 +1,50 @@
+#carouselOne {
+    display: none;
+}
+
+#carouselThree {
+    display: block;
+}
+
+.carousel3 {
+    position: relative;
+    width: 33%;
+}
+
 .carousel-item div {
     gap: 8px;
+}
+
+.carousel-inner {
+    width: 70%;
+    justify-self: center;
 }
 
 .carousel-item img {
     width: 100%;
     aspect-ratio: 1.1 / 1;
+    min-width: 220px;
+    min-height: 200px;
     object-fit: cover;
     border-radius: 5px;
     border: 2px solid var(--punch);
 }
 
-.carousel-inner {
-    width: 70%;
-    min-width: 200px;
-    min-height: 220px;
-    justify-self: center;
-}
+@media (max-width: 1100px) {
+    #carouselOne {
+        display: block;
+    }
 
-.carousel-item {
-    position: relative;
-    width: 100%;
-}
+    #carouselThree {
+        display: none;
+    }
 
-.carousel {
-    width: 100%;
-}
-
-@media (max-width: 991px) {
-    .carousel-item {
+    .carousel-item img {
         min-width: auto;
         min-height: auto;
     }
 
-    .restaurant-bottom-container {
-        justify-content: center;
-    }
-
-    .restaurant-price-container {
-        order: 1;
-    }
-
-    .restaurant-card-button {
-        order: 2;
+    .carousel-item {
+        position: relative;
     }
 }
