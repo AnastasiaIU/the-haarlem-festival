@@ -66,4 +66,65 @@ class UserModel extends BaseModel
             self::$pdo->rollBack(); // Ensure rollback in case of failure
         }
     }
+
+    public function getAllUsers() : array{
+        $query = self::$pdo->prepare(
+            'SELECT id, email, password, role, created_at FROM user'
+        );
+        $query->execute();
+        $users = $query->fetchAll(PDO::FETCH_ASSOC);
+        $dtos = [];
+
+        foreach ($users as $user) {
+            $dto = UserDTO::fromArray($user);
+            $dtos[] = $dto;
+        }
+
+        return $dtos;
+    }
+
+    public function deleteUser(int $id): bool{
+        $query = self::$pdo->prepare("DELETE FROM user WHERE id = :id");
+        return $query->execute([':id' => $id]);
+    }
+
+    public function updateUserRole(int $id, UserRole $newRole): bool{
+        $query = self::$pdo->prepare("UPDATE user SET role = :role WHERE id = :id");
+        return $query->execute([
+            ':role' => $newRole->value, 
+            ':id' => $id
+        ]);
+    }
+
+    public function updateUserEmail(int $id, string $newEmail): bool{
+        $query = self::$pdo->prepare("UPDATE user SET email = :email WHERE id = :id");
+        return $query->execute([':email' => $newEmail, ':id' => $id]);
+    }
+
+    public function getUserEmailById(int $id): ?array {
+        $query = self::$pdo->prepare('SELECT email FROM user WHERE id = :id');
+        $query->execute([':id' => $id]);
+        $item = $query->fetch(PDO::FETCH_ASSOC);
+    
+        return $item ?: null; // Return null if no user found
+    }
+
+    public function updateUserProfile(int $id, array $updates): bool {
+        $fields = [];
+        $values = [];
+
+        foreach ($updates as $key => $value) {
+            $fields[] = "$key = :$key";
+            $values[":$key"] = $value;
+        }
+
+        if (empty($fields)) {
+            return false;
+        }
+
+        $values[':id'] = $id;
+        $query = self::$pdo->prepare("UPDATE user SET " . implode(", ", $fields) . " WHERE id = :id");
+
+        return $query->execute($values);
+    }
 }

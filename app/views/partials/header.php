@@ -24,6 +24,7 @@
             referrerpolicy="origin"></script>
     <script type="module" src="../../assets/js/main.js"></script>
     <script type="module" src="../../assets/js/homepage.js"></script>
+    <script type="module" src="../../assets/js/profile.js"></script>
     <?php
     $isAdmin = isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'Administrator';
     ?>
