@@ -3,7 +3,7 @@
 /**
  * Data Transfer Object (DTO) for representing a title.
  */
-class TitleDTO {
+class TitleDTO implements JsonSerializable {
     private int $id;
     private string $title;
 
@@ -19,7 +19,7 @@ class TitleDTO {
      */
     public function toArray(): array {
         return [
-            'id' => $this->id,
+            'title_id' => $this->id,
             'title' => $this->title
         ];
     }
@@ -32,8 +32,18 @@ class TitleDTO {
      */
     public static function fromArray(array $data): self {
         return new self(
-            $data['id'],
+            $data['title_id'],
             $data['title']
         );
+    }
+
+    /**
+     * Converts the TitleDTO object to a JSON-serializable array.
+     *
+     * @return array A JSON-serializable array representing the TitleDTO object.
+     */
+    public function jsonSerialize(): array
+    {
+        return self::toArray();
     }
 }

@@ -134,7 +134,7 @@
         <div class="event-map col-xxl-8 d-flex flex-column m-0">
             <div class="d-flex gap-2 pb-2">
                 <img class="location-icon" src="/assets/images/location-icon.svg" alt="Location icon">
-                <h2 class="locations-header h4 fw-bold">LOCATIONS</h2>
+                <h2 class="locations-header h4 fw-bold">Locations</h2>
             </div>
             <iframe
                     style="border:0"

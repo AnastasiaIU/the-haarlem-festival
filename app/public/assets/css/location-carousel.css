@@ -1,0 +1,50 @@
+#carouselOne {
+    display: none;
+}
+
+#carouselThree {
+    display: block;
+}
+
+.carousel3 {
+    position: relative;
+    width: 33%;
+}
+
+.carousel-item div {
+    gap: 8px;
+}
+
+.carousel-inner {
+    width: 70%;
+    justify-self: center;
+}
+
+.carousel-item img {
+    width: 100%;
+    aspect-ratio: 1.1 / 1;
+    min-width: 220px;
+    min-height: 200px;
+    object-fit: cover;
+    border-radius: 5px;
+    border: 2px solid var(--punch);
+}
+
+@media (max-width: 1100px) {
+    #carouselOne {
+        display: block;
+    }
+
+    #carouselThree {
+        display: none;
+    }
+
+    .carousel-item img {
+        min-width: auto;
+        min-height: auto;
+    }
+
+    .carousel-item {
+        position: relative;
+    }
+}
