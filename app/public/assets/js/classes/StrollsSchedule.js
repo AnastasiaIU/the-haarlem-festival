@@ -23,6 +23,10 @@ export class StrollsSchedule {
         return instance;
     }
 
+    /**
+     * Iterates through all grouped tours by date and guide, clones the last schedule card if needed,
+     * and binds the tour data to each new card.
+     */
     populateCards() {
         let cardIndex = 0;
 
@@ -49,6 +53,12 @@ export class StrollsSchedule {
         }
     }
 
+    /**
+     * Binds the tour data to the last schedule card in the DOM.
+     *
+     * @param {Array} tour - Array of tour objects for the same guide and day.
+     * @param {boolean} left - Whether the guide image should appear on the left side.
+     */
     bindDataToCard(tour, left = false) {
         const cards = this.cardsContainer.querySelectorAll('.schedule-card');
         const lastCard = cards[cards.length - 1];
@@ -60,7 +70,7 @@ export class StrollsSchedule {
         this.setImage(lastCard, tour[0]);
         this.setDescription(lastCard, tour[0]);
         this.reorderImage(lastCard, left);
-        this.setButton(lastCard);
+        this.disableButton(lastCard);
     }
 
     /**
@@ -87,11 +97,22 @@ export class StrollsSchedule {
         }
     }
 
-    setButton(card) {
+    /**
+     * Disables the booking button in a schedule card by default.
+     *
+     * @param {HTMLElement} card - The schedule card DOM element.
+     */
+    disableButton(card) {
         const button = card.querySelector('.btn');
         button.disabled = true;
     }
 
+    /**
+     * Populates the guide description in the schedule card and sets the CMS input dataset.
+     *
+     * @param {HTMLElement} card - The schedule card DOM element.
+     * @param {Object} tour - A single tour object.
+     */
     setDescription(card, tour) {
         const description = card.querySelector('.guide-text');
         description.id = `guide-desc-${tour.guide.name}-${tour.date_time.split(' ')[0]}`;
@@ -103,6 +124,12 @@ export class StrollsSchedule {
         this.cms.setContentInputDataset(description.id, 'guide', tour.guide.guide_id, 'description');
     }
 
+    /**
+     * Populates the guide image in the schedule card and binds CMS metadata.
+     *
+     * @param {HTMLElement} card - The schedule card DOM element.
+     * @param {Object} tour - A single tour object.
+     */
     setImage(card, tour) {
         const image = card.querySelector('.guide-image');
         image.src = `/assets/images/${tour.guide.image}`;
@@ -117,11 +144,23 @@ export class StrollsSchedule {
         this.cms.setImageInputDataset(saveButton.id, 'guide', tour.guide.guide_id, 'image', image.id);
     }
 
+    /**
+     * Sets the language label in the schedule card.
+     *
+     * @param {HTMLElement} card - The schedule card DOM element.
+     * @param {Object} tour - A single tour object.
+     */
     setLanguage(card, tour) {
         const language = card.querySelector('.language');
         language.innerHTML = tour.guide.language.language;
     }
 
+    /**
+     * Sets the guide's name in the schedule card and binds it for CMS editing.
+     *
+     * @param {HTMLElement} card - The schedule card DOM element.
+     * @param {Object} tour - A single tour object.
+     */
     setName(card, tour) {
         const name = card.querySelector('.guide-name');
         name.id = `guide-name-${tour.guide.name}-${tour.date_time.split(' ')[0]}`;
@@ -133,6 +172,13 @@ export class StrollsSchedule {
         this.cms.setContentInputDataset(name.id, 'guide', tour.guide.guide_id, 'name');
     }
 
+    /**
+     * Populates the dropdown with available time options for the tour and enables
+     * the booking button when a valid time is selected.
+     *
+     * @param {HTMLElement} card - The schedule card DOM element.
+     * @param {Array} tour - Array of tour objects (all same guide and day).
+     */
     populateTime(card, tour) {
         const dropdown = card.querySelector('.form-select');
         dropdown.innerHTML = '<option value="" disabled selected>Select a time</option>';
@@ -164,6 +210,12 @@ export class StrollsSchedule {
         return `${hours}:${minutes}`;
     }
 
+    /**
+     * Sets the numeric date and weekday into the card based on the tour's date.
+     *
+     * @param {HTMLElement} card - The schedule card DOM element.
+     * @param {Object} tour - A single tour object.
+     */
     setDate(card, tour) {
         const date = new Date(tour.date_time);
         const options = {weekday: 'long'};
@@ -175,6 +227,12 @@ export class StrollsSchedule {
         dayElement.innerHTML = date.toLocaleDateString('en-US', options);
     }
 
+    /**
+     * Groups the list of tours first by date, and then by guide name.
+     *
+     * @returns {Object} An object with dates as keys, each containing an object of guide names
+     *                   as keys, mapping to arrays of tour objects.
+     */
     groupToursByDayAndGuide() {
         const grouped = {};
 
@@ -196,6 +254,10 @@ export class StrollsSchedule {
         return grouped;
     }
 
+    /**
+     * Fetches and sets the schedule title and subtitle from the API,
+     * and binds them for inline CMS editing.
+     */
     async setTitles() {
         const titleElement = document.querySelector('.strolls-schedule-title');
         const title = await fetchFromApi('/api/getCustomByIdentifier/strolls_schedule_title');

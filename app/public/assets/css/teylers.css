@@ -1,3 +1,99 @@
 #teylersMainContent {
+    z-index: 2;
+}
+
+#teylersLorentz {
     position: relative;
+    background: no-repeat left center / cover;
+}
+
+.lorentz-shadow {
+    position: absolute;
+    top: 0;
+    left: -8px;
+    width: 105%;
+    height: 100%;
+    box-shadow:
+            -4px -4px 8px rgba(0, 0, 0, 1),
+            -4px 24px 24px rgba(0, 0, 0, 1);
+}
+
+#lorentzTitle {
+    color: var(--punch);
+}
+
+.card {
+    border: none;
+}
+
+.card-header {
+    background-color: var(--punch);
+    border: none;
+}
+
+.card-body {
+    background-color: var(--terracotta);
+    align-items: center;
+}
+
+.promotion-card {
+    background-color: var(--terracotta);
+    border-radius: 8px;
+}
+
+#discoverAppTitle {
+    font-family: 'Open Sans', serif;
+}
+
+.app-badges {
+    align-self: end;
+}
+
+.bg-white {
+    background-color: white;
+}
+
+#appPromotionImage1, #appPromotionImage2 {
+    max-height: 450px;
+    object-fit: contain;
+}
+
+.location-icon {
+    width: 24px;
+    height: 24px;
+}
+
+.locations-header {
+    color: var(--rufous);
+}
+
+.image-container {
+    position: relative;
+}
+
+@media (max-width: 1200px) {
+    .card-body {
+        flex-wrap: wrap;
+    }
+
+    .promotion-card h2, #teylerDescription {
+        text-align: center;
+    }
+
+    .app-description {
+        justify-content: center;
+    }
+
+    .app-badges {
+        align-self: center;
+    }
+
+    .teyler-schedule {
+        display: flex;
+        justify-content: center;
+    }
+
+    #appPromotionImage1, #appPromotionImage2 {
+        width: 100%;
+    }
 }
