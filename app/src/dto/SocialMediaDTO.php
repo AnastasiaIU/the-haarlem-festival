@@ -1,18 +1,20 @@
 <?php
 
+require_once(__DIR__ . '/../enums/Platform.php');
+
 /**
  * Data Transfer Object (DTO) for representing a social media link associated with a restaurant.
  */
-class SocialMediaDTO {
+class SocialMediaDTO implements JsonSerializable {
     private int $id;
-    private int $platformId;
     private int $restaurantId;
+    private Platform $platform;
     private string $link;
 
-    public function __construct(int $id, int $platformId, int $restaurantId, string $link) {
+    public function __construct(int $id, int $restaurantId, Platform $platform, string $link) {
         $this->id = $id;
-        $this->platformId = $platformId;
         $this->restaurantId = $restaurantId;
+        $this->platform = $platform;
         $this->link = $link;
     }
 
@@ -24,8 +26,8 @@ class SocialMediaDTO {
     public function toArray(): array {
         return [
             'id' => $this->id,
-            'platform_id' => $this->platformId,
             'restaurant_id' => $this->restaurantId,
+            'platform' => $this->platform->value,
             'link' => $this->link
         ];
     }
@@ -37,11 +39,23 @@ class SocialMediaDTO {
      * @return self A new instance of SocialMediaDTO populated with the provided data.
      */
     public static function fromArray(array $data): self {
+        $platform = isset($data['platform']) ? Platform::from($data['platform']) : null;
+
         return new self(
             $data['id'],
-            $data['platform_id'],
             $data['restaurant_id'],
+            $platform,
             $data['link']
         );
+    }
+
+    /**
+     * Converts the SocialMediaDTO object to a JSON-serializable array.
+     *
+     * @return array A JSON-serializable array representing the SocialMediaDTO object.
+     */
+    public function jsonSerialize(): array
+    {
+        return self::toArray();
     }
 }
