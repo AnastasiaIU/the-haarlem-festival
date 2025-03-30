@@ -13,6 +13,7 @@ import {RestaurantCard} from "./RestaurantCard.js";
 import {RestaurantHero} from "./RestaurantHero.js";
 import {RestaurantSchedule} from "./RestaurantSchedule.js";
 import {StrollsSchedule} from "./StrollsSchedule.js";
+import {Teylers} from "./Teylers.js";
 
 /**
  * Class that handles the navigation for the website.
@@ -47,10 +48,11 @@ export class Navigation {
             '/yummy': [EventHero, Promo, RestaurantCard],
             '/strolls': [EventHero, Promo],
             '/strolls/schedule': [StrollsSchedule],
-            '/teylers': [EventHero, Promo]
+            '/teylers': [EventHero, Promo, Teylers]
         };
 
         this.styles = {
+            '/': ['homepage'],
             '/dance': ['hero', 'promo', 'artist', 'artist-carousel'],
             '/yummy': ['hero', 'promo', 'restaurant', 'restaurant-carousel'],
             '/strolls': ['hero', 'promo'],

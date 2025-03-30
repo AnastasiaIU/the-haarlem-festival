@@ -10,7 +10,6 @@
     <link rel="stylesheet" type="text/css" href="../../assets/css/colors.css">
     <link rel="stylesheet" type="text/css" href="../../assets/css/style.css">
     <link rel="stylesheet" type="text/css" href="../../assets/css/shopping-cart.css">
-    <link rel="stylesheet" type="text/css" href="../../assets/css/homepage.css">
     <link rel="icon" type="image/x-icon" href="../../assets/images/favicon.svg">
     <link href='https://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=Cabin' rel='stylesheet'>
