@@ -14,6 +14,8 @@ import {RestaurantHero} from "./RestaurantHero.js";
 import {RestaurantSchedule} from "./RestaurantSchedule.js";
 import {StrollsSchedule} from "./StrollsSchedule.js";
 import {Teylers} from "./Teylers.js";
+import {Restaurant} from "./Restaurant.js";
+import {RestaurantCarousel} from "./RestaurantCarousel.js";
 
 /**
  * Class that handles the navigation for the website.
@@ -54,7 +56,7 @@ export class Navigation {
         this.styles = {
             '/': ['homepage'],
             '/dance': ['hero', 'promo', 'artist', 'artist-carousel'],
-            '/yummy': ['hero', 'promo', 'restaurant', 'restaurant-carousel'],
+            '/yummy': ['hero', 'promo', 'restaurant', 'yummy-carousel'],
             '/strolls': ['hero', 'promo'],
             '/strolls/schedule': ['strolls'],
             '/teylers': ['hero', 'promo', 'teylers']
@@ -118,7 +120,7 @@ export class Navigation {
 
         if (restaurantMatch) {
             this.navItems[this.path] = 'nav-item-yummy';
-            this.routeMap[this.path] = [RestaurantHero, RestaurantSchedule];
+            this.routeMap[this.path] = [RestaurantHero, RestaurantSchedule, Restaurant, RestaurantCarousel];
             this.styles[this.path] = ['hero', 'restaurant', 'restaurant-carousel'];
         }
     }
