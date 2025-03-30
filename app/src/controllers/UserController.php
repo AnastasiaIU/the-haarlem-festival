@@ -88,4 +88,33 @@ class UserController
         $redirectUrl = $_SESSION['last_visited_url'] ?? '/profile';
         echo json_encode(['redirectUrl' => $redirectUrl]);
     }
+
+    public function getAllUsers() : array{
+        return $this->userModel->getAllUsers(); 
+    }
+
+    public function deleteUser(int $id): bool{
+        return $this->userModel->deleteUser($id);
+    }
+
+    public function updateUserRole(int $id, UserRole $newRole){
+        return $this->userModel->updateUserRole($id, $newRole);
+    }
+
+    public function updateUserEmail(int $id, string $newEmail){
+        return $this->userModel->updateUserEmail($id, $newEmail);
+    }
+
+    public function createUser(string $email,string $password, UserRole $newRole){
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+        return $this->userModel->createUser($email, $hashedPassword, $newRole);
+    }
+
+    public function getUserEmailById(): array {        
+        return $this->userModel->getUserEmailById($_SESSION['user']);
+    }
+
+    public function updateUserProfile($updates) {
+        return $this->userModel->updateUserProfile($_SESSION['user'], $updates);
+    }
 }

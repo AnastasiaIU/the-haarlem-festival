@@ -132,12 +132,6 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
     fetchTextByType('location', 'a[href="#map-section"]');
 
-    await fetchHomepageBannerData();
-    await fetchEventsData();
-    await fetchCustomData();
-    await setTeylersContent();
-
-
     function renderSchedule(schedule) {
         scheduleContainer.innerHTML = ""; // Clear previous content
 
@@ -163,15 +157,6 @@ document.addEventListener("DOMContentLoaded", async function () {
 
             scheduleContainer.appendChild(scheduleRow);
         });
-    }
-
-    function getDayAndWeekday(dateString) {
-        const date = new Date(dateString);
-        const options = { weekday: 'long', day: 'numeric' };
-        return {
-            day: date.getDate(),
-            weekday: date.toLocaleDateString('en-US', options)
-        };
     }
 
     function groupEventsByDate(events) {
@@ -212,7 +197,11 @@ document.addEventListener("DOMContentLoaded", async function () {
             .catch(error => console.error("Error fetching schedule:", error));
     }
 
-
+    
+    await fetchHomepageBannerData();
+    await fetchEventsData();
+    await fetchCustomData();
+    await setTeylersContent();
     fetchSchedule();}
 });
 

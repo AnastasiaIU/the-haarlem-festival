@@ -17,6 +17,7 @@ ErrorHandler::register();
  */
 session_start();
 
+
 /**
  * Require routing library. Allows handling request for different URL routes, i.e. /dance, /yummy, etc.
  */
@@ -49,6 +50,7 @@ require_once(__DIR__ . "/../routes/api/schedule.php");
 require_once(__DIR__ . "/../routes/api/food_type.php");
 require_once(__DIR__ . "/../routes/api/restaurant.php");
 require_once(__DIR__ . "/../routes/api/tour.php");
+require_once(__DIR__."/../routes/api/user.php");
 require_once(__DIR__ . "/../routes/api/chef.php");
 require_once(__DIR__ . "/../routes/api/social_media.php");
 
