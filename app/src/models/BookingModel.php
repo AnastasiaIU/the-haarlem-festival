@@ -33,4 +33,17 @@ class BookingModel extends BaseModel {
             return ['error' => 'Failed to create booking. Exception: ' . $e->getMessage()];
         }
     }
+
+    public function passesSold() {
+        $query = self::$pdo->prepare('SELECT pass.day AS day, SUM(quantity) AS passes_sold FROM booking JOIN pass ON booking.ticket_id = pass.id GROUP BY pass.day');
+        $query->execute();
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+
+        $passesSold = [];
+        foreach ($result as $row) {
+            $passesSold[$row['day']] = $row['passes_sold'];
+        }
+        
+        return $passesSold;
+    }
 }

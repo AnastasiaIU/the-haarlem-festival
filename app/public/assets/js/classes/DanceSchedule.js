@@ -35,9 +35,30 @@ export class DanceSchedule {
 
     async setButtons() {
         const passButtons = document.querySelectorAll(".pass-button");
-
+        const passesAvailability = await fetchFromApi('/api/getPassesAvailability');
+    
         for (let i = 0; i < passButtons.length; i++) {
-            const cartItem = await fetchFromApi(`/api/cart-item/pass/${this.passes[i].id}`);
+            const pass = this.passes[i];
+            const cartItem = await fetchFromApi(`/api/cart-item/pass/${pass.id}`);
+    
+            let dayName;
+    
+            if (pass.item_name === "Three-days pass" || i === this.passes.length - 1) {
+                dayName = "All-Access";
+            } else {
+                dayName = new Date(cartItem.date.replace(' ', 'T')).toLocaleDateString('en-US', { weekday: 'long' });
+            }
+    
+            const canSell = passesAvailability[dayName];
+    
+            if (canSell) {
+                passButtons[i].disabled = false;
+                passButtons[i].classList.remove('disabled');
+            } else {
+                passButtons[i].disabled = true;
+                passButtons[i].classList.add('disabled');
+            }
+    
             setButton(passButtons[i], cartItem);
         }
     }

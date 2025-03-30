@@ -25,4 +25,9 @@ class DanceShowController
     {
         return $this->showModel->fetchAllShows($artistSlug);
     }
+
+    public function danceShowAvailability()
+    {
+        return $this->showModel->danceShowAvailability();
+    }
 }

@@ -40,4 +40,17 @@ class DanceShowModel extends BaseModel
 
         return $dtos;
     }
+
+    public function danceShowAvailability() {
+        $query = self::$pdo->prepare('SELECT date_time, SUM(capacity) AS capacity FROM dance_show GROUP BY date_time');
+        $query->execute();
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+
+        $availability = [];
+        foreach ($result as $row) {
+            $availability[$row['date_time']] = $row['capacity'];
+        }
+
+        return $availability;
+    }
 }

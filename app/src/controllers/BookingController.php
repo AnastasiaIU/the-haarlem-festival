@@ -17,4 +17,8 @@ class BookingController {
 
         return $this->bookingModel->createBookings($bookings, $orderNumber, $receivingEmail, $userId);
     }
+
+    public function passesSold() {
+        return $this->bookingModel->passesSold();
+    }
 }
