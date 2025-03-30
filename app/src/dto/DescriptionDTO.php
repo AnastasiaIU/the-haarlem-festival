@@ -1,19 +1,21 @@
 <?php
 
+require_once(__DIR__ . '/TitleDTO.php');
+
 /**
  * Data Transfer Object (DTO) for representing a description.
  */
-class DescriptionDTO {
+class DescriptionDTO implements JsonSerializable {
     private int $id;
     private int $locationId;
-    private int $titleId;
+    private TitleDTO $title;
     private string $description;
     private int $displayOrder;
 
-    public function __construct(int $id, int $locationId, int $titleId, string $description, int $displayOrder) {
+    public function __construct(int $id, int $locationId, TitleDTO $title, string $description, int $displayOrder) {
         $this->id = $id;
         $this->locationId = $locationId;
-        $this->titleId = $titleId;
+        $this->title = $title;
         $this->description = $description;
         $this->displayOrder = $displayOrder;
     }
@@ -27,7 +29,7 @@ class DescriptionDTO {
         return [
             'id' => $this->id,
             'location_id' => $this->locationId,
-            'title_id' => $this->titleId,
+            'title' => $this->title,
             'description' => $this->description,
             'display_order' => $this->displayOrder
         ];
@@ -43,9 +45,19 @@ class DescriptionDTO {
         return new self(
             $data['id'],
             $data['location_id'],
-            $data['title_id'],
+            TitleDTO::fromArray($data),
             $data['description'],
             $data['display_order']
         );
+    }
+
+    /**
+     * Converts the DescriptionDTO object to a JSON-serializable array.
+     *
+     * @return array A JSON-serializable array representing the DescriptionDTO object.
+     */
+    public function jsonSerialize(): array
+    {
+        return self::toArray();
     }
 }

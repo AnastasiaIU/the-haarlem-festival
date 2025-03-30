@@ -22,7 +22,11 @@
     height: 24px;
 }
 
-.locations-header, .book-header, .restaurant-price, .menu-header, .chef-header, .contact-header {
+.book-header, .menu-header, .chef-header, .contact-header {
+    color: var(--punch);
+}
+
+.locations-header, .restaurant-price {
     color: var(--rufous);
 }
 
