@@ -53,6 +53,8 @@ require_once(__DIR__ . "/../routes/api/tour.php");
 require_once(__DIR__."/../routes/api/user.php");
 require_once(__DIR__ . "/../routes/api/chef.php");
 require_once(__DIR__ . "/../routes/api/social_media.php");
+require_once(__DIR__ . "/../routes/api/location.php");
+require_once(__DIR__ . "/../routes/api/description.php");
 
 // Start the router, enabling handling requests
 Route::run();

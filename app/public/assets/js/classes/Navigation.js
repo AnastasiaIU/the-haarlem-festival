@@ -16,6 +16,10 @@ import {StrollsSchedule} from "./StrollsSchedule.js";
 import {Teylers} from "./Teylers.js";
 import {Restaurant} from "./Restaurant.js";
 import {RestaurantCarousel} from "./RestaurantCarousel.js";
+import {Strolls} from "./Strolls.js";
+import {LocationHero} from "./LocationHero.js";
+import {Location} from "./Location.js";
+import {LocationCarousel} from "./LocationCarousel.js";
 
 /**
  * Class that handles the navigation for the website.
@@ -48,7 +52,7 @@ export class Navigation {
             '/register': [RegistrationForm],
             '/dance': [EventHero, Promo, ArtistCard, DanceSchedule],
             '/yummy': [EventHero, Promo, RestaurantCard],
-            '/strolls': [EventHero, Promo],
+            '/strolls': [EventHero, Promo, Strolls],
             '/strolls/schedule': [StrollsSchedule],
             '/teylers': [EventHero, Promo, Teylers]
         };
@@ -57,7 +61,7 @@ export class Navigation {
             '/': ['homepage'],
             '/dance': ['hero', 'promo', 'artist', 'artist-carousel'],
             '/yummy': ['hero', 'promo', 'restaurant', 'yummy-carousel'],
-            '/strolls': ['hero', 'promo'],
+            '/strolls': ['hero', 'promo', 'strolls'],
             '/strolls/schedule': ['strolls'],
             '/teylers': ['hero', 'promo', 'teylers']
         };
@@ -111,6 +115,7 @@ export class Navigation {
     addDynamicRoutes() {
         const artistMatch = this.path.match(/^\/dance\/([a-z0-9-]+)$/);
         const restaurantMatch = this.path.match(/^\/yummy\/([a-z0-9-]+)$/);
+        const locationMatch = this.path.match(/^\/strolls\/([a-z0-9-]+)$/);
 
         if (artistMatch) {
             this.navItems[this.path] = 'nav-item-dance';
@@ -122,6 +127,12 @@ export class Navigation {
             this.navItems[this.path] = 'nav-item-yummy';
             this.routeMap[this.path] = [RestaurantHero, RestaurantSchedule, Restaurant, RestaurantCarousel];
             this.styles[this.path] = ['hero', 'restaurant', 'restaurant-carousel'];
+        }
+
+        if (locationMatch) {
+            this.navItems[this.path] = 'nav-item-strolls';
+            this.routeMap[this.path] = [LocationHero, Location, LocationCarousel];
+            this.styles[this.path] = ['hero', 'location', 'location-carousel'];
         }
     }
 

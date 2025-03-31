@@ -1,17 +1,17 @@
-.strolls-schedule-subtitle, .schedule-date {
-    color: var(--rufous);
+.strolls-schedule-subtitle, .schedule-date, #strollsTitle, #strollsLocationsTitle {
+    color: var(--punch);
 }
 
 .schedule-date, .guide-name {
     min-height: 50px;
 }
 
-.guide-image-container {
+.guide-image-container, .location-image-container {
     position: relative;
     min-width: 220px;
 }
 
-.guide-image {
+.guide-image, .location-card-image {
     width: 100%;
     aspect-ratio: 1.1 / 1;
     min-width: 220px;
@@ -19,6 +19,11 @@
     object-fit: cover;
     border-radius: 5px;
     border: 2px solid var(--punch);
+}
+
+.location-address a {
+    color: var(--rufous);
+    font-style: italic;
 }
 
 @media (max-width: 768px) {
@@ -60,5 +65,14 @@
         margin-top: auto !important;
         margin-bottom: auto !important;
         display: flex;
+    }
+
+    .location-image-container {
+        order: 1 !important;
+        width: 100% !important;
+    }
+
+    .text-container {
+        order: 2 !important;
     }
 }
