@@ -129,7 +129,7 @@ export class Navigation {
             this.styles[this.path] = ['hero', 'restaurant', 'restaurant-carousel'];
         }
 
-        if (locationMatch) {
+        if (locationMatch && this.path !== '/strolls/schedule') {
             this.navItems[this.path] = 'nav-item-strolls';
             this.routeMap[this.path] = [LocationHero, Location, LocationCarousel];
             this.styles[this.path] = ['hero', 'location', 'location-carousel'];
