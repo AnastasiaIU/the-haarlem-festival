@@ -1,0 +1,78 @@
+.strolls-schedule-subtitle, .schedule-date, #strollsTitle, #strollsLocationsTitle {
+    color: var(--punch);
+}
+
+.schedule-date, .guide-name {
+    min-height: 50px;
+}
+
+.guide-image-container, .location-image-container {
+    position: relative;
+    min-width: 220px;
+}
+
+.guide-image, .location-card-image {
+    width: 100%;
+    aspect-ratio: 1.1 / 1;
+    min-width: 220px;
+    min-height: 200px;
+    object-fit: cover;
+    border-radius: 5px;
+    border: 2px solid var(--punch);
+}
+
+.location-address a {
+    color: var(--rufous);
+    font-style: italic;
+}
+
+@media (max-width: 768px) {
+    .guide-image-container {
+        order: 4 !important;
+        width: 100% !important;
+    }
+
+    .guide-text-container {
+        order: 3 !important;
+        padding: 0 !important;
+    }
+
+    .date-container {
+        order: 2 !important;
+        flex-direction: row !important;
+    }
+
+    .book-container {
+        order: 1 !important;
+        flex-direction: row !important;
+    }
+
+    .schedule-card {
+        align-items: center;
+        text-align: center;
+        gap: 16px;
+    }
+
+    .strolls-schedule-title, .strolls-schedule-subtitle {
+        justify-content: center;
+    }
+
+    .schedule-date, .guide-name {
+        min-height: auto;
+    }
+
+    .schedule-day-of-week, .language, .schedule-date, .guide-name {
+        margin-top: auto !important;
+        margin-bottom: auto !important;
+        display: flex;
+    }
+
+    .location-image-container {
+        order: 1 !important;
+        width: 100% !important;
+    }
+
+    .text-container {
+        order: 2 !important;
+    }
+}

@@ -1,0 +1,25 @@
+.location-address {
+    font-style: italic;
+    text-decoration: underline;
+}
+
+.location-address a {
+    color: white;
+}
+
+#locationMainContent {
+    position: relative;
+}
+
+.location-header {
+    color: var(--punch);
+}
+
+.location-icon {
+    width: 24px;
+    height: 24px;
+}
+
+.locations-header {
+    color: var(--rufous);
+}

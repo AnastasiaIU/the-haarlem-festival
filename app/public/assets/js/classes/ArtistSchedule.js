@@ -140,7 +140,7 @@ export class ArtistSchedule {
      * @returns {string} The formatted date string, e.g. 'Friday 25th at 23:00'.
      */
     getFormattedDate(date) {
-        const dayOfWeek = date.toLocaleDateString(undefined, { weekday: 'long' });
+        const dayOfWeek = date.toLocaleDateString('en-US', {weekday: 'long'});
         const day = date.getDate();
         const hours = String(date.getHours()).padStart(2, '0');
         const minutes = String(date.getMinutes()).padStart(2, '0');

@@ -1,4 +1,4 @@
-<section class="show-card d-flex flex-column-reverse flex-lg-row">
+<section class="show-card d-flex flex-column-reverse flex-lg-row gap-1">
     <div class="show-date-container d-inline-flex flex-column justify-content-between">
         <div class="d-flex flex-column">
             <p class="h1 show-date fw-bold"></p>
@@ -19,7 +19,7 @@
     <div class="col-md-3 show-image-container">
         <img class="show-image" src="/assets/images/dance_show.png" alt="People at a dance event">
     </div>
-    <div class="col-md-3 show-text-container my-auto ps-2">
+    <div class="col-md-3 show-text-container my-auto">
         <p class="show-text text-center m-0"></p>
     </div>
 </section>

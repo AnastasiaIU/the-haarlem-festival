@@ -3,7 +3,7 @@
 /**
  * Data Transfer Object (DTO) for representing a chef.
  */
-class ChefDTO {
+class ChefDTO implements JsonSerializable {
     private int $id;
     private int $restaurantId;
     private string $name;
@@ -47,5 +47,15 @@ class ChefDTO {
             $data['image'],
             $data['description']
         );
+    }
+
+    /**
+     * Converts the ChefDTO object to a JSON-serializable array.
+     *
+     * @return array A JSON-serializable array representing the ChefDTO object.
+     */
+    public function jsonSerialize(): array
+    {
+        return self::toArray();
     }
 }

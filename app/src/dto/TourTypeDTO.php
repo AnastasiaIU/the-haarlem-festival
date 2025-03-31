@@ -3,7 +3,7 @@
 /**
  * Data Transfer Object (DTO) for representing a tour type.
  */
-class TourTypeDTO {
+class TourTypeDTO implements JsonSerializable {
     private int $id;
     private int $capacity;
     private float $singlePrice;
@@ -23,7 +23,7 @@ class TourTypeDTO {
      */
     public function toArray(): array {
         return [
-            'id' => $this->id,
+            'tour_type_id' => $this->id,
             'capacity' => $this->capacity,
             'single_price' => $this->singlePrice,
             'family_price' => $this->familyPrice
@@ -38,10 +38,20 @@ class TourTypeDTO {
      */
     public static function fromArray(array $data): self {
         return new self(
-            $data['id'],
+            $data['tour_type_id'],
             $data['capacity'],
             $data['single_price'],
             $data['family_price']
         );
+    }
+
+    /**
+     * Converts the TourTypeDTO object to a JSON-serializable array.
+     *
+     * @return array A JSON-serializable array representing the TourTypeDTO object.
+     */
+    public function jsonSerialize(): array
+    {
+        return self::toArray();
     }
 }

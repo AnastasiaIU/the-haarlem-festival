@@ -11,6 +11,15 @@ import {ArtistCarousel} from "./ArtistCarousel.js";
 import {Track} from "./Track.js";
 import {RestaurantCard} from "./RestaurantCard.js";
 import {RestaurantHero} from "./RestaurantHero.js";
+import {RestaurantSchedule} from "./RestaurantSchedule.js";
+import {StrollsSchedule} from "./StrollsSchedule.js";
+import {Teylers} from "./Teylers.js";
+import {Restaurant} from "./Restaurant.js";
+import {RestaurantCarousel} from "./RestaurantCarousel.js";
+import {Strolls} from "./Strolls.js";
+import {LocationHero} from "./LocationHero.js";
+import {Location} from "./Location.js";
+import {LocationCarousel} from "./LocationCarousel.js";
 
 /**
  * Class that handles the navigation for the website.
@@ -33,6 +42,7 @@ export class Navigation {
             '/profile': 'nav-item-profile',
             '/register': '',
             '/strolls': 'nav-item-strolls',
+            '/strolls/schedule': 'nav-item-strolls',
             '/teylers': 'nav-item-teylers',
             '/yummy': 'nav-item-yummy'
         };
@@ -42,14 +52,17 @@ export class Navigation {
             '/register': [RegistrationForm],
             '/dance': [EventHero, Promo, ArtistCard, DanceSchedule],
             '/yummy': [EventHero, Promo, RestaurantCard],
-            '/strolls': [EventHero, Promo],
-            '/teylers': [EventHero, Promo]
+            '/strolls': [EventHero, Promo, Strolls],
+            '/strolls/schedule': [StrollsSchedule],
+            '/teylers': [EventHero, Promo, Teylers]
         };
 
         this.styles = {
+            '/': ['homepage'],
             '/dance': ['hero', 'promo', 'artist', 'artist-carousel'],
-            '/yummy': ['hero', 'promo', 'restaurant', 'restaurant-carousel'],
-            '/strolls': ['hero', 'promo'],
+            '/yummy': ['hero', 'promo', 'restaurant', 'yummy-carousel'],
+            '/strolls': ['hero', 'promo', 'strolls'],
+            '/strolls/schedule': ['strolls'],
             '/teylers': ['hero', 'promo', 'teylers']
         };
 
@@ -102,6 +115,7 @@ export class Navigation {
     addDynamicRoutes() {
         const artistMatch = this.path.match(/^\/dance\/([a-z0-9-]+)$/);
         const restaurantMatch = this.path.match(/^\/yummy\/([a-z0-9-]+)$/);
+        const locationMatch = this.path.match(/^\/strolls\/([a-z0-9-]+)$/);
 
         if (artistMatch) {
             this.navItems[this.path] = 'nav-item-dance';
@@ -111,8 +125,14 @@ export class Navigation {
 
         if (restaurantMatch) {
             this.navItems[this.path] = 'nav-item-yummy';
-            this.routeMap[this.path] = [RestaurantHero];
+            this.routeMap[this.path] = [RestaurantHero, RestaurantSchedule, Restaurant, RestaurantCarousel];
             this.styles[this.path] = ['hero', 'restaurant', 'restaurant-carousel'];
+        }
+
+        if (locationMatch) {
+            this.navItems[this.path] = 'nav-item-strolls';
+            this.routeMap[this.path] = [LocationHero, Location, LocationCarousel];
+            this.styles[this.path] = ['hero', 'location', 'location-carousel'];
         }
     }
 
