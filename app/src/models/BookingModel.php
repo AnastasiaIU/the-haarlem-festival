@@ -46,4 +46,15 @@ class BookingModel extends BaseModel {
         
         return $passesSold;
     }
+
+    public function danceShowSold($ticketId) {
+        $query = self::$pdo->prepare('SELECT SUM(booking.quantity) AS tickets_sold, dance_show.capacity FROM dance_show LEFT JOIN booking ON booking.ticket_id = dance_show.id WHERE dance_show.id = :ticket_id');
+        $query->execute([':ticket_id' => $ticketId]);
+        $result = $query->fetch(PDO::FETCH_ASSOC);
+
+        return [
+            'tickets_sold' => $result['tickets_sold'] ?? 0,
+            'capacity' => $result['capacity'] ?? 0
+        ];
+    }
 }

@@ -21,4 +21,20 @@ class BookingController {
     public function passesSold() {
         return $this->bookingModel->passesSold();
     }
+
+    public function danceShowSold($ticketId) {
+        return $this->bookingModel->danceShowSold($ticketId);
+    }
+
+    public function getAvailability($ticketId): bool {
+        $danceShowData = $this->danceShowSold($ticketId);
+        $capacity = $danceShowData['capacity'];
+        $ticketsSold = $danceShowData['tickets_sold'];
+
+        if (($capacity * 0.9) > $ticketsSold) {
+            return true;
+        }
+
+        return false;
+    }
 }

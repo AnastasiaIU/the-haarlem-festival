@@ -15,3 +15,10 @@ Route::add('/api/bookings', function () use ($bookingConroller) {
 
     echo json_encode($response);
 }, 'post');
+
+Route::add('/api/bookings/([0-9]+)', function ($id) use ($bookingConroller) {
+    header('Content-Type: application/json');
+
+    $response = $bookingConroller->getAvailability($id);
+    echo json_encode($response);
+});

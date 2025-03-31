@@ -71,7 +71,16 @@ export class ArtistSchedule {
         const pathSegments = window.location.pathname.split('/').filter(segment => segment !== '');
         const slug = pathSegments[pathSegments.length - 1];
         const cartItem = await fetchFromApi(`/api/cart-item/dance-show/${show.dance_show_id}/${slug}`);
-        await setButton(ticketButton, cartItem);
+        const available = await fetchFromApi(`/api/bookings/${cartItem.ticket_id}`);
+
+        if (available) {
+            setButton(ticketButton, cartItem);
+            ticketButton.classList.remove('disabled');
+            ticketButton.disabled = false;
+        } else {
+            ticketButton.classList.add('disabled');
+            ticketButton.disabled = true;
+        }
     }
 
     /**

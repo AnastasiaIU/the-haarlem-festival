@@ -60,6 +60,7 @@ export class DanceSchedule {
             }
     
             setButton(passButtons[i], cartItem);
+            console.log(cartItem);
         }
     }
 }

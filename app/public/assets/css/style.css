@@ -54,6 +54,10 @@ body {
     color: white;
 }
 
+.btn.disabled {
+    opacity: 0.2;
+}
+
 .button-icon {
     height: 16px;
 }

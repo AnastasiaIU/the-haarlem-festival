@@ -48,7 +48,7 @@ export async function fetchFromApi(url) {
     return await response.json();
 }
 
-export async function setButton(button, value) {
+export function setButton(button, value) {
     button.setAttribute("value", JSON.stringify(value));
     button.addEventListener("click", function () {
         const value = JSON.parse(this.getAttribute("value"));
