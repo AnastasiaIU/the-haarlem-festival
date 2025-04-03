@@ -48,11 +48,13 @@ export async function fetchFromApi(url) {
     return await response.json();
 }
 
-export function setButton(button, value) {
-    button.setAttribute("value", JSON.stringify(value));
+export function setButton(button, cartItems) {
+    button.setAttribute("cartItems", JSON.stringify(cartItems));
     button.addEventListener("click", function () {
-        const value = JSON.parse(this.getAttribute("value"));
-        const cartItem = new CartItem(value.ticket_id, value.item_name, value.date, value.price, value.item_type, value.image_path, value.item_sub_type);
-        shoppingCart.addItem(cartItem);
+        const cartItems = JSON.parse(this.getAttribute("cartItems"));
+
+        cartItems.forEach(cartItem => {
+            shoppingCart.addItem(cartItem);
+        });
     });
 }

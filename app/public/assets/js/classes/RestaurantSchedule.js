@@ -1,7 +1,10 @@
-import {fetchFromApi} from "../main.js";
-import {CMS} from "./CMS.js";
+import { fetchFromApi } from "../main.js";
+import { CMS } from "./CMS.js";
+import { CartItem } from "./CartItem.js";
+import { ShoppingCart } from "./ShoppingCart.js";
 
 const RESERVATION_FEE = 10.00;
+const shoppingCart = ShoppingCart.getInstance();
 
 /**
  * Class that handles the restaurant schedule.
@@ -11,7 +14,6 @@ export class RestaurantSchedule {
         this.cms = await CMS.create();
         this.restaurant = await this.fetchRestaurant();
         this.cardsContainer = document.getElementById('restaurantSchedule');
-
         await this.setTitleAndDescription();
         this.populateSchedule();
 
@@ -29,7 +31,7 @@ export class RestaurantSchedule {
         return instance;
     }
 
-    updatePrices() {
+    updatePrices(event) {
         const adults = this.getSelectedValue('optionsAdult');
         const kids = this.getSelectedValue('optionsKids');
 
@@ -39,6 +41,69 @@ export class RestaurantSchedule {
         // Format to 0,00 format for EU display
         document.getElementById('fullPrice').innerText = fullPrice.toFixed(2).replace('.', ',');
         document.getElementById('reservationPrice').innerText = reservationPrice.toFixed(2).replace('.', ',');
+
+        this.setButtons(event, this.restaurant);
+    }
+
+    async setButtons(event, restaurant) {
+        const addButton = document.querySelector('.add-button-r');
+        const adultCount = this.getSelectedValue('optionsAdult');
+        const kidCount = this.getSelectedValue('optionsKids');
+        const date = event.relatedTarget.dataset.bookDate;
+        const time = event.relatedTarget.dataset.bookTime;
+        const fullDate = new Date(`${date}T${time}`);
+        const comment = document.getElementById('message-text').value;
+    
+        const cartItemPathType = await fetchFromApi(`/api/cart-item/restaurant/${restaurant.id}`);
+    
+        // Clear previous cart items
+        let cartItems = [];
+    
+        // Add kid tickets
+        for (let i = 0; i < kidCount; i++) {
+            const cartItem = new CartItem(
+                restaurant.id,
+                restaurant.name,
+                fullDate,
+                RESERVATION_FEE,
+                cartItemPathType.type,
+                cartItemPathType.image,
+                'Kids',
+                comment
+            );
+            cartItems.push(cartItem);
+        }
+    
+        // Add adult tickets
+        for (let i = 0; i < adultCount; i++) {
+            const cartItem = new CartItem(
+                restaurant.id,
+                restaurant.name,
+                fullDate,
+                RESERVATION_FEE,
+                cartItemPathType.type,
+                cartItemPathType.image,
+                'Adults',
+                comment
+            );
+            cartItems.push(cartItem);
+        }
+    
+        // Remove any existing event listener
+        if (addButton.addButtonClickListener) {
+            addButton.removeEventListener('click', addButton.addButtonClickListener);
+        }
+    
+        // Define the new event listener
+        const addButtonClickListener = function () {
+            cartItems.forEach(cartItem => {
+                shoppingCart.addItem(cartItem);
+            });
+        };
+    
+        // Attach the new event listener
+        addButton.addEventListener('click', addButtonClickListener);
+        addButton.addButtonClickListener = addButtonClickListener;
     }
 
     getSelectedValue(groupName) {
@@ -65,10 +130,10 @@ export class RestaurantSchedule {
         modalTime.textContent = `${this.getFormattedTime(fullDate)} - ${this.getFormattedTime(end)}`;
 
         document.querySelectorAll('input[name="optionsAdult"], input[name="optionsKids"]').forEach(input => {
-            input.addEventListener('change', () => this.updatePrices());
+            input.addEventListener('change', () => this.updatePrices(event));
         });
 
-        this.updatePrices();
+        this.updatePrices(event);
     }
 
     populateSchedule() {
@@ -231,8 +296,8 @@ export class RestaurantSchedule {
 
     formatFullDate(date) {
         const day = date.getDate();
-        const weekday = date.toLocaleDateString('en-US', {weekday: 'long'});
-        const month = date.toLocaleDateString('en-US', {month: 'long'});
+        const weekday = date.toLocaleDateString('en-US', { weekday: 'long' });
+        const month = date.toLocaleDateString('en-US', { month: 'long' });
         const year = date.getFullYear();
 
         return `${weekday}, ${month} ${day}${this.getOrdinalSuffix(day)}, ${year}`;
@@ -251,7 +316,6 @@ export class RestaurantSchedule {
                 return 'th';
         }
     }
-
 
     async setTitleAndDescription() {
         const titleElement = document.querySelector('.book-header');

@@ -1,5 +1,6 @@
 import { fetchFromApi } from "../main.js";
 import { setButton } from "../main.js";
+import { CartItem } from "./CartItem.js";
 
 /**
  * Class that handles an artist schedule.
@@ -70,13 +71,17 @@ export class ArtistSchedule {
         const ticketButton = showCard.querySelector('.show-button');
         const pathSegments = window.location.pathname.split('/').filter(segment => segment !== '');
         const slug = pathSegments[pathSegments.length - 1];
-        const cartItem = await fetchFromApi(`/api/cart-item/dance-show/${show.dance_show_id}/${slug}`);
-        const available = await fetchFromApi(`/api/bookings/${cartItem.ticket_id}`);
+        const cartItemData = await fetchFromApi(`/api/cart-item/dance-show/${show.dance_show_id}/${slug}`);
+        const available = await fetchFromApi(`/api/bookings/${cartItemData.ticket_id}`);
 
         if (available) {
-            setButton(ticketButton, cartItem);
             ticketButton.classList.remove('disabled');
             ticketButton.disabled = false;
+
+            let cartItems = [];
+            const cartItem = new CartItem(cartItemData.ticket_id, cartItemData.item_name, cartItemData.date, cartItemData.price, cartItemData.item_type, cartItemData.image_path);
+            cartItems.push(cartItem);
+            setButton(ticketButton, cartItems);
         } else {
             ticketButton.classList.add('disabled');
             ticketButton.disabled = true;

@@ -1,5 +1,6 @@
 import { fetchFromApi } from "../main.js";
 import { setButton } from "../main.js";
+import { CartItem } from "./CartItem.js";
 
 /**
  * Class that handles the DANCE! event schedule.
@@ -39,14 +40,13 @@ export class DanceSchedule {
     
         for (let i = 0; i < passButtons.length; i++) {
             const pass = this.passes[i];
-            const cartItem = await fetchFromApi(`/api/cart-item/pass/${pass.id}`);
-    
+            const cartItemData = await fetchFromApi(`/api/cart-item/pass/${pass.id}`);
             let dayName;
     
             if (pass.item_name === "Three-days pass" || i === this.passes.length - 1) {
                 dayName = "All-Access";
             } else {
-                dayName = new Date(cartItem.date.replace(' ', 'T')).toLocaleDateString('en-US', { weekday: 'long' });
+                dayName = new Date(cartItemData.date.replace(' ', 'T')).toLocaleDateString('en-US', { weekday: 'long' });
             }
     
             const canSell = passesAvailability[dayName];
@@ -54,13 +54,15 @@ export class DanceSchedule {
             if (canSell) {
                 passButtons[i].disabled = false;
                 passButtons[i].classList.remove('disabled');
+
+                let cartItems = [];
+                const cartItem = new CartItem(cartItemData.ticket_id, cartItemData.item_name, cartItemData.date, cartItemData.price, cartItemData.item_type, cartItemData.image_path);
+                cartItems.push(cartItem);
+                setButton(passButtons[i], cartItems);
             } else {
                 passButtons[i].disabled = true;
                 passButtons[i].classList.add('disabled');
             }
-    
-            setButton(passButtons[i], cartItem);
-            console.log(cartItem);
         }
     }
 }

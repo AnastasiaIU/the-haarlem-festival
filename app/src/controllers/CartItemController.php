@@ -16,4 +16,8 @@ class CartItemController {
     public function fetchDanceShowItem(int $id, string $slug): ?CartItemDTO {
         return $this->cartItemModel->fetchDanceShowItem($id, $slug);
     }
+
+    public function fetchRestaurantCartItem(int $id): ?array {
+        return $this->cartItemModel->fetchRestaurantCartItem($id);
+    }
 }

@@ -37,15 +37,18 @@ export class ShoppingCart {
      * @param {CartItem} newItem - The item to add to the cart.
      */
     addItem(newItem) {
-        const key = newItem.id;
-
+        // Use a unique key combining the item ID, subType, time, and date
+        const key = newItem.subType
+            ? `${newItem.id}-${newItem.subType}-${newItem.time}-${newItem.date}`
+            : `${newItem.id}-${newItem.time}-${newItem.date}`;
+    
         // Check if the item already exists in the cart
         if (this.items.has(key)) {
             this.items.get(key).push(newItem); // Add another instance of the item
         } else {
             this.items.set(key, [newItem]); // Add the item as a new entry
         }
-
+    
         this.saveCartToStorage(); // Save the updated cart to localStorage
         this.updateTotalPrice(); // Update the total price
     }
@@ -55,9 +58,9 @@ export class ShoppingCart {
      *
      * @param {number} itemId - The ID of the item to remove.
      */
-    removeItem(itemId) {
-        if (this.items.has(itemId)) {
-            this.items.delete(itemId); // Remove the item from the cart
+    removeItem(itemKey) {
+        if (this.items.has(itemKey)) {
+            this.items.delete(itemKey); // Remove the item from the cart
             this.saveCartToStorage(); // Save the updated cart to localStorage
             this.updateTotalPrice(); // Update the total price
         }
@@ -69,31 +72,32 @@ export class ShoppingCart {
      * @param {number} itemId - The ID of the item to update.
      * @param {number} change - The change in quantity (+1 or -1).
      */
-    updateQuantity(itemId, change) {
-        if (this.items.has(itemId)) {
-            const tickets = this.items.get(itemId);
-
+    updateQuantity(itemKey, change) {
+        if (this.items.has(itemKey)) {
+            const tickets = this.items.get(itemKey);
+    
             if (change > 0) {
                 // Increase quantity
                 const existingItem = tickets[0];
                 const newItem = new CartItem(
                     existingItem.id,
                     existingItem.name,
-                    `${existingItem.date}T${existingItem.time}`,
+                    existingItem.date,
                     existingItem.price,
                     existingItem.type,
                     existingItem.path,
-                    existingItem.subType
+                    existingItem.subType,
+                    existingItem.time
                 );
                 tickets.push(newItem);
             } else {
                 // Decrease quantity
                 tickets.pop();
                 if (tickets.length === 0) {
-                    this.items.delete(itemId); // Remove the item if quantity is 0
+                    this.items.delete(itemKey); // Remove the item if quantity is 0
                 }
             }
-
+    
             this.saveCartToStorage(); // Save the updated cart to localStorage
             this.updateTotalPrice(); // Update the total price
         }
@@ -159,11 +163,11 @@ export class ShoppingCart {
      */
     renderCart(cartItemsContainer, totalPriceElement) {
         cartItemsContainer.innerHTML = '';
-
+    
         this.items.forEach((tickets, key) => {
             const item = tickets[0];
             const quantity = tickets.length;
-
+    
             const cartItemElement = document.createElement('div');
             cartItemElement.classList.add('cart-item');
             cartItemElement.innerHTML = `
@@ -172,10 +176,10 @@ export class ShoppingCart {
                     <p class="event-type">${item.type}</p>
                     <p class="event-name">${item.name}</p>
                     <p class="event-date">${item.date.split('-').reverse().join('-')}</p>
-                    <p class="event-time">${item.time.slice(0, 5)}</p>
+                    <p class="event-time">${item.time}</p>
                 </div>
-                <div>
-                    <p>${item.subType}</p>
+                <div class="d-flex justify-content-center align-items-center">
+                    <p class="m-0">${item.subType}</p>
                 </div>
                 <div class="quantity-controls">
                     <button class="decrease-quantity" data-id="${key}">-</button>
@@ -186,26 +190,26 @@ export class ShoppingCart {
                 <p class="item-price">€ ${(item.price * quantity).toFixed(2)}</p>
                 <button class="remove-item" data-id="${key}">Remove</button>
             `;
-
+    
             cartItemsContainer.appendChild(cartItemElement);
-
+    
             // Add event listeners for quantity buttons and remove button
             cartItemElement.querySelector('.decrease-quantity').addEventListener('click', () => {
-                this.updateQuantity(parseInt(key), -1);
+                this.updateQuantity(key, -1);
                 this.renderCart(cartItemsContainer, totalPriceElement);
             });
-
+    
             cartItemElement.querySelector('.increase-quantity').addEventListener('click', () => {
-                this.updateQuantity(parseInt(key), 1);
+                this.updateQuantity(key, 1);
                 this.renderCart(cartItemsContainer, totalPriceElement);
             });
-
+    
             cartItemElement.querySelector('.remove-item').addEventListener('click', () => {
-                this.removeItem(parseInt(key));
+                this.removeItem(key);
                 this.renderCart(cartItemsContainer, totalPriceElement);
             });
         });
-
+    
         // Update the total price in the UI
         totalPriceElement.textContent = `€${this.totalPrice.toFixed(2)}`;
     }

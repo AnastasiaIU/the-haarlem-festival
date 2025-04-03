@@ -7,7 +7,7 @@ class BookingModel extends BaseModel {
         try {
             self::$pdo->beginTransaction();
 
-            $query = self::$pdo->prepare('INSERT INTO booking (order_number, user_id, receiving_email, ticket_type, ticket_id, quantity) VALUES (:order_number, :user_id, :receiving_email, :ticket_type, :ticket_id, :quantity)');
+            $query = self::$pdo->prepare('INSERT INTO booking (order_number, user_id, receiving_email, ticket_type, ticket_subtype, ticket_id, quantity) VALUES (:order_number, :user_id, :receiving_email, :ticket_type, :ticket_subtype, :ticket_id, :quantity)');
 
             foreach ($bookings as $booking) {
                 $success = $query->execute([
@@ -15,6 +15,7 @@ class BookingModel extends BaseModel {
                     ':user_id' => $userId,
                     ':receiving_email' => $receivingEmail,
                     ':ticket_type' => $booking['ticketType'],
+                    ':ticket_subtype' => $booking['ticketSubType'],
                     ':ticket_id' => $booking['ticketId'],
                     ':quantity' => $booking['quantity']
                 ]);

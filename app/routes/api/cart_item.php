@@ -17,3 +17,10 @@ Route::add('/api/cart-item/dance-show/([0-9]+)/([a-zA-Z0-9-]+)', function ($id, 
     $cartItem = $carItemController->fetchDanceShowItem($id, $slug);
     echo json_encode($cartItem->toArray());
 });
+
+Route::add('/api/cart-item/restaurant/([0-9]+)', function ($id) use ($carItemController) {
+    header('Content-Type: application/json');
+
+    $cartItem = $carItemController->fetchRestaurantCartItem($id);
+    echo json_encode($cartItem);
+});

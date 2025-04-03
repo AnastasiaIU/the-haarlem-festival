@@ -94,7 +94,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary d-flex text-nowrap align-items-center gap-2 py-2 px-3">
+                <button type="button" class="btn btn-primary d-flex text-nowrap align-items-center gap-2 py-2 px-3 add-button-r">
                     <span>Add to cart</span>
                     <img src="/assets/images/shopping_cart_white.svg" alt="Shopping cart">
                 </button>

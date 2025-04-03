@@ -1,11 +1,12 @@
 export class CartItem {
-    constructor(id, name, dateTime, price, type, path, subType = null) {
+    constructor(id, name, dateTime, price, type, path, subType = null, comment = null) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.type = type;
         this.subType = subType ? subType : '';
         this.path = path;
+        this.comment = comment ? comment : '';
 
         const dateObj = new Date(dateTime);
 
