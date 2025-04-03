@@ -59,6 +59,7 @@ require_once(__DIR__ . "/../routes/api/stripe.php");
 require_once(__DIR__ . "/../routes/api/booking.php");
 require_once(__DIR__ . "/../routes/api/cart_item.php");
 require_once(__DIR__ . "/../routes/api/reservation.php");
+require_once(__DIR__ . "/../routes/api/teylers_event.php");
 
 // Start the router, enabling handling requests
 Route::run();

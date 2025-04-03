@@ -23,9 +23,9 @@
                     <div>
                         <select id="lorentzDate" class="form-select" aria-label="Select a day">
                             <option value="" disabled="" selected="">Select a day</option>
-                            <option value="25">Friday, July 25th</option>
-                            <option value="26">Saturday, July 26th</option>
-                            <option value="27">Sunday, July 27th</option>
+                            <option value="2025-07-25">Friday, July 25th</option>
+                            <option value="2025-07-26">Saturday, July 26th</option>
+                            <option value="2025-07-27">Sunday, July 27th</option>
                         </select>
                     </div>
                     <div>
@@ -91,10 +91,10 @@
                                 <div>
                                     <select id="teylerDate" class="form-select" aria-label="Select a day">
                                         <option value="" disabled="" selected="">Select a day</option>
-                                        <option value="24">Thursday, July 24th</option>
-                                        <option value="25">Friday, July 25th</option>
-                                        <option value="26">Saturday, July 26th</option>
-                                        <option value="27">Sunday, July 27th</option>
+                                        <option value="2025-07-24">Thursday, July 24th</option>
+                                        <option value="2025-07-25">Friday, July 25th</option>
+                                        <option value="2025-07-26">Saturday, July 26th</option>
+                                        <option value="2025-07-27">Sunday, July 27th</option>
                                     </select>
                                 </div>
                                 <div>
