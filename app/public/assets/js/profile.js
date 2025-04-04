@@ -1,4 +1,3 @@
-if(window.location.pathname === "/profile/edit"){
 document.addEventListener("DOMContentLoaded", async function () {
     await checkAdminStatus();
     await fetchUsers();
@@ -9,17 +8,12 @@ document.addEventListener("DOMContentLoaded", async function () {
     document.getElementById("date-header").addEventListener("click", () => sortUsers("created_at"));
     document.getElementById("role-header").addEventListener("click", () => sortUsers("role"));
 
-    document.getElementById("create-user-btn").addEventListener("click", openCreateUserModal);
+    document.getElementById("create-user-btn").addEventListener("click", function() {});
     document.getElementById("createUserForm").addEventListener("submit", handleCreateUser);
-    document.getElementById("createUserModal").addEventListener("hidden.bs.modal", function () {
-        document.body.classList.remove("modal-open"); 
-        document.querySelector(".modal-backdrop")?.remove();
-        document.getElementById("createUserForm").reset();
-    });
 
     document.getElementById("editProfileForm").addEventListener("submit", handleProfileUpdate);
     document.getElementById("showEditPasswordCheck").addEventListener("change", togglePasswordVisibility);
-});}
+});
 
 async function checkAdminStatus() {
     const response = await fetch('/api/authAdmin');
@@ -38,7 +32,6 @@ async function fetchUsers() {
     users = await response.json();
     applyFilters();
 }
-
 
 function applyFilters() {
     const searchInput = document.getElementById("search-input").value.toLowerCase();
@@ -231,8 +224,19 @@ async function handleCreateUser(event) {
         const result = await response.json();
 
         if (result.success) {
-            let modal = bootstrap.Modal.getInstance(document.getElementById("createUserModal"));
-            modal.hide();
+            let modalElement = document.getElementById("createUserModal");
+            let modalInstance = bootstrap.Modal.getInstance(modalElement);
+            
+            if (modalInstance) {
+                modalInstance.hide(); // ✅ Correct Bootstrap method
+            }
+
+            // ✅ If Bootstrap doesn't work, manually remove modal backdrop
+            setTimeout(() => {
+                modalElement.style.display = "none";
+                document.body.classList.remove("modal-open"); 
+                document.querySelector(".modal-backdrop")?.remove();
+            }, 300);
 
             await fetchUsers(); 
         } else {

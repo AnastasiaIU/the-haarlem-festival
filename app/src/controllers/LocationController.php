@@ -35,4 +35,36 @@ class LocationController
     {
         return $this->locationModel->fetchLocationBySlug($slug);
     }
+
+    /**
+     * Creates a new location.
+     */
+    public function createLocation(array $data): bool
+    {
+        return $this->locationModel->createLocation($data);
+    }
+
+    /**
+     * Updates an existing location by ID.
+     */
+    public function updateLocation(int $id, array $data): bool
+    {
+    $result = $this->locationModel->updateLocation($id, $data);
+
+    if ($result) {
+        error_log("Update successful.");
+    } else {
+        error_log("Update failed.");
+    }
+
+    return $result;
+    }
+
+    /**
+     * Deletes a location by ID.
+     */
+    public function deleteLocation(int $id): bool
+    {
+        return $this->locationModel->deleteLocation($id);
+    }
 }

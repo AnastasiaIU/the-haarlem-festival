@@ -54,4 +54,48 @@ class LocationModel extends BaseModel
 
         return LocationDTO::fromArray($location);
     }
+
+    public function createLocation(array $data): bool
+    {
+        $query = self::$pdo->prepare(
+            'INSERT INTO location (event_id, slug, name, address, description, card_description, image, card_image, 
+            carousel_image1, carousel_image2, carousel_image3, carousel_image4, carousel_image5, carousel_image6) 
+            VALUES (:event_id, :slug, :name, :address, :description, :card_description, :image, :card_image, 
+            :carousel_image1, :carousel_image2, :carousel_image3, :carousel_image4, :carousel_image5, :carousel_image6)'
+        );
+
+        return $query->execute($data);
+    }
+
+    public function updateLocation(int $id, array $data): bool
+    {
+        $query = self::$pdo->prepare(
+            'UPDATE location SET 
+                event_id = 4,
+                slug = :slug, 
+                name = :name, 
+                address = :address, 
+                description = :description, 
+                card_description = :card_description, 
+                image = :image, 
+                card_image = :card_image, 
+                carousel_image1 = :carousel_image1, 
+                carousel_image2 = :carousel_image2, 
+                carousel_image3 = :carousel_image3, 
+                carousel_image4 = :carousel_image4, 
+                carousel_image5 = :carousel_image5, 
+                carousel_image6 = :carousel_image6 
+            WHERE id = :id'
+        );
+    
+        $data['id'] = $id;
+
+        return $query->execute($data); 
+    }
+
+    public function deleteLocation(int $id): bool
+    {
+        $query = self::$pdo->prepare('DELETE FROM location WHERE id = :id');
+        return $query->execute(['id' => $id]);
+    }
 }
