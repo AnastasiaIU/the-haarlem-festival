@@ -26,6 +26,10 @@
     font-style: italic;
 }
 
+select {
+    min-width: 175px;
+}
+
 @media (max-width: 768px) {
     .guide-image-container {
         order: 4 !important;
@@ -40,6 +44,8 @@
     .date-container {
         order: 2 !important;
         flex-direction: row !important;
+        flex-wrap: wrap;
+        justify-content: center;
     }
 
     .book-container {
