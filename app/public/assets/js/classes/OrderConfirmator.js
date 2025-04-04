@@ -114,7 +114,7 @@ export class OrderConfirmator {
     }
 
     createRestaurantBookings(reservationIds,orderItems) {
-        const reservationMap = new Map();
+            const reservationMap = new Map();
         let reservationIndex = 0;
 
         orderItems.forEach((orderItem) => {
@@ -169,6 +169,6 @@ export class OrderConfirmator {
         const orderConfirmationHolder = document.getElementById('confirmation-message');
 
         orderNumberHolder.textContent = data.order_number;
-        orderConfirmationHolder.textContent = data.receiving_email;
+        orderConfirmationHolder.textContent =`A confiramation will be sent to you at ${data.receiving_email} with your tickets.`;
     }
 }

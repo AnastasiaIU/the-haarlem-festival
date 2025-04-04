@@ -155,6 +155,13 @@ export class ShoppingCart {
         return Array.from(this.items.values()).flat();
     }
 
+    capitalizeWords(str) {
+        return str
+            .split(' ')
+            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(' ');
+    }
+
     /**
      * Renders the cart items in the UI.
      *
@@ -173,10 +180,10 @@ export class ShoppingCart {
             cartItemElement.innerHTML = `
                 <img src="./assets/images/${item.path}" alt="${item.name}" class="item-image">
                 <div class="item-info">
-                    <p class="event-type">${item.type}</p>
+                    <p class="event-type">${this.capitalizeWords(item.type.replace("_", " "))}</p>
                     <p class="event-name">${item.name}</p>
                     <p class="event-date">${item.date.split('-').reverse().join('-')}</p>
-                    <p class="event-time">${item.time}</p>
+                    <p class="event-time">${item.time.slice(0,5)}</p>
                 </div>
                 <div class="d-flex justify-content-center align-items-center">
                     <p class="m-0">${item.subType}</p>
@@ -220,7 +227,6 @@ export class ShoppingCart {
         this.items.forEach((tickets) => {
             const item = tickets[0];
             const quantity = tickets.length;
-
             const cartItemElement = document.createElement('div');
             cartItemElement.classList.add('cart-item-c');
             cartItemElement.innerHTML = `

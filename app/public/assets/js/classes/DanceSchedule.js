@@ -8,7 +8,6 @@ import { CartItem } from "./CartItem.js";
 export class DanceSchedule {
     async init() {
         this.passes = await fetchFromApi('/api/getPasses');
-
         this.setPrices();
         await this.setButtons();
     }
@@ -37,7 +36,7 @@ export class DanceSchedule {
     async setButtons() {
         const passButtons = document.querySelectorAll(".pass-button");
         const passesAvailability = await fetchFromApi('/api/getPassesAvailability');
-    
+
         for (let i = 0; i < passButtons.length; i++) {
             const pass = this.passes[i];
             const cartItemData = await fetchFromApi(`/api/cart-item/pass/${pass.id}`);

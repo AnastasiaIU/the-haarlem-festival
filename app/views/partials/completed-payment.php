@@ -2,8 +2,8 @@
     <div class="completed-payment-information">
         <h1 class="order-heeader">Thank you for your order!</h1>
         <hr class="order-line-separation w-100">
-        <p>A confirmation will be sent to you at <p id="confirmation-message">
-        </p>with your tickets.</p>
+        <p id="confirmation-message">
+        </p>
         <p class="confirmation-number-information">Below is your order number. Please save it before closing the page. You can refer to your order using this number.</p>
         <h2 id="order-number" class="confirmation-code">
         </h2>
@@ -11,4 +11,4 @@
     </div>
 </div>
 
-<script type="module" src="../../assets/js/order-confirmation.js"></script> 
+<script type="module" src="../../assets/js/order-confirmation.js"></script>
