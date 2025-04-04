@@ -193,7 +193,7 @@ export class ShoppingCart {
                     <span class="quantity">${quantity}</span>
                     <button class="increase-quantity" data-id="${key}">+</button>
                 </div>
-                <p class="item-price">€ ${item.price.toFixed(2)}</p>
+                <p class="item-price">€ ${item.price.toFixed(2)}${item.type == "reservation" ? "*" : ""}</p>
                 <p class="item-price">€ ${(item.price * quantity).toFixed(2)}</p>
                 <button class="remove-item" data-id="${key}">Remove</button>
             `;
