@@ -188,7 +188,7 @@ VALUES (3, 'ratatouille', 'Ratatouille Food and Wine', 'Spaarne 96, 2011 CL Haar
 CREATE TABLE chef
 (
     id            INT AUTO_INCREMENT PRIMARY KEY,
-    restaurant_id INT          NOT NULL UNIQUE,
+    restaurant_id INT          NOT NULL,
     name          VARCHAR(100) NOT NULL,
     image         VARCHAR(100) NOT NULL,
     description   VARCHAR(500) NOT NULL,
@@ -268,7 +268,8 @@ CREATE TABLE guide
     language_id INT          NOT NULL,
     name        VARCHAR(100) NOT NULL,
     description VARCHAR(500) NOT NULL,
-    image       VARCHAR(100) NOT NULL
+    image       VARCHAR(100) NOT NULL,
+    CONSTRAINT fk_language_id_guide FOREIGN KEY (language_id) REFERENCES language (id)
 );
 
 INSERT INTO guide (language_id, name, description, image)
@@ -545,61 +546,6 @@ VALUES (1, 1,
         '<p>A Hidden Gem:</p><ul><li>The Hof van Bakenes is tucked away in Haarlem’s city center, making it a delightful surprise for those who discover it.</li><li>Unlike larger public squares, this intimate courtyard provides a quiet escape where visitors can admire its historical charm.</li></ul><p>Respectful Tourism:</p><ul><li>Though primarily a residential area, visitors are welcome to admire the hofje’s architecture and garden while respecting its peaceful atmosphere.</li><li>Guided walking tours often include the Hof van Bakenes as part of Haarlem’s hofjes tradition, showcasing the city’s lesser-known but deeply historic sites.</li></ul>',
         3);
 
-CREATE TABLE image
-(
-    id          INT AUTO_INCREMENT PRIMARY KEY,
-    location_id INT          NOT NULL,
-    image       VARCHAR(100) NOT NULL,
-    CONSTRAINT fk_location_id_image FOREIGN KEY (location_id) REFERENCES location (id)
-);
-
-INSERT INTO image (location_id, image)
-VALUES (1, 'church_of_st_bavo_1.png'),
-       (1, 'church_of_st_bavo_2.png'),
-       (1, 'church_of_st_bavo_3.png'),
-       (1, 'church_of_st_bavo_4.png'),
-       (1, 'church_of_st_bavo_5.png'),
-       (2, 'grote_markt_1.png'),
-       (2, 'grote_markt_2.png'),
-       (2, 'grote_markt_3.png'),
-       (2, 'grote_markt_4.png'),
-       (2, 'grote_markt_5.png'),
-       (3, 'de_hallen_1.png'),
-       (3, 'de_hallen_2.png'),
-       (3, 'de_hallen_3.png'),
-       (3, 'de_hallen_4.png'),
-       (3, 'de_hallen_5.png'),
-       (4, 'proveniershof_1.png'),
-       (4, 'proveniershof_2.png'),
-       (4, 'proveniershof_3.png'),
-       (4, 'proveniershof_4.png'),
-       (4, 'proveniershof_5.png'),
-       (5, 'jopenkerk_1.png'),
-       (5, 'jopenkerk_2.png'),
-       (5, 'jopenkerk_3.png'),
-       (5, 'jopenkerk_4.png'),
-       (5, 'jopenkerk_5.png'),
-       (6, 'waalse-kerk-haarlem_1.png'),
-       (6, 'waalse-kerk-haarlem_2.png'),
-       (6, 'waalse-kerk-haarlem_3.png'),
-       (6, 'waalse-kerk-haarlem_4.png'),
-       (6, 'waalse-kerk-haarlem_5.png'),
-       (7, 'molen-de-adriaan_1.png'),
-       (7, 'molen-de-adriaan_2.png'),
-       (7, 'molen-de-adriaan_3.png'),
-       (7, 'molen-de-adriaan_4.png'),
-       (7, 'molen-de-adriaan_5.png'),
-       (8, 'amsterdamse-poort_1.png'),
-       (8, 'amsterdamse-poort_2.png'),
-       (8, 'amsterdamse-poort_3.png'),
-       (8, 'amsterdamse-poort_4.png'),
-       (8, 'amsterdamse-poort_5.png'),
-       (9, 'hof-van-bakenes_1.png'),
-       (9, 'hof-van-bakenes_2.png'),
-       (9, 'hof-van-bakenes_3.png'),
-       (9, 'hof-van-bakenes_4.png'),
-       (9, 'hof-van-bakenes_5.png');
-
 
 CREATE TABLE track
 (
@@ -662,7 +608,7 @@ CREATE TABLE venue
 (
     id      INT AUTO_INCREMENT PRIMARY KEY,
     name    VARCHAR(100) NOT NULL,
-    address VARCHAR(100) NOT NULL
+    address VARCHAR(150) NOT NULL
 );
 
 INSERT INTO venue (name, address)
