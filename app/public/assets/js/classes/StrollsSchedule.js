@@ -70,7 +70,6 @@ export class StrollsSchedule {
         this.setImage(lastCard, tour[0]);
         this.setDescription(lastCard, tour[0]);
         this.reorderImage(lastCard, left);
-        this.disableButton(lastCard);
     }
 
     /**
@@ -95,16 +94,6 @@ export class StrollsSchedule {
             imageContainer.style.order = 3;
             textContainer.style.order = 4;
         }
-    }
-
-    /**
-     * Disables the booking button in a schedule card by default.
-     *
-     * @param {HTMLElement} card - The schedule card DOM element.
-     */
-    disableButton(card) {
-        const button = card.querySelector('.btn');
-        button.disabled = true;
     }
 
     /**
@@ -174,27 +163,43 @@ export class StrollsSchedule {
 
     /**
      * Populates the dropdown with available time options for the tour and enables
-     * the booking button when a valid time is selected.
+     * the booking button when a valid time and type is selected.
      *
      * @param {HTMLElement} card - The schedule card DOM element.
      * @param {Array} tour - Array of tour objects (all same guide and day).
      */
     populateTime(card, tour) {
-        const dropdown = card.querySelector('.form-select');
-        dropdown.innerHTML = '<option value="" disabled selected>Select a time</option>';
+        const selectTime = card.querySelector('.select-time');
+        selectTime.innerHTML = '<option value="" disabled selected>Select a time</option>';
 
         tour.forEach((item) => {
             const option = document.createElement('option');
             option.value = this.getFormattedTime(new Date(item.date_time));
             option.textContent = option.value;
 
-            dropdown.appendChild(option);
+            selectTime.appendChild(option);
         })
 
-        dropdown.addEventListener('change', () => {
-            const button = card.querySelector('.btn');
-            button.disabled = card.querySelector('option:checked').value === '';
+        selectTime.addEventListener('change', () => {
+            this.enableButton(card);
         })
+
+        const selectType = card.querySelector('.select-type');
+        selectType.addEventListener('change', () => {
+            this.enableButton(card);
+        })
+    }
+
+    /**
+     * Enables the booking button if a valid time and type are selected.
+     *
+     * @param {HTMLElement} card - The schedule card DOM element.
+     */
+    enableButton(card) {
+        const button = card.querySelector('.btn');
+        const selectedTime = card.querySelector('.select-time option:checked').value;
+        const selectedType = card.querySelector('.select-type option:checked').value;
+        button.disabled = selectedTime === '' || selectedType === '';
     }
 
     /**
