@@ -18,7 +18,12 @@
             <div class="date-container d-flex flex-column gap-3">
                 <p class="h1 schedule-date fw-bold m-0"></p>
                 <p class="schedule-day-of-week m-0"></p>
-                <select class="form-select" aria-label="Select a time"></select>
+                <select class="form-select select-time" aria-label="Select a time"></select>
+                <select class="form-select select-type" aria-label="Select ticket type">
+                    <option value="" disabled selected>Select ticket type</option>
+                    <option value="individual">Individual</option>
+                    <option value="family">Family</option>
+                </select>
             </div>
             <div class="book-container d-flex flex-column flex-grow-1 pe-lg-2 gap-3">
                 <form method="post" class="tinymce-form-guides">
@@ -28,7 +33,7 @@
                 </form>
                 <p class="language m-0"></p>
                 <div>
-                    <button class="btn btn-primary font-p-16 fw-bold py-2 px-3">Book now</button>
+                    <button class="btn btn-primary font-p-16 fw-bold py-2 px-3" disabled>Book now</button>
                 </div>
             </div>
             <div class="col-md-3 guide-image-container">
