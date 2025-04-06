@@ -1,6 +1,7 @@
-import {fetchFromApi} from "../main.js";
-import {CMS} from "./CMS.js";
-
+import { fetchFromApi } from "../main.js";
+import { CMS } from "./CMS.js";
+import { CartItem } from "./CartItem.js";
+import { ShoppingCart } from "./ShoppingCart.js";
 /**
  * Class that handles the Strolls schedule.
  */
@@ -10,6 +11,7 @@ export class StrollsSchedule {
         this.cardsContainer = document.getElementById('strollsSchedule');
         this.tours = await fetchFromApi('/api/getTours');
         this.groupedTours = this.groupToursByDayAndGuide();
+        this.shoppingCart = ShoppingCart.getInstance();
 
         await this.setTitles();
         this.populateCards();
@@ -186,7 +188,7 @@ export class StrollsSchedule {
 
         const selectType = card.querySelector('.select-type');
         selectType.addEventListener('change', () => {
-            this.enableButton(card);
+            this.enableButton(card, tour);
         })
     }
 
@@ -195,11 +197,47 @@ export class StrollsSchedule {
      *
      * @param {HTMLElement} card - The schedule card DOM element.
      */
-    enableButton(card) {
+    enableButton(card, tour) {
         const button = card.querySelector('.btn');
         const selectedTime = card.querySelector('.select-time option:checked').value;
         const selectedType = card.querySelector('.select-type option:checked').value;
         button.disabled = selectedTime === '' || selectedType === '';
+
+        button.onclick = null;
+        // Add a new click event listener
+        button.onclick = async () => {
+            const selectedTour = tour.find(item => {
+                const tourTime = item.date_time.slice(11, 16);
+                return tourTime === selectedTime;
+            });
+
+            if (!selectedTour) {
+                console.error('Selected tour not found');
+                return;
+            }
+            console.log(selectedType);
+
+
+            const availability = await fetchFromApi(`/api/bookings/tour-availability/${selectedTour.id}`);
+            console.log(availability);
+            const isAvailable = selectedType == 'individual' ? availability.individual : availability.family;
+            button.disabled = !isAvailable;
+
+            if (isAvailable) {
+                await this.addCartItem(selectedTour, selectedType);
+            }
+        }
+    }
+
+    async addCartItem(tour, selectedType) {
+        console.log(tour);
+        console.log();
+        const price = selectedType == 'individual' ? tour.tour_type.single_price : tour.tour_type.family_price;
+        const cartItemData = await fetchFromApi('/api/cart-item/tour');
+        console.log(cartItemData);
+        console.log(`${tour.guide.language.language} ${cartItemData.type}`);
+        const cartItem = new CartItem(tour.id, `${tour.guide.language.language} ${cartItemData.type}`, tour.date_time, price, cartItemData.type, cartItemData.image, selectedType);
+        this.shoppingCart.addItem(cartItem);
     }
 
     /**
@@ -223,7 +261,7 @@ export class StrollsSchedule {
      */
     setDate(card, tour) {
         const date = new Date(tour.date_time);
-        const options = {weekday: 'long'};
+        const options = { weekday: 'long' };
 
         const dateElement = card.querySelector('.schedule-date');
         dateElement.innerHTML = date.getDate();

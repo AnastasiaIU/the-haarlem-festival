@@ -64,6 +64,10 @@ export class OrderConfirmator {
     async processRestaurantBookings(orderItems) {
         this.createReservations(orderItems);
 
+        if(this.reservations.length === 0) {
+            return;
+        }
+        
         try {
             const response = await this.postReservations();
             const reservationIds = await response.json();

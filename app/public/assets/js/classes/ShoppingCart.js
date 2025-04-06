@@ -181,12 +181,12 @@ export class ShoppingCart {
                 <img src="./assets/images/${item.path}" alt="${item.name}" class="item-image">
                 <div class="item-info">
                     <p class="event-type">${this.capitalizeWords(item.type.replace("_", " "))}</p>
-                    <p class="event-name">${item.name}</p>
+                    <p class="event-name">${this.capitalizeWords(item.name)}</p>
                     <p class="event-date">${item.date.split('-').reverse().join('-')}</p>
                     <p class="event-time">${item.time.slice(0,5)}</p>
                 </div>
                 <div class="d-flex justify-content-center align-items-center">
-                    <p class="m-0">${item.subType}</p>
+                    <p class="m-0">${this.capitalizeWords(item.subType)}</p>
                 </div>
                 <div class="quantity-controls">
                     <button class="decrease-quantity" data-id="${key}">-</button>
@@ -231,8 +231,8 @@ export class ShoppingCart {
             cartItemElement.classList.add('cart-item-c');
             cartItemElement.innerHTML = `
                 <div class="d-flex flex-column">
-                    <strong>${item.type}</strong>
-                    <strong>${item.name}</strong>
+                    <strong>${this.capitalizeWords(item.type)}</strong>
+                    <strong>${this.capitalizeWords(item.name)}</strong>
                     <p class="m-0 text-start">${item.date.split('-').reverse().join('-')}</p>
                     <p class="m-0">${item.time.slice(0, 5)}</p>
                 </div>

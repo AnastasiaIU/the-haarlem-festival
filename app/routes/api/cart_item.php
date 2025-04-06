@@ -24,3 +24,10 @@ Route::add('/api/cart-item/restaurant/([0-9]+)', function ($id) use ($carItemCon
     $cartItem = $carItemController->fetchRestaurantCartItem($id);
     echo json_encode($cartItem);
 });
+
+Route::add('/api/cart-item/tour', function () use ($carItemController) {
+    header('Content-Type: application/json');
+
+    $cartItem = $carItemController->fetchTourCartItem();
+    echo json_encode($cartItem);
+});

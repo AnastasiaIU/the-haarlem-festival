@@ -35,11 +35,11 @@ class CartItemDTO
         ];
     }
 
-    public static function fromArray(array $data, TicketType $ticketType): self
+    public static function fromArray(array $data): self
     {
         return new self(
             $data['item_name'],
-            $ticketType,
+            TicketType::from($data['item_type']),
             $data['ticket_id'],
             new DateTime($data['date']),
             $data['price'],

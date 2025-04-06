@@ -37,4 +37,22 @@ class BookingController {
 
         return false;
     }
+
+    public function tourSold($ticketId): array {
+        return $this->bookingModel->tourSold($ticketId);
+    }
+
+    public function getTourAvailability($ticketId): array {
+        $tourData = $this->tourSold($ticketId);
+        $capacity = $tourData['capacity'];
+        $ticketsSold = $tourData['tickets_sold'];
+
+        $individualTickets = $capacity > $ticketsSold;
+        $familyTickets = ($capacity - $ticketsSold) >= 4;
+
+        return [
+            'individual' => $individualTickets,
+            'family' => $familyTickets
+        ];
+    }
 }

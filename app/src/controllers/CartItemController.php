@@ -20,4 +20,8 @@ class CartItemController {
     public function fetchRestaurantCartItem(int $id): ?array {
         return $this->cartItemModel->fetchRestaurantCartItem($id);
     }
+
+    public function fetchTourCartItem(): ?array {
+        return $this->cartItemModel->fetchTourCartItem();
+    }
 }
