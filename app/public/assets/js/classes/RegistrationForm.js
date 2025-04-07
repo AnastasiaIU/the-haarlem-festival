@@ -6,6 +6,7 @@ export class RegistrationForm {
         this.form = document.getElementById("registrationForm");
         this.email = document.getElementById("inputEmail");
         this.emailPrompt = document.getElementById("inputEmailPrompt");
+        this.name = document.getElementById("inputName");
         this.password = document.getElementById("inputPassword");
         this.confirmPassword = document.getElementById("inputConfirmPassword");
         this.confirmPasswordPrompt = document.getElementById("confirmPasswordPrompt");
@@ -15,6 +16,7 @@ export class RegistrationForm {
         this.form.addEventListener('submit', (event) => this.handleFormSubmission(event));
         this.showPasswordCheck.addEventListener('change', () => this.togglePasswordVisibility());
         this.email.addEventListener('change', () => this.resetFieldsValidation());
+        this.name.addEventListener('change', () => this.resetFieldsValidation());
         this.password.addEventListener('change', () => this.resetFieldsValidation());
         this.confirmPassword.addEventListener('change', () => this.resetFieldsValidation());
     }
@@ -40,6 +42,10 @@ export class RegistrationForm {
             this.emailPrompt.innerHTML = 'Invalid email.';
         }
 
+        if (this.name.value === '') {
+            this.name.setCustomValidity('Name cannot be empty.');
+        }
+
         // Check if the passwords are matching
         if (this.password.value !== this.confirmPassword.value) {
             this.password.setCustomValidity("Passwords do not match.");
@@ -60,6 +66,7 @@ export class RegistrationForm {
                 if (result.user_error) {
                     this.email.setCustomValidity(result.user_error);
                     this.emailPrompt.innerHTML = '';
+                    this.name.setCustomValidity(result.user_error);
                     this.password.setCustomValidity(result.user_error);
                     this.confirmPassword.setCustomValidity(result.user_error);
                     this.confirmPasswordPrompt.innerHTML = result.user_error;
@@ -90,6 +97,7 @@ export class RegistrationForm {
      */
     resetFieldsValidation() {
         this.email.setCustomValidity('');
+        this.name.setCustomValidity('');
         this.password.setCustomValidity('');
         this.confirmPassword.setCustomValidity('');
         this.captchaPrompt.style.display = 'none';

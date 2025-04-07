@@ -28,7 +28,7 @@ class UserController
      * @param string $password The password of the user to register.
      * @throws DateMalformedStringException
      */
-    public function registerUser(string $email, string $password, string $recaptchaToken): void
+    public function registerUser(string $email, string $password, string $recaptchaToken, string $name): void
     {
         $secretKey = $_ENV['RECAPTCHA_SECRET_KEY'];
         $url = "https://www.google.com/recaptcha/api/siteverify?secret=$secretKey&response=$recaptchaToken";
@@ -47,7 +47,7 @@ class UserController
 
             // Hash the password and save the user to the database
             $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-            $this->userModel->createUser($email, $hashedPassword, UserRole::CUSTOMER);
+            $this->userModel->createUser($email, $hashedPassword, UserRole::CUSTOMER, $name);
 
             $_SESSION['login_user_created'] = 'User created successfully. Please log in.';
 

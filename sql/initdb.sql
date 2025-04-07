@@ -693,11 +693,11 @@ VALUES (1, 5),
 
 CREATE TABLE pass
 (
-    id    INT AUTO_INCREMENT PRIMARY KEY,
-    event_id INT                                       NOT NULL,
-    name VARCHAR(50),
-    price DECIMAL(7, 2)                                       NOT NULL,
-    day   ENUM ('Friday', 'Saturday', 'Sunday', 'All-Access') NOT NULL,
+    id         INT AUTO_INCREMENT PRIMARY KEY,
+    event_id   INT                                                 NOT NULL,
+    name       VARCHAR(50),
+    price      DECIMAL(7, 2)                                       NOT NULL,
+    day        ENUM ('Friday', 'Saturday', 'Sunday', 'All-Access') NOT NULL,
     start_date DATETIME
 );
 
@@ -765,25 +765,26 @@ CREATE TABLE user
     email      VARCHAR(254)                                   NOT NULL,
     password   VARCHAR(64)                                    NOT NULL,
     role       ENUM ('Customer', 'Employee', 'Administrator') NOT NULL,
-    created_at DATETIME                                       NOT NULL
+    created_at DATETIME                                       NOT NULL,
+    name       VARCHAR(100)                                   NOT NULL
 );
 
-INSERT INTO user (email, password, role, created_at)
-VALUES ('123emp@mail.com', '$2y$12$SI3.l5PY5nWimBXtCMZ4cenGk6TtkmeE9FYJF649FHUv5xUfPqMTy', 'Employee', NOW()),
-       ('123@mail.com', '$2y$12$SI3.l5PY5nWimBXtCMZ4cenGk6TtkmeE9FYJF649FHUv5xUfPqMTy', 'Customer', NOW()),
-       ('123admin@mail.com', '$2y$12$SI3.l5PY5nWimBXtCMZ4cenGk6TtkmeE9FYJF649FHUv5xUfPqMTy', 'Administrator', NOW());
+INSERT INTO user (email, password, role, created_at, name)
+VALUES ('123emp@mail.com', '$2y$12$SI3.l5PY5nWimBXtCMZ4cenGk6TtkmeE9FYJF649FHUv5xUfPqMTy', 'Employee', NOW(), 'John Doe'),
+       ('123@mail.com', '$2y$12$SI3.l5PY5nWimBXtCMZ4cenGk6TtkmeE9FYJF649FHUv5xUfPqMTy', 'Customer', NOW(), 'Maria'),
+       ('123admin@mail.com', '$2y$12$SI3.l5PY5nWimBXtCMZ4cenGk6TtkmeE9FYJF649FHUv5xUfPqMTy', 'Administrator', NOW(), 'Mara Baker');
 
 
 CREATE TABLE booking
 (
-    id          INT AUTO_INCREMENT PRIMARY KEY,
-    user_id     INT                                                                 NOT NULL,
-    order_number VARCHAR(10),
+    id              INT AUTO_INCREMENT PRIMARY KEY,
+    user_id         INT                                                                 NOT NULL,
+    order_number    VARCHAR(10),
     receiving_email VARCHAR(254),
-    ticket_type ENUM ('pass', 'dance_show', 'reservation', 'tour', 'teylers_event') NOT NULL,
-    ticket_subtype ENUM ('Kids', 'Adults', 'Family', 'Individual') NULL,
-    ticket_id   INT                                                                 NOT NULL,
-    quantity    INT                                                                 NOT NULL,
+    ticket_type     ENUM ('pass', 'dance_show', 'reservation', 'tour', 'teylers_event') NOT NULL,
+    ticket_subtype  ENUM ('Kids', 'Adults', 'Family', 'Individual')                     NULL,
+    ticket_id       INT                                                                 NOT NULL,
+    quantity        INT                                                                 NOT NULL,
     CONSTRAINT fk_user_id_booking FOREIGN KEY (user_id) REFERENCES user (id)
 );
 
