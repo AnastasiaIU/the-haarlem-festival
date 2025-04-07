@@ -11,7 +11,7 @@
             <a href="/profile/change_account" class="btn btn-primary w-100">Change Account</a>
         </div>
         <div class="col-6">
-            <a href="#" class="btn btn-primary w-100">Something Else</a>
+            <a href="/profile/personal-plan" class="btn btn-primary w-100">Personal Plan</a>
         </div>
 
         <div class="col-6 d-none" id="adminUsersBtn">

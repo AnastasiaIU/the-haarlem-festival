@@ -5,6 +5,12 @@
             <div class="d-flex flex-column justify-content-center align-items-center gap-3">
                 <p class="h5 mb-3 medium-grey-text">Edit Your Profile</p>
             </div>
+
+            <div class="form-group">
+                <label for="editName">Change Your Name</label>
+                <input type="text" name="name" class="form-control" id="editName"
+                    placeholder="Enter new name" autocomplete="name">
+            </div>
             
             <div class="form-group">
                 <label for="editEmail">Change Your Email Address</label>
@@ -33,7 +39,7 @@
         </form>
     </section>
 
-    <div id="profileSuccessMessage" class="alert alert-success col-md-6 col-lg-5 col-xl-4 d-none" role="alert">
+    <div id="profileSuccessMessage" class="alert alert-success col-md-6 col-lg-5 col-xl-4 d-none mt-3" role="alert">
         Profile updated successfully!
     </div>
 

@@ -84,9 +84,12 @@ Route::add('/api/createUser', function() {
 
 Route::add('/api/getUserEmailById', function(){
     $userController = new UserController();
-    $user = $userController->getUserEmailById(); 
+    $user = $userController->getUserInfoById(); 
 
-    echo json_encode(["email" => $user["email"]]);
+    echo json_encode([
+        "email" => $user["email"],
+        "name" => $user["name"]
+    ]);
 });
 
 Route::add('/api/updateUserProfile', function () {
@@ -104,6 +107,10 @@ Route::add('/api/updateUserProfile', function () {
                 echo json_encode(["error" => "Invalid email format"]);
                 return;
             }
+        }
+        
+        if (!empty($data['name'])) {
+            $updates['name'] = htmlspecialchars(trim($data['name']));
         }
 
         if (!empty($data['password'])) {

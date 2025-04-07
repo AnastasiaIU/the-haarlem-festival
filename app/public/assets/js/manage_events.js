@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     fetchLocations();
     document.getElementById("create-location-btn").addEventListener("click", openCreateModal);
-    document.getElementById("searchLocationInput").addEventListener("input", applyFilters);
+    document.getElementById("searchLocationInput").addEventListener("input", applySearchLocations);
 });
 
 let locations = [];

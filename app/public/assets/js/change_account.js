@@ -13,6 +13,7 @@ async function populateProfileForm() {
         const user = await response.json();
         if (user && user.email) {
             document.getElementById("editEmail").value = user.email;
+            document.getElementById("editName").value = user.name || "";
         }
     } catch (error) {
         console.error("Error fetching user profile:", error);
@@ -35,9 +36,11 @@ async function handleProfileUpdate(event) {
     const emailField = document.getElementById("editEmail");
     const passwordField = document.getElementById("editPassword");
     const successMessage = document.getElementById("profileSuccessMessage");
+    const nameField = document.getElementById("editName");
 
     const newEmail = emailField.value.trim();
     const newPassword = passwordField.value.trim();
+    const newName = nameField.value.trim();
 
     if (!newEmail && !newPassword) {
         alert("Please enter a new email or password.");
@@ -52,6 +55,7 @@ async function handleProfileUpdate(event) {
     const updates = {};
     if (newEmail) updates.email = newEmail;
     if (newPassword) updates.password = newPassword;
+    if (newName) updates.name = newName;
 
     try {
         const response = await fetch('/api/updateUserProfile', {
