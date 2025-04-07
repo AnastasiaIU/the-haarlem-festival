@@ -775,18 +775,21 @@ CREATE TABLE booking
 (
     id          INT AUTO_INCREMENT PRIMARY KEY,
     user_id     INT                                                                 NOT NULL,
+    order_number VARCHAR(10),
+    receiving_email VARCHAR(254),
     ticket_type ENUM ('pass', 'dance_show', 'reservation', 'tour', 'teylers_event') NOT NULL,
+    ticket_subtype ENUM ('Kids', 'Adults', 'Family', 'Individual') NULL,
     ticket_id   INT                                                                 NOT NULL,
     quantity    INT                                                                 NOT NULL,
     CONSTRAINT fk_user_id_booking FOREIGN KEY (user_id) REFERENCES user (id)
 );
 
-INSERT INTO booking (user_id, ticket_type, ticket_id, quantity)
-VALUES (2, 'pass', 2, 2),
-       (2, 'dance_show', 3, 1),
-       (2, 'tour', 7, 1),
-       (2, 'teylers_event', 9, 2),
-       (2, 'reservation', 1, 1);
+INSERT INTO booking (user_id, order_number, receiving_email, ticket_type, ticket_subtype, ticket_id, quantity)
+VALUES (2, 'KCJ145', '123@mail.com' 'pass', 2, 2),
+       (2, 'KCJ145', '123@mail.com', 'dance_show', 3, 1),
+       (2, 'KCJ145', '123@mail.com', 'tour', 7, 1),
+       (2, 'KCJ145', '123@mail.com', 'teylers_event', 9, 2),
+       (2, 'KCJ145', '123@mail.com', 'reservation', 1, 1);
 
 
 CREATE TABLE button_type
