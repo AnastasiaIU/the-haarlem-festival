@@ -10,7 +10,7 @@ require_once(__DIR__ . "/../lib/error_reporting.php");
  * Enable the ErrorHandler class for using the error and exception handlers.
  */
 require_once(__DIR__ . '/../src/services/ErrorHandler.php');
-//ErrorHandler::register();
+ErrorHandler::register();
 
 /**
  * Start user session.
