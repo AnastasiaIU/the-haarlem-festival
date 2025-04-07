@@ -1,6 +1,7 @@
 <?php
 
 require_once(__DIR__ . '/BaseModel.php');
+require_once(__DIR__ . '/../dto/BookingDTO.php');
 
 class BookingModel extends BaseModel
 {
@@ -87,5 +88,20 @@ class BookingModel extends BaseModel
             'tickets_sold' => $result['tickets_sold'] ?? 0,
             'capacity' => $result['capacity'] ?? 0
         ];
+    }
+
+    public function fetchBookingsByUserId($userId): array
+    {
+        $query = self::$pdo->prepare('SELECT * FROM booking WHERE user_id = :user_id');
+        $query->execute([':user_id' => $userId]);
+        $bookings = $query->fetchAll(PDO::FETCH_ASSOC);
+
+        $dtos = [];
+        foreach ($bookings as $booking) {
+            $dto = BookingDTO::fromArray($booking);
+            $dtos[] = $dto;
+        }
+
+        return $dtos;
     }
 }

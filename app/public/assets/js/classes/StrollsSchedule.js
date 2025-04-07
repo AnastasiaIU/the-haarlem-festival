@@ -211,16 +211,8 @@ export class StrollsSchedule {
                 return tourTime === selectedTime;
             });
 
-            if (!selectedTour) {
-                console.error('Selected tour not found');
-                return;
-            }
-            console.log(selectedType);
-
-
             const availability = await fetchFromApi(`/api/bookings/tour-availability/${selectedTour.id}`);
-            console.log(availability);
-            const isAvailable = selectedType == 'individual' ? availability.individual : availability.family;
+            const isAvailable = selectedType == 'Individual' ? availability.individual : availability.family;
             button.disabled = !isAvailable;
 
             if (isAvailable) {
@@ -230,12 +222,8 @@ export class StrollsSchedule {
     }
 
     async addCartItem(tour, selectedType) {
-        console.log(tour);
-        console.log();
-        const price = selectedType == 'individual' ? tour.tour_type.single_price : tour.tour_type.family_price;
+        const price = selectedType == 'Individual' ? tour.tour_type.single_price : tour.tour_type.family_price;
         const cartItemData = await fetchFromApi('/api/cart-item/tour');
-        console.log(cartItemData);
-        console.log(`${tour.guide.language.language} ${cartItemData.type}`);
         const cartItem = new CartItem(tour.id, `${tour.guide.language.language} ${cartItemData.type}`, tour.date_time, price, cartItemData.type, cartItemData.image, selectedType);
         this.shoppingCart.addItem(cartItem);
     }

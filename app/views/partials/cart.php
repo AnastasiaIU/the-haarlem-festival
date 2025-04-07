@@ -23,7 +23,7 @@
             </p>
         </div>
         <div class="d-flex justify-content-end">
-            <a href="/cart/checkout" class="btn btn-primary">Proceed to checkout</a>
+            <button id="checkoutButton" class="btn btn-primary">Proceed to checkout</button>
         </div>
     </div>
 </main>

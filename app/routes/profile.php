@@ -17,5 +17,5 @@ Route::add('/profile/edit', function () {
 Route::add('/profile/personal-plan', function () {
     AuthHandler::checkUserLoggedIn();
 
-    require_once(__DIR__ . "/../views/pages/profile_edit_info.php");
+    require_once(__DIR__ . "/../views/pages/profile_personal_plan.php");
 });

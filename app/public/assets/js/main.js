@@ -1,6 +1,5 @@
 import { Navigation } from "./classes/Navigation.js";
 import { ShoppingCart } from "./classes/ShoppingCart.js";
-import { CartItem } from "./classes/CartItem.js";
 
 let shoppingCart;
 /**

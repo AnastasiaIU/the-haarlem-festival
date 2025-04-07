@@ -55,4 +55,8 @@ class BookingController {
             'family' => $familyTickets
         ];
     }
+
+    public function fetchBookingsByUserId($userId): array {
+        return $this->bookingModel->fetchBookingsByUserId($userId);
+    }
 }

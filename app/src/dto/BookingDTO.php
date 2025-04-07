@@ -6,7 +6,7 @@ require_once(__DIR__ . '/../enums/TicketSubType.php');
 /**
  * Data Transfer Object (DTO) for representing a booking.
  */
-class BookingDTO
+class BookingDTO implements JsonSerializable
 {
     private int $id;
     private string $orderNumber;
@@ -80,7 +80,7 @@ class BookingDTO
             'ticket_type' => $this->ticketType->value,
             'ticket_id' => $this->ticketId,
             'quantity' => $this->quantity,
-            'ticket_sub_type' => $this->ticketSubType->value
+            'ticket_subtype' => $this->ticketSubType ? $this->ticketSubType->value : null
         ];
     }
 
@@ -100,7 +100,17 @@ class BookingDTO
             TicketType::from($data['ticket_type']),
             $data['ticket_id'],
             $data['quantity'],
-            $data['ticket_sub_type'] ? TicketSubType::from($data['ticket_sub_type']) : null
+            $data['ticket_subtype'] ? TicketSubType::from($data['ticket_subtype']) : null
         );
+    }
+
+    /**
+     * Converts the ArtistDTO object to a JSON-serializable array.
+     *
+     * @return array A JSON-serializable array representing the ArtistDTO object.
+     */
+    public function jsonSerialize(): array
+    {
+        return self::toArray();
     }
 }

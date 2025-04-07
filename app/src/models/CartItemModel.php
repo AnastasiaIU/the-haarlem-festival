@@ -21,7 +21,7 @@ class CartItemModel extends BaseModel
             return null;
         }
 
-        return CartItemDTO::fromArray($cartItem);
+        return CartItemDTO::fromArray($cartItem, $ticketType);
     }
 
     private function setParameters(array $data): array

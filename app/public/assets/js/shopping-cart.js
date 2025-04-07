@@ -7,4 +7,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const totalPriceElement = document.getElementById("total-price");
 
     shoppingCart.renderCart(cartItemsContainer, totalPriceElement);
+
+    const checkoutButton = document.getElementById("checkoutButton");
+
+    checkoutButton.addEventListener("click", () => {
+        if (shoppingCart.getItems().length !== 0) {
+            window.location.href = "/cart/checkout";
+        }
+    });
 });

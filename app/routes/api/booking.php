@@ -29,3 +29,11 @@ Route::add('/api/bookings/tour-availability/([0-9]+)', function ($id) use ($book
     $response = $bookingConroller->getTourAvailability($id);
     echo json_encode($response);
 });
+
+Route::add('/api/bookings/user', function () use ($bookingConroller) {
+    header('Content-Type: application/json');
+    
+    $userId = $_SESSION['user'];
+    $response = $bookingConroller->fetchBookingsByUserId($userId);
+    echo json_encode($response);
+});
