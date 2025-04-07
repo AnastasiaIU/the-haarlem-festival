@@ -103,12 +103,12 @@ class UserModel extends BaseModel
         return $query->execute([':email' => $newEmail, ':id' => $id]);
     }
 
-    public function getUserEmailById(int $id): ?array {
-        $query = self::$pdo->prepare('SELECT email FROM user WHERE id = :id');
+    public function getUserInfoById(int $id): ?array {
+        $query = self::$pdo->prepare('SELECT email, name FROM user WHERE id = :id');
         $query->execute([':id' => $id]);
         $item = $query->fetch(PDO::FETCH_ASSOC);
     
-        return $item ?: null; // Return null if no user found
+        return $item ?: null;
     }
 
     public function updateUserProfile(int $id, array $updates): bool {

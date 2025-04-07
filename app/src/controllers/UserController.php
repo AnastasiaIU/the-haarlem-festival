@@ -110,8 +110,8 @@ class UserController
         return $this->userModel->createUser($email, $hashedPassword, $newRole);
     }
 
-    public function getUserEmailById(): array {        
-        return $this->userModel->getUserEmailById($_SESSION['user']);
+    public function getUserInfoById(): array {
+        return $this->userModel->getUserInfoById($_SESSION['user']); 
     }
 
     public function updateUserProfile($updates) {
