@@ -762,7 +762,7 @@ VALUES (1, '2025-07-24 10:00:00', '2025-07-24 17:00:00'),
 CREATE TABLE user
 (
     id         INT AUTO_INCREMENT PRIMARY KEY,
-    email      VARCHAR(254)                                   NOT NULL,
+    email      VARCHAR(254) UNIQUE                            NOT NULL,
     password   VARCHAR(64)                                    NOT NULL,
     role       ENUM ('Customer', 'Employee', 'Administrator') NOT NULL,
     created_at DATETIME                                       NOT NULL,
@@ -770,9 +770,11 @@ CREATE TABLE user
 );
 
 INSERT INTO user (email, password, role, created_at, name)
-VALUES ('123emp@mail.com', '$2y$12$SI3.l5PY5nWimBXtCMZ4cenGk6TtkmeE9FYJF649FHUv5xUfPqMTy', 'Employee', NOW(), 'John Doe'),
+VALUES ('123emp@mail.com', '$2y$12$SI3.l5PY5nWimBXtCMZ4cenGk6TtkmeE9FYJF649FHUv5xUfPqMTy', 'Employee', NOW(),
+        'John Doe'),
        ('123@mail.com', '$2y$12$SI3.l5PY5nWimBXtCMZ4cenGk6TtkmeE9FYJF649FHUv5xUfPqMTy', 'Customer', NOW(), 'Maria'),
-       ('123admin@mail.com', '$2y$12$SI3.l5PY5nWimBXtCMZ4cenGk6TtkmeE9FYJF649FHUv5xUfPqMTy', 'Administrator', NOW(), 'Mara Baker');
+       ('123admin@mail.com', '$2y$12$SI3.l5PY5nWimBXtCMZ4cenGk6TtkmeE9FYJF649FHUv5xUfPqMTy', 'Administrator', NOW(),
+        'Mara Baker');
 
 
 CREATE TABLE booking
