@@ -161,7 +161,7 @@ async function updateUserEmail(id, email) {
     const allUsers = await check.json();
     if (allUsers.some(u => u.email.toLowerCase() === email.toLowerCase() && u.id !== parseInt(id))) {
         alert("Email already in use.");
-        fetchUsers(); // revert input
+        fetchUsers(); 
         return;
     }
 
