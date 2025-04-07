@@ -785,11 +785,11 @@ CREATE TABLE booking
 );
 
 INSERT INTO booking (user_id, order_number, receiving_email, ticket_type, ticket_subtype, ticket_id, quantity)
-VALUES (2, 'KCJ145', '123@mail.com' 'pass', 2, 2),
-       (2, 'KCJ145', '123@mail.com', 'dance_show', 3, 1),
-       (2, 'KCJ145', '123@mail.com', 'tour', 7, 1),
-       (2, 'KCJ145', '123@mail.com', 'teylers_event', 9, 2),
-       (2, 'KCJ145', '123@mail.com', 'reservation', 1, 1);
+VALUES (2, 'KCJ145', '123@mail.com' 'pass', null, 2, 2),
+       (2, 'KCJ145', '123@mail.com', 'dance_show', null, 3, 1),
+       (2, 'KCJ145', '123@mail.com', 'tour', null, 7, 1),
+       (2, 'KCJ145', '123@mail.com', 'teylers_event', null, 9, 2),
+       (2, 'KCJ145', '123@mail.com', 'reservation', null, 1, 1);
 
 
 CREATE TABLE button_type
