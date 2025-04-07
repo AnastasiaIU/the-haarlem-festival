@@ -694,15 +694,18 @@ VALUES (1, 5),
 CREATE TABLE pass
 (
     id    INT AUTO_INCREMENT PRIMARY KEY,
+    event_id INT                                       NOT NULL,
+    name VARCHAR(50),
     price DECIMAL(7, 2)                                       NOT NULL,
-    day   ENUM ('Friday', 'Saturday', 'Sunday', 'All-Access') NOT NULL
+    day   ENUM ('Friday', 'Saturday', 'Sunday', 'All-Access') NOT NULL,
+    start_date DATETIME
 );
 
-INSERT INTO pass (price, day)
-VALUES (125.00, 'Friday'),
-       (150.00, 'Saturday'),
-       (150.00, 'Sunday'),
-       (250.00, 'All-Access');
+INSERT INTO pass (event_id, name, price, day, start_date)
+VALUES (2, 'Friday Pass', 125.00, 'Friday', '2025-07-25 20:00:00'),
+       (2, 'Saturday Pass', 150.00, 'Saturday', '2025-07-26 14:00:00'),
+       (2, 'Sunday Pass', 150.00, 'Sunday', '2025-07-27 20:00:00'),
+       (2, 'All-Access Pass', 250.00, 'All-Access', '2025-07-25 20:00:00');
 
 
 CREATE TABLE reservation
