@@ -19,7 +19,7 @@ class UserModel extends BaseModel
     public function getUser(string $email): ?UserDTO
     {
         $query = self::$pdo->prepare(
-            'SELECT id, email, password, role, created_at
+            'SELECT id, email, password, role, created_at, name
                     FROM user
                     WHERE email = :email'
         );
@@ -39,20 +39,22 @@ class UserModel extends BaseModel
      * @param string $email The email of the new user.
      * @param string $hashedPassword The already hashed password.
      * @param UserRole $role The role of the new user.
+     * @param string $name The name of the new user.
      */
-    public function createUser(string $email, string $hashedPassword, UserRole $role): void
+    public function createUser(string $email, string $hashedPassword, UserRole $role, string $name): void
     {
         try {
             self::$pdo->beginTransaction();
 
             $query = self::$pdo->prepare(
-                'INSERT INTO user (email, password, role, created_at) VALUES (:email, :password, :role, NOW())'
+                'INSERT INTO user (email, password, role, created_at, name) VALUES (:email, :password, :role, NOW(), :name)'
             );
 
             $success = $query->execute([
                 ':email' => $email,
                 ':password' => $hashedPassword,
-                ':role' => $role->value
+                ':role' => $role->value,
+                ':name' => $name
             ]);
 
             if (!$success) {
@@ -69,7 +71,7 @@ class UserModel extends BaseModel
 
     public function getAllUsers() : array{
         $query = self::$pdo->prepare(
-            'SELECT id, email, password, role, created_at FROM user'
+            'SELECT id, email, password, role, created_at, name FROM user'
         );
         $query->execute();
         $users = $query->fetchAll(PDO::FETCH_ASSOC);

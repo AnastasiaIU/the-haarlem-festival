@@ -16,6 +16,14 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <label for="inputName">Name</label>
+                    <input type="text" name="name" class="form-control" id="inputName"
+                           placeholder="Enter email" required>
+                    <div class="invalid-feedback" id="inputNamePrompt">
+                        Name cannot be empty.
+                    </div>
+                </div>
+                <div class="form-group">
                     <label for="inputPassword">Password</label>
                     <input type="password" name="password" class="form-control" id="inputPassword"
                            placeholder="Password" required>

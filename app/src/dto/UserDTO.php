@@ -12,14 +12,16 @@ class UserDTO
     private string $password;
     private UserRole $role;
     private DateTime $created_at;
+    private string $name;
 
-    public function __construct(string $id, string $email, string $password, UserRole $role, DateTime $created_at)
+    public function __construct(string $id, string $email, string $password, UserRole $role, DateTime $created_at, string $name)
     {
         $this->id = $id;
         $this->email = $email;
         $this->password = $password;
         $this->role = $role;
         $this->created_at = $created_at;
+        $this->name = $name;
     }
 
     // Getters
@@ -52,7 +54,8 @@ class UserDTO
             'id' => $this->id,
             'email' => $this->email,
             'role' => $this->role->value,
-            'created_at' => $this->created_at->format('Y-m-d H:i:s')
+            'created_at' => $this->created_at->format('Y-m-d H:i:s'),
+            'name' => $this->name
         ];
     }
 
@@ -69,7 +72,8 @@ class UserDTO
             $data['email'],
             $data['password'],
             UserRole::from($data['role']),
-            new DateTime($data['created_at'])
+            new DateTime($data['created_at']),
+            $data['name']
         );
     }
 }
