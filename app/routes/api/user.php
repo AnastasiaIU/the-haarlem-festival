@@ -129,3 +129,8 @@ Route::add('/api/updateUserProfile', function () {
         echo json_encode(["success" => $updated]);
     }
 }, 'put');
+
+Route::add('/api/user/logged-in', function () {
+    $userController = new UserController();
+    echo json_encode($userController->userLoggedIn());
+});

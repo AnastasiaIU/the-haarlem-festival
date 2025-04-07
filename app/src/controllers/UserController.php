@@ -117,4 +117,8 @@ class UserController
     public function updateUserProfile($updates) {
         return $this->userModel->updateUserProfile($_SESSION['user'], $updates);
     }
+
+    public function userLoggedIn(): bool {
+        return isset($_SESSION['user']);
+    }
 }

@@ -49,7 +49,14 @@ export async function fetchFromApi(url) {
 
 export function setButton(button, cartItems) {
     button.setAttribute("cartItems", JSON.stringify(cartItems));
-    button.addEventListener("click", function () {
+    button.addEventListener("click", async function () {
+        const userLoggedIn = await fetchFromApi("/api/user/logged-in");
+
+        if (!userLoggedIn) {
+            window.location.href = "/login";
+            return;
+        }
+        
         const cartItems = JSON.parse(this.getAttribute("cartItems"));
 
         cartItems.forEach(cartItem => {
