@@ -1,34 +1,20 @@
 <?php
 
-require_once(__DIR__ . '/../../vendor/autoload.php');
+require_once(__DIR__ . "/../../src/services/StripeService.php");
 
-\Stripe\Stripe::setApiKey('sk_test_51QwoutQK69u3tWgIlyxkZsAp8xygOLnRd1QKRhEdEMrAAqTwnryZixsMbICDeuC4gmR27t4nYCJxSPefLHR9COLs00zKZs6HV6');
+Route::add('/api/stripe/create-payment-intent', function () {
+    header('Content-Type: application/json');
 
-$paymentMethod = $_POST['payment_method'];
-$email = $_POST['email'];
+    $input = json_decode(file_get_contents('php://input'), true);
+    $amount = $input['amount'];
+    $tickets = $input['tickets'];
 
-try {
-    if ($paymentMethod === 'card') {
-        $token = $_POST['stripeToken'];
-        $charge = \Stripe\Charge::create([
-            'amount' => 5000, // Amount in cents
-            'currency' => 'usd',
-            'description' => 'Example charge',
-            'source' => $token,
-            'receipt_email' => $email,
-        ]);
-        echo 'Payment successful!';
-    } elseif ($paymentMethod === 'ideal') {
-        $source = $_POST['stripeSource'];
-        $charge = \Stripe\Charge::create([
-            'amount' => 5000, // Amount in cents
-            'currency' => 'eur',
-            'source' => $source,
-            'receipt_email' => $email,
-        ]);
-        echo 'Payment successful!';
-    }
-    // Add handling for PayPal, Apple Pay, and Google Pay here
-} catch (\Stripe\Exception\CardException $e) {
-    echo 'Error: ' . $e->getMessage();
-}
+    $stripeService = new StripeService();
+    $response = $stripeService->createPayment($amount, $tickets);
+
+    echo json_encode($response);
+}, 'post');
+
+Route::add('/api/stripe/public-key', function () {
+    echo json_encode(['public_key' => $_ENV['STRIPE_PUBLIC_KEY']]);
+});

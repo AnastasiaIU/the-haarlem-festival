@@ -1,4 +1,6 @@
-import {fetchFromApi} from "../main.js";
+import { fetchFromApi } from "../main.js";
+import { setButton } from "../main.js";
+import { CartItem } from "./CartItem.js";
 
 /**
  * Class that handles an artist schedule.
@@ -54,7 +56,7 @@ export class ArtistSchedule {
         this.setDate(show, lastShowCard);
         this.setPrice(show, lastShowCard);
         await this.setText(show, lastShowCard);
-        this.setButton(show, lastShowCard);
+        await this.assignButton(show, lastShowCard);
 
         this.reorderImage(lastShowCard, left);
     }
@@ -65,8 +67,25 @@ export class ArtistSchedule {
      * @param show The dance show object.
      * @param showCard The show card element.
      */
-    setButton(show, showCard) {
-        // Set the button for a card here
+    async assignButton(show, showCard) {
+        const ticketButton = showCard.querySelector('.show-button');
+        const pathSegments = window.location.pathname.split('/').filter(segment => segment !== '');
+        const slug = pathSegments[pathSegments.length - 1];
+        const cartItemData = await fetchFromApi(`/api/cart-item/dance-show/${show.dance_show_id}/${slug}`);
+        const available = await fetchFromApi(`/api/bookings/${cartItemData.ticket_id}`);
+
+        if (available) {
+            ticketButton.classList.remove('disabled');
+            ticketButton.disabled = false;
+
+            let cartItems = [];
+            const cartItem = new CartItem(cartItemData.ticket_id, cartItemData.item_name, cartItemData.date, cartItemData.price, cartItemData.item_type, cartItemData.image_path);
+            cartItems.push(cartItem);
+            setButton(ticketButton, cartItems);
+        } else {
+            ticketButton.classList.add('disabled');
+            ticketButton.disabled = true;
+        }
     }
 
     /**
@@ -152,7 +171,7 @@ export class ArtistSchedule {
         const showTime = showCard.querySelector('.show-time');
 
         const date = new Date(show.date_time.replace(' ', 'T'));
-        const options = {weekday: 'long'};
+        const options = { weekday: 'long' };
 
         showDate.innerHTML = date.getDate();
         showDay.innerHTML = date.toLocaleDateString('en-US', options);

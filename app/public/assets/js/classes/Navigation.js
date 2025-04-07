@@ -63,7 +63,11 @@ export class Navigation {
             '/yummy': ['hero', 'promo', 'restaurant', 'yummy-carousel'],
             '/strolls': ['hero', 'promo', 'strolls'],
             '/strolls/schedule': ['strolls'],
-            '/teylers': ['hero', 'promo', 'teylers']
+            '/teylers': ['hero', 'promo', 'teylers'],
+            '/profile/personal-plan': ['profile'],
+            '/cart': ['shopping-cart'],
+            '/cart/checkout': ['shopping-cart'],
+            '/cart/checkout/confirmation': ['shopping-cart']
         };
 
         this.addDynamicRoutes();

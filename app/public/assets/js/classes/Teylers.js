@@ -1,5 +1,6 @@
 import {fetchFromApi} from "../main.js";
 import {CMS} from "./CMS.js";
+import { Booking } from "./Booking.js";
 
 /**
  * Class that handles the Magic@Teylers event.
@@ -74,6 +75,40 @@ export class Teylers {
         date.addEventListener('change', () => {
             button.disabled = (date.querySelector('option:checked').value === '');
         })
+
+        button.addEventListener('click', async () => {
+            const dateTime = `${date.querySelector('option:checked').value}T10:00:00`;
+            const createdBooking = await this.handleBooking(dateTime);
+
+            if (createdBooking) {
+                date.value = '';
+                date.querySelector('option').selected = true;
+            }
+        });
+    }
+
+    async handleBooking(dateTime) {
+        const encodedDateTime = encodeURIComponent(dateTime);
+        const url = `/api/teylers-event?dateTime=${encodedDateTime}`;
+        const response = await fetchFromApi(url);
+        return await this.processBooking(response);
+    }
+
+    async processBooking(bookingData) {
+        let bookings = [];
+        const booking = new Booking(bookingData.ticket_type, null, bookingData.ticket_id, 1);
+        bookings.push(booking);
+
+        return await fetch('/api/bookings', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                bookings: bookings,
+                receivingEmail: localStorage.getItem('email'),
+            }),
+        });
     }
 
     /**
@@ -94,6 +129,18 @@ export class Teylers {
             button.disabled = (time.querySelector('option:checked').value === '' ||
                 date.querySelector('option:checked').value === '');
         })
+
+        button.addEventListener('click', async () => {
+            const dateTime = `${date.querySelector('option:checked').value}T${time.querySelector('option:checked').value}`;
+            const createdBooking = await this.handleBooking(dateTime);
+
+            if (createdBooking) {
+                time.value = '';
+                date.value = '';
+                time.querySelector('option').selected = true;
+                date.querySelector('option').selected = true;
+            }
+        });
     }
 
     /**

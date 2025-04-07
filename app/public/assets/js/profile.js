@@ -1,4 +1,4 @@
-if(window.location.pathname === "/profile"){
+if(window.location.pathname === "/profile/edit"){
 document.addEventListener("DOMContentLoaded", async function () {
     await checkAdminStatus();
     await fetchUsers();

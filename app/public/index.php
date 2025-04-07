@@ -55,6 +55,11 @@ require_once(__DIR__ . "/../routes/api/chef.php");
 require_once(__DIR__ . "/../routes/api/social_media.php");
 require_once(__DIR__ . "/../routes/api/location.php");
 require_once(__DIR__ . "/../routes/api/description.php");
+require_once(__DIR__ . "/../routes/api/stripe.php");
+require_once(__DIR__ . "/../routes/api/booking.php");
+require_once(__DIR__ . "/../routes/api/cart_item.php");
+require_once(__DIR__ . "/../routes/api/reservation.php");
+require_once(__DIR__ . "/../routes/api/teylers_event.php");
 
 // Start the router, enabling handling requests
 Route::run();

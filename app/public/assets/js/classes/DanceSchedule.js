@@ -1,4 +1,6 @@
-import {fetchFromApi} from "../main.js";
+import { fetchFromApi } from "../main.js";
+import { setButton } from "../main.js";
+import { CartItem } from "./CartItem.js";
 
 /**
  * Class that handles the DANCE! event schedule.
@@ -6,8 +8,8 @@ import {fetchFromApi} from "../main.js";
 export class DanceSchedule {
     async init() {
         this.passes = await fetchFromApi('/api/getPasses');
-
         this.setPrices();
+        await this.setButtons();
     }
 
     static async create() {
@@ -29,5 +31,37 @@ export class DanceSchedule {
         saturdayPass.innerHTML = `€${this.passes[1].price}`;
         sundayPass.innerHTML = `€${this.passes[2].price}`;
         allAccessPass.innerHTML = `€${this.passes[3].price}`;
+    }
+
+    async setButtons() {
+        const passButtons = document.querySelectorAll(".pass-button");
+        const passesAvailability = await fetchFromApi('/api/getPassesAvailability');
+
+        for (let i = 0; i < passButtons.length; i++) {
+            const pass = this.passes[i];
+            const cartItemData = await fetchFromApi(`/api/cart-item/pass/${pass.id}`);
+            let dayName;
+    
+            if (pass.item_name === "Three-days pass" || i === this.passes.length - 1) {
+                dayName = "All-Access";
+            } else {
+                dayName = new Date(cartItemData.date.replace(' ', 'T')).toLocaleDateString('en-US', { weekday: 'long' });
+            }
+    
+            const canSell = passesAvailability[dayName];
+    
+            if (canSell) {
+                passButtons[i].disabled = false;
+                passButtons[i].classList.remove('disabled');
+
+                let cartItems = [];
+                const cartItem = new CartItem(cartItemData.ticket_id, cartItemData.item_name, cartItemData.date, cartItemData.price, cartItemData.item_type, cartItemData.image_path);
+                cartItems.push(cartItem);
+                setButton(passButtons[i], cartItems);
+            } else {
+                passButtons[i].disabled = true;
+                passButtons[i].classList.add('disabled');
+            }
+        }
     }
 }

@@ -1,11 +1,15 @@
-import {Navigation} from "./classes/Navigation.js";
+import { Navigation } from "./classes/Navigation.js";
+import { ShoppingCart } from "./classes/ShoppingCart.js";
 
+let shoppingCart;
 /**
  * Initializes event listeners and functions when the DOM content is fully loaded.
  */
 document.addEventListener("DOMContentLoaded", async () => {
     await Navigation.create();
     enableBootstrapFormValidation();
+
+    shoppingCart = ShoppingCart.getInstance();
 });
 
 /**
@@ -41,4 +45,15 @@ export async function fetchFromApi(url) {
     const response = await fetch(url);
     if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
     return await response.json();
+}
+
+export function setButton(button, cartItems) {
+    button.setAttribute("cartItems", JSON.stringify(cartItems));
+    button.addEventListener("click", function () {
+        const cartItems = JSON.parse(this.getAttribute("cartItems"));
+
+        cartItems.forEach(cartItem => {
+            shoppingCart.addItem(cartItem);
+        });
+    });
 }

@@ -11,7 +11,7 @@
             </div>
             <div class="d-inline-flex align-items-center  justify-content-end">
                 <p class="fw-bold m-0" id="pass-friday-price"></p>
-                <a type="button" class="btn btn-primary ms-3 font-p-16 fw-bold text-nowrap">Add to cart</a>
+                <button type="button" class="btn btn-primary ms-3 font-p-16 fw-bold text-nowrap pass-button">Add to cart</button>
             </div>
         </div>
         <div class="offer-name-container flex-grow-1">
@@ -42,7 +42,7 @@
             </div>
             <div class="d-inline-flex align-items-center  justify-content-end">
                 <p class="fw-bold m-0" id="pass-saturday-price"></p>
-                <a type="button" class="btn btn-primary ms-3 font-p-16 fw-bold text-nowrap">Add to cart</a>
+                <button type="button" class="btn btn-primary ms-3 font-p-16 fw-bold text-nowrap pass-button">Add to cart</button>
             </div>
         </div>
         <div class="offer-name-container flex-grow-1">
@@ -72,7 +72,7 @@
             </div>
             <div class="d-inline-flex align-items-center justify-content-end">
                 <p class="fw-bold m-0" id="pass-sunday-price"></p>
-                <a type="button" class="btn btn-primary ms-3 font-p-16 fw-bold text-nowrap">Add to cart</a>
+                <button type="button" class="btn btn-primary ms-3 font-p-16 fw-bold text-nowrap pass-button">Add to cart</button>
             </div>
         </div>
         <div class="offer-name-container flex-grow-1">
@@ -102,7 +102,7 @@
             </div>
             <div class="d-inline-flex align-items-center justify-content-end">
                 <p class="fw-bold m-0" id="pass-all-access-price"></p>
-                <a type="button" class="btn btn-primary ms-3 font-p-16 fw-bold text-nowrap">Add to cart</a>
+                <button type="button" class="btn btn-primary ms-3 font-p-16 fw-bold text-nowrap pass-button">Add to cart</button>
             </div>
         </div>
         <div class="offer-name-container flex-grow-1">

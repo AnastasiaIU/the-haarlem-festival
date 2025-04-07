@@ -2,10 +2,6 @@
     <div class="cart-view-container">
         <div class="d-flex justify-content-between align-items-center">
             <h1>My Personal Plan</h1>
-            <div class="d-flex justify-content-between align-items-center">
-                <strong class="mx-5">Share the plan</strong>
-                <button class="btn btn-primary">Copy the link</button>
-            </div>
         </div>
         <hr class="my-4" style="border-color: black;">
         <div class="cart-item-headers">
@@ -27,7 +23,7 @@
             </p>
         </div>
         <div class="d-flex justify-content-end">
-            <button class="btn btn-primary">Proceed to checkout</button>
+            <button id="checkoutButton" class="btn btn-primary">Proceed to checkout</button>
         </div>
     </div>
 </main>

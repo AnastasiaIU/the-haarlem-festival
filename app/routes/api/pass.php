@@ -7,3 +7,9 @@ Route::add('/api/getPasses', function () {
     $passes = $passController->fetchAllPasses();
     echo json_encode($passes);
 });
+
+Route::add('/api/getPassesAvailability', function () {
+    $passController = new PassController();
+    $availability = $passController->passesAvailable();
+    echo json_encode($availability);
+});
