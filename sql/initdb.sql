@@ -698,7 +698,8 @@ CREATE TABLE pass
     name       VARCHAR(50),
     price      DECIMAL(7, 2)                                       NOT NULL,
     day        ENUM ('Friday', 'Saturday', 'Sunday', 'All-Access') NOT NULL,
-    start_date DATETIME
+    start_date DATETIME,
+    CONSTRAINT fk_event_id_pass FOREIGN KEY (event_id) REFERENCES event (id)
 );
 
 INSERT INTO pass (event_id, name, price, day, start_date)
