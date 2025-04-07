@@ -19,3 +19,13 @@ Route::add('/profile/manage_events', function (){
 
     require_once(__DIR__ . "/../views/pages/manage_events.php");
 });
+
+Route::add('/profile/change_account', function (){
+    require_once(__DIR__."/../views/pages/change_account.php");
+});
+
+Route::add('/profile/manage_users', function (){
+    AuthHandler::checkAdminLoggedIn();
+
+    require_once(__DIR__."/../views/pages/manage_users.php");
+});
