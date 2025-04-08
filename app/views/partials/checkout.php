@@ -1,4 +1,4 @@
-<div class="cart-view-container d-flex flex-row">
+<div class="cart-view-container d-flex">
     <div class="payment-container">
         <h1>My Details</h1>
         <hr class="my-4" style="border-color: black;">
@@ -32,7 +32,7 @@
             <button type="submit" class="btn btn-primary">Pay with iDEAL</button>
         </form>
     </div>
-    <aside class="aside-container ms-auto">
+    <div class="aside-container ms-auto">
         <div class="personal-plan-background">
             <div class="plan-container">
                 <div class="plan-headers">
@@ -49,7 +49,7 @@
                 </div>
             </div>
         </div>
-    </aside>
+    </div>
 </div>
 
 <script src="https://js.stripe.com/v3/"></script>
