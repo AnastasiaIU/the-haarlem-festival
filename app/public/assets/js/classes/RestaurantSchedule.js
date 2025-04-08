@@ -18,9 +18,10 @@ export class RestaurantSchedule {
         this.populateSchedule();
 
         this.modal = document.getElementById('bookingModal');
+
         if (this.modal) {
-            this.modal.addEventListener('show.bs.modal', event => {
-                this.setModal(event);
+            this.modal.addEventListener('show.bs.modal', async event => {
+                await this.setModal(event);
             });
         }
     }
@@ -31,7 +32,7 @@ export class RestaurantSchedule {
         return instance;
     }
 
-    updatePrices(event) {
+    async updatePrices(event) {
         const adults = this.getSelectedValue('optionsAdult');
         const kids = this.getSelectedValue('optionsKids');
 
@@ -42,7 +43,7 @@ export class RestaurantSchedule {
         document.getElementById('fullPrice').innerText = fullPrice.toFixed(2).replace('.', ',');
         document.getElementById('reservationPrice').innerText = reservationPrice.toFixed(2).replace('.', ',');
 
-        this.setButtons(event, this.restaurant);
+        await this.setButtons(event, this.restaurant);
     }
 
     async setButtons(event, restaurant) {
@@ -114,7 +115,7 @@ export class RestaurantSchedule {
         return parseInt(label.innerText);
     }
 
-    setModal(event) {
+    async setModal(event) {
         const button = event.relatedTarget;
 
         const date = button.dataset.bookDate;
@@ -130,10 +131,10 @@ export class RestaurantSchedule {
         modalTime.textContent = `${this.getFormattedTime(fullDate)} - ${this.getFormattedTime(end)}`;
 
         document.querySelectorAll('input[name="optionsAdult"], input[name="optionsKids"]').forEach(input => {
-            input.addEventListener('change', () => this.updatePrices(event));
+            input.addEventListener('change', async () => await this.updatePrices(event));
         });
 
-        this.updatePrices(event);
+        await this.updatePrices(event);
     }
 
     populateSchedule() {
