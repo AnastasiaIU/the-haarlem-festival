@@ -104,4 +104,50 @@ class BookingModel extends BaseModel
 
         return $dtos;
     }
+
+    public function fetchAllOrders(): array
+    {
+        try {
+            $query = self::$pdo->prepare('
+                SELECT 
+                    booking.*, 
+                    user.name AS user_name,
+                    user.email AS user_email
+                FROM booking
+                JOIN user ON user.id = booking.user_id
+                ORDER BY booking.order_number
+            ');
+            $query->execute();
+    
+            $bookings = $query->fetchAll(PDO::FETCH_ASSOC);
+    
+            $groupedBookings = [];
+    
+            foreach ($bookings as $booking) {
+                $orderNumber = $booking['order_number'];
+    
+                if (!isset($groupedBookings[$orderNumber])) {
+                    $groupedBookings[$orderNumber] = [
+                        'order_number' => $orderNumber,
+                        'receiving_email' => $booking['receiving_email'],
+                        'user_email' => $booking['user_email'],
+                        'user_name' => $booking['user_name'],
+                        'bookings' => []
+                    ];
+                }
+    
+                $groupedBookings[$orderNumber]['bookings'][] = $booking;
+            }
+    
+            $result = [];
+            foreach ($groupedBookings as $order) {
+                $result[] = $order;
+            }
+    
+            return $result;
+        } catch (Exception $e) {
+            return ['error' => 'Error fetching orders: ' . $e->getMessage()];
+        }
+    }
 }
+

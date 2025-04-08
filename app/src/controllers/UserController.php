@@ -105,9 +105,9 @@ class UserController
         return $this->userModel->updateUserEmail($id, $newEmail);
     }
 
-    public function createUser(string $email,string $password, UserRole $newRole){
+    public function createUser(string $email,string $password, UserRole $newRole, string $name){
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-        return $this->userModel->createUser($email, $hashedPassword, $newRole);
+        return $this->userModel->createUser($email, $hashedPassword, $newRole, $name);
     }
 
     public function getUserInfoById(): array {
@@ -120,5 +120,9 @@ class UserController
 
     public function userLoggedIn(): bool {
         return isset($_SESSION['user']);
+    }
+
+    public function updateUserName(int $id, string $newName): bool {
+        return $this->userModel->updateUserName($id, $newName);
     }
 }

@@ -46,4 +46,16 @@ class ArtistController
     {
         return $this->artistModel->fetchArtistBySlug($slug);
     }
+
+    public function updateArtist(int $id, array $data){
+        return $this->artistModel->updateArtist($id, $data);
+    }
+
+    public function createArtist(array $data){
+        return $this->artistModel->createArtist($data);
+    }
+
+    public function deleteArtist(int $id){
+        return $this->artistModel->deleteArtist($id);
+    }
 }

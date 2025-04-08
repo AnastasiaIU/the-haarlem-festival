@@ -29,3 +29,8 @@ Route::add('/profile/manage_users', function (){
 
     require_once(__DIR__."/../views/pages/manage_users.php");
 });
+
+Route::add('/profile/view_orders', function(){
+    AuthHandler::checkAdminLoggedIn();
+    require_once(__DIR__."/../views/pages/view_orders.php");
+});

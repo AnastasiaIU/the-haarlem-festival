@@ -9,5 +9,6 @@ async function checkAdminStatus() {
     if (data.isAdmin) {
         document.getElementById("adminUsersBtn").classList.remove("d-none");
         document.getElementById("adminEntitiesBtn").classList.remove("d-none");
+        document.getElementById("adminOrdersBtn").classList.remove("d-none");
     }
 }

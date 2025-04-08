@@ -103,6 +103,11 @@ class UserModel extends BaseModel
         return $query->execute([':email' => $newEmail, ':id' => $id]);
     }
 
+    public function updateUserName(int $id, string $newName): bool {
+        $query = self::$pdo->prepare("UPDATE user SET name = :name WHERE id = :id");
+        return $query->execute([':name' => $newName, ':id' => $id]);
+    }
+
     public function getUserInfoById(int $id): ?array {
         $query = self::$pdo->prepare('SELECT email, name FROM user WHERE id = :id');
         $query->execute([':id' => $id]);

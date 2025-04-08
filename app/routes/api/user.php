@@ -66,11 +66,11 @@ Route::add('/api/createUser', function() {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $data = json_decode(file_get_contents("php://input"), true);
 
-        if (isset($data['email'], $data['password'], $data['role'])) {
+        if (isset($data['email'], $data['password'], $data['role'], $data['name'])) {
             try {
                 $role = UserRole::from($data['role']); 
                 $hashedPassword = password_hash($data['password'], PASSWORD_BCRYPT);
-                $userController->createUser($data['email'], $hashedPassword, $role);
+                $userController->createUser($data['email'], $hashedPassword, $role, $data['name']);
                 
                 echo json_encode(["success" => true]);
             } catch (UnexpectedValueException $e) {
@@ -134,3 +134,18 @@ Route::add('/api/user/logged-in', function () {
     $userController = new UserController();
     echo json_encode($userController->userLoggedIn());
 });
+
+Route::add('/api/updateUserName', function(){
+    $userController = new UserController();
+
+    if ($_SERVER['REQUEST_METHOD'] === 'PUT'){
+        $data = json_decode(file_get_contents("php://input"), true);
+
+        if (isset($data['id']) && isset($data['name'])) {
+            $updated = $userController->updateUserName($data['id'], $data['name']);
+            echo json_encode(["success" => $updated]);
+        } else {
+            echo json_encode(["error" => "User ID and new name are required"]);
+        }
+    }
+}, 'put');

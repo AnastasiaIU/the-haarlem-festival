@@ -20,6 +20,9 @@
         <div class="col-6 d-none" id="adminEntitiesBtn">    
             <a href="/profile/manage_events" class="btn btn-primary w-100">Manage Events</a>
         </div>
+        <div class="col-6 d-none" id="adminOrdersBtn">
+            <a href="/profile/view_orders" class="btn btn-primary w-100">View Orders</a>
+        </div>
     </div>
 </section>
 </main>

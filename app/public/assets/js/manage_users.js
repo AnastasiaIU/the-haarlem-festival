@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     document.getElementById("email-header").addEventListener("click", () => sortUsers("email"));
     document.getElementById("date-header").addEventListener("click", () => sortUsers("created_at"));
     document.getElementById("role-header").addEventListener("click", () => sortUsers("role"));
+    document.getElementById("name-header").addEventListener("click", () => sortUsers("name"));
     document.getElementById("createUserForm").addEventListener("submit", handleCreateUser);
 });
 
@@ -30,7 +31,8 @@ function applyFilters() {
     const searchInput = document.getElementById("search-input").value.toLowerCase();
     const filtered = users.filter(user =>
         user.email.toLowerCase().includes(searchInput) ||
-        user.role.toLowerCase().includes(searchInput)
+        user.role.toLowerCase().includes(searchInput) ||
+        user.name.toLowerCase().includes(searchInput)
     );
     renderUsers(filtered);
 }
@@ -59,6 +61,7 @@ function renderUsers(userList) {
         const row = document.createElement("tr");
         row.innerHTML = `
             <td><input type="email" class="form-control email-input" value="${user.email}" data-id="${user.id}"></td>
+            <td><input type="text" class="form-control name-input" value="${user.name}" data-id="${user.id}"></td>
             <td>${user.created_at}</td>
             <td>
                 <select class="form-select role-select" data-id="${user.id}">
@@ -95,6 +98,18 @@ function renderUsers(userList) {
             updateUserEmail(this.dataset.id, newEmail);
         })
     );
+
+    document.querySelectorAll(".name-input").forEach(input =>
+        input.addEventListener("change", function () {
+            const newName = this.value.trim();
+            if (newName === "") {
+                alert("Name cannot be empty.");
+                this.value = this.defaultValue;
+                return;
+            }
+            updateUserName(this.dataset.id, newName);
+        })
+    );
 }
 
 function validateEmail(email) {
@@ -107,8 +122,9 @@ async function handleCreateUser(e) {
     const email = document.getElementById("newUserEmail").value.trim();
     const password = document.getElementById("newUserPassword").value.trim();
     const role = document.getElementById("newUserRole").value;
+    const name = document.getElementById("newUserName").value.trim();
 
-    if (!email || !password) return alert("Email and password are required.");
+    if (!email || !password || !name) return alert("Email, password and name are required.");
 
     const check = await fetch('/api/getUsers');
     const allUsers = await check.json();
@@ -119,7 +135,7 @@ async function handleCreateUser(e) {
     const res = await fetch('/api/createUser', {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password, role })
+        body: JSON.stringify({ email, password, role, name })
     });
     const result = await res.json();
 
@@ -172,4 +188,14 @@ async function updateUserEmail(id, email) {
     });
     const result = await res.json();
     if (!result.success) alert("Error updating email.");
+}
+
+async function updateUserName(id, name) {
+    const res = await fetch('/api/updateUserName', {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id, name })
+    });
+    const result = await res.json();
+    if (!result.success) alert("Error updating name.");
 }
