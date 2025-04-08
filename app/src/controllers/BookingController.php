@@ -59,4 +59,8 @@ class BookingController {
     public function fetchBookingsByUserId($userId): array {
         return $this->bookingModel->fetchBookingsByUserId($userId);
     }
+
+    public function fetchAllOrders(): array {
+        return $this->bookingModel->fetchAllOrders();
+    }
 }

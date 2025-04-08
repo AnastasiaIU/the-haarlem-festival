@@ -46,3 +46,11 @@ Route::add('/api/bookings/user', function () use ($bookingConroller) {
     $response = $bookingConroller->fetchBookingsByUserId($userId);
     echo json_encode($response);
 });
+
+Route::add('/api/bookings/allOrders', function () use ($bookingConroller) {
+    header('Content-Type: application/json');
+
+    $response = $bookingConroller->fetchAllOrders();
+
+    echo json_encode($response);
+});
