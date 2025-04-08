@@ -21,7 +21,7 @@
             </div>
         </div>
         <div class="col-md-3 pass-image-container">
-            <img class="pass-image" src="/assets/images/dance.png" alt="People at a dance event">
+            <img class="pass-image" src="/assets/images/dance.webp" alt="People at a dance event">
         </div>
         <div class="col-md-3 pass-text-container my-auto ps-2">
             <p class="text-center m-0">Owners of an All-Day Pass may attend during each performance on Friday.<br>
@@ -59,7 +59,7 @@
                 Slachthuis 23:00</p>
         </div>
         <div class="col-md-3 pass-image-container">
-            <img class="pass-image" src="/assets/images/dance.png" alt="People at a dance event">
+            <img class="pass-image" src="/assets/images/dance.webp" alt="People at a dance event">
         </div>
     </div>
     <hr>
@@ -82,7 +82,7 @@
             </div>
         </div>
         <div class="col-md-3 pass-image-container">
-            <img class="pass-image" src="/assets/images/dance.png" alt="People at a dance event">
+            <img class="pass-image" src="/assets/images/dance.webp" alt="People at a dance event">
         </div>
         <div class="col-md-3 pass-text-container my-auto ps-2">
             <p class="text-center m-0">Owners of an All-Day Pass may attend during each performance on Sunday.<br>
@@ -115,7 +115,7 @@
             <p class="text-center m-0">Owner of a Three-Day Pass may attend during each performance on Friday, Saturday, and Sunday.</p>
         </div>
         <div class="col-md-3 pass-image-container">
-            <img class="pass-image" src="/assets/images/dance.png" alt="People at a dance event">
+            <img class="pass-image" src="/assets/images/dance.webp" alt="People at a dance event">
         </div>
     </div>
     <div class="flex-inline pt-5">

@@ -7,7 +7,7 @@
         </div>
         <div class="d-inline-flex align-items-center justify-content-end">
             <p class="show-price fw-bold m-0"></p>
-            <buttonm type="button" class="show-button btn btn-primary ms-3 font-p-16 fw-bold text-nowrap">Add to cart</button>
+            <button type="button" class="show-button btn btn-primary ms-3 font-p-16 fw-bold text-nowrap">Add to cart</button>
         </div>
     </div>
     <div class="show-name-container flex-grow-1">
@@ -17,7 +17,7 @@
         </div>
     </div>
     <div class="col-md-3 show-image-container">
-        <img class="show-image" src="/assets/images/dance_show.png" alt="People at a dance event">
+        <img class="show-image" src="/assets/images/dance_show.webp" alt="People at a dance event">
     </div>
     <div class="col-md-3 show-text-container my-auto">
         <p class="show-text text-center m-0"></p>
