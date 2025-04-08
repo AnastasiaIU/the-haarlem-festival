@@ -2,7 +2,7 @@
 
 A website for The Haarlem Festival which is implemented using PHP with the MVC design pattern, leveraging relational databases for data management and ensuring a user-friendly and visually appealing interface using a CSS framework Bootstrap.
 
-<img src="app/public/assets/images/Screenshot.png" width="100%"/>
+<img src="app/public/assets/images/Screenshot.webp" alt="" width="100%"/>
 
 ## Credentials
 
