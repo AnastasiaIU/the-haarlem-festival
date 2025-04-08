@@ -98,12 +98,12 @@
             <div class="schedule"></div>
         </div>
     </section>
-    <section id="map-section" class="location-section col-12 col-md-6 col-lg-5 col-xl-4 position-relative ">
+    <section id="map-section" class="location-section col-12 col-md-6 col-lg-5 col-xl-4 position-relative mb-5">
         <div class="location-title">
             <img src="/assets/images/location-icon.svg" class="img-fluid" alt="Location Icon">
             <h2>LOCATIONS</h2>
         </div>  
-        <iframe src="https://www.google.com/maps/d/embed?mid=1kYks-RDNNXXlRf26fyN1YrX8RR75pZ0&ehbc=2E312F" class = "homepage-map">
+        <iframe src="https://www.google.com/maps/d/embed?mid=1kYks-RDNNXXlRf26fyN1YrX8RR75pZ0&ehbc=D43D25&noprof=1" class = "homepage-map">
             style="border:0;" 
             allowfullscreen="" 
             loading="lazy">
