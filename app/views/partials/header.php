@@ -20,8 +20,8 @@
             integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
             crossorigin="anonymous"></script>
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-    <!--<script src="https://cdn.tiny.cloud/1/clwrf6ykpssoswy8p2on10mut3yv9h65futcwnlgkg48h573/tinymce/7/tinymce.min.js"
-            referrerpolicy="origin"></script>-->
+    <script src="https://cdn.tiny.cloud/1/clwrf6ykpssoswy8p2on10mut3yv9h65futcwnlgkg48h573/tinymce/7/tinymce.min.js"
+            referrerpolicy="origin"></script>
     <script type="module" src="../../assets/js/main.js"></script>
     <script type="module" src="../../assets/js/homepage.js"></script>
     <?php
