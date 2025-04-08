@@ -92,14 +92,14 @@ class BookingModel extends BaseModel
 
     public function fetchBookingsByUserId($userId): array
     {
-        $query = self::$pdo->prepare('SELECT * FROM booking WHERE user_id = :user_id');
+        $query = self::$pdo->prepare('SELECT *, name AS user_name FROM booking JOIN user ON user.id = user_id WHERE user_id = :user_id');
         $query->execute([':user_id' => $userId]);
         $bookings = $query->fetchAll(PDO::FETCH_ASSOC);
 
         $dtos = [];
         foreach ($bookings as $booking) {
             $dto = BookingDTO::fromArray($booking);
-            $dtos[] = $dto;
+            $dtos[] = ['booking' => $dto, 'user_name' => $booking['user_name']];
         }
 
         return $dtos;

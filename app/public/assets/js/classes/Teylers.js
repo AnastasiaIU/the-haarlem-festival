@@ -84,6 +84,8 @@ export class Teylers {
                 date.value = '';
                 date.querySelector('option').selected = true;
             }
+
+            button.disabled = true;
         });
     }
 
@@ -139,6 +141,7 @@ export class Teylers {
                 date.value = '';
                 time.querySelector('option').selected = true;
                 date.querySelector('option').selected = true;
+                button.disabled = true;
             }
         });
     }
