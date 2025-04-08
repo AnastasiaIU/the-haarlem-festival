@@ -1,6 +1,7 @@
 <?php
 
 require_once(__DIR__ . '/../../src/controllers/BookingController.php');
+require_once(__DIR__ . '/../../src/controllers/UserController.php');
 
 $bookingConroller = new BookingController();
 
@@ -11,7 +12,15 @@ Route::add('/api/bookings', function () use ($bookingConroller) {
     $bookings = $input['bookings'];
     $receivingEmail = $input['receivingEmail'];
 
-    $response = $bookingConroller->createBooking($bookings, $receivingEmail);
+    $response = null;
+
+    if (isset($receivingEmail)) {
+        $userController = new UserController();
+        $userData = $userController->getUserInfoById($_SESSION['user']);
+        $response = $bookingConroller->createBooking($bookings, $userData['email']);
+    } else {
+        $response = $bookingConroller->createBooking($bookings, $receivingEmail);
+    }
 
     echo json_encode($response);
 }, 'post');

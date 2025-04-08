@@ -4,7 +4,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     const personalPlanContainer = document.getElementById("personalPlanContainer");
     const bookings = await fetchFromApi("/api/bookings/user");
     const groupedBookings = groupBy(bookings, "order_number");
-    console.log(bookings);
 
     personalPlanContainer.innerHTML = "";
 
@@ -21,10 +20,11 @@ document.addEventListener("DOMContentLoaded", async () => {
                     .map(
                         item => `
                     <div class="item-card">
-                        <p><strong>Ticket Type:</strong> ${capitalizeWords(item.ticket_type.replace("_", " "))}</p>
-                        <p><strong>Quantity:</strong> ${item.quantity}</p>
-                        <p><strong>Email:</strong> ${item.receiving_email}</p>
-                        <p><strong>Ticket Subtype:</strong> ${item.ticket_subtype ? capitalizeWords(item.ticket_subtype) : "-"}</p>
+                        <p><strong>Ticket Type:</strong> ${capitalizeWords(item.booking.ticket_type.replace("_", " "))}</p>
+                        <p><strong>Quantity:</strong> ${item.booking.quantity}</p>
+                        <p><strong>Email:</strong> ${item.booking.receiving_email}</p>
+                        <p><strong>Name:</strong> ${item.user_name}</p>
+                        <p><strong>Ticket Subtype:</strong> ${item.booking.ticket_subtype ? capitalizeWords(item.booking.ticket_subtype) : "-"}</p>
                     </div>
                 `
                     )
@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 function groupBy(array, key) {
     return array.reduce((result, currentValue) => {
-        (result[currentValue[key]] = result[currentValue[key]] || []).push(currentValue);
+        (result[currentValue.booking[key]] = result[currentValue.booking[key]] || []).push(currentValue);
         return result;
     }, {});
 }
