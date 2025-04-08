@@ -57,6 +57,16 @@ async function handleProfileUpdate(event) {
     if (newPassword) updates.password = newPassword;
     if (newName) updates.name = newName;
 
+    const allUsersResponse = await fetch('/api/getUsers');
+    const allUsers = await allUsersResponse.json();
+    const emailExists = allUsers.some(user => 
+        user.email.toLowerCase() === newEmail.toLowerCase()
+    );
+    if (emailExists) {
+        alert("Email is already in use by another account.");
+        return;
+    }
+
     try {
         const response = await fetch('/api/updateUserProfile', {
             method: "PUT",

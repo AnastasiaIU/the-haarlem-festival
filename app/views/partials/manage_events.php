@@ -102,7 +102,66 @@
     </div>
 
     <button id="create-artist-btn" class="btn btn-primary m-2">
-        Add Location
+        Add Artist
     </button>
 </section>
+
+<div class="modal fade" id="artistModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="artistModalTitle">Add Artist</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="artistForm">
+                    <input type="hidden" id="artistId">
+                    <div class="mb-3">
+                        <label for="artistStageName" class="form-label">Stage Name</label>
+                        <input type="text" class="form-control" id="artistStageName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="artistSlug" class="form-label">Slug</label>
+                        <input type="text" class="form-control" id="artistSlug">
+                    </div>
+                    <div class="mb-3">
+                        <label for="artistGenre" class="form-label">Genre</label>
+                        <input type="text" class="form-control" id="artistGenre">
+                    </div>
+                    <div class="mb-3">
+                        <label for="artistHeroDescription" class="form-label">Hero Description</label>
+                        <textarea class="form-control" id="artistHeroDescription"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="artistCardDescription" class="form-label">Card Description</label>
+                        <textarea class="form-control" id="artistCardDescription"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Upload Images</label>
+                        <div class="d-flex flex-wrap gap-2">
+                            <img id="artistImagePreview" src="" width="100">
+                            <input type="file" class="form-control" id="artistImageUpload" accept="image/*">
+                            <img id="artistCardImagePreview" src="" width="100">
+                            <input type="file" class="form-control mt-2" id="artistCardImageUpload" accept="image/*">
+                            <img id="artistCarousel1Preview" src="" width="100">
+                            <input type="file" class="form-control mt-2" id="artistCarousel1Upload" accept="image/*">
+                            <img id="artistCarousel2Preview" src="" width="100">
+                            <input type="file" class="form-control mt-2" id="artistCarousel2Upload" accept="image/*">
+                            <img id="artistCarousel3Preview" src="" width="100">
+                            <input type="file" class="form-control mt-2" id="artistCarousel3Upload" accept="image/*">
+                            <img id="artistCarousel4Preview" src="" width="100">
+                            <input type="file" class="form-control mt-2" id="artistCarousel4Upload" accept="image/*">
+                            <img id="artistCarousel5Preview" src="" width="100">
+                            <input type="file" class="form-control mt-2" id="artistCarousel5Upload" accept="image/*">
+                            <img id="artistCarousel6Preview" src="" width="100">
+                            <input type="file" class="form-control mt-2" id="artistCarousel6Upload" accept="image/*">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Save Artist</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 </main>

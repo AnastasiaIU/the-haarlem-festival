@@ -8,6 +8,7 @@
                 <thead>
                     <tr>
                         <th id="email-header" style="cursor: pointer;">Email ⬍</th>
+                        <th id="name-header" style="cursor: pointer;">Name ⬍</th>
                         <th id="date-header" style="cursor: pointer;">Registration Date ⬍</th>
                         <th id="role-header" style="cursor: pointer;">Role ⬍</th>
                         <th>Actions</th>
@@ -33,6 +34,10 @@
                             <div class="mb-3">
                                 <label for="newUserEmail" class="form-label">Email</label>
                                 <input type="email" class="form-control" id="newUserEmail" required>
+                            </div>
+                            <div>
+                                <label for="newUserName" class="form-label">Name</label>
+                                <input type="name" class="form-control" id="newUserName" required>
                             </div>
                             <div class="mb-3">
                                 <label for="newUserPassword" class="form-label">Password</label>
